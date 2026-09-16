@@ -1,11 +1,14 @@
 ---
+import "../../styles/site.css";
 import { render } from "astro:content";
 import { getPublishedCollection } from "astro-course-university/content";
 import RelatedContent from "astro-course-university/components/RelatedContent.astro";
 import SpecList from "astro-course-university/components/SpecList.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import Specimen from "../../components/Specimen.astro";
 import TeachingTeam from "../../components/TeachingTeam.astro";
 import { formatCourseDate } from "../../lib/dates";
+import { PHASE_LABELS, weeks } from "../../lib/weeks";
 import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
@@ -15,6 +18,15 @@ export async function getStaticPaths() {
 
 const { session } = Astro.props;
 const { Content } = await render(session);
+
+// 阶段从大纲查，不由页面自己写，这样十二周不可能各说各话。
+// The phase is looked up from the syllabus rather than restated in frontmatter,
+// so no week page can claim a phase the syllabus disagrees with. The rule and
+// the creature list ARE in frontmatter, because a week has to be able to say
+// its own rule on its own page; `spec/course.test.ts` checks the two agree.
+const syllabus = weeks.find((week) => week.week === session.data.week);
+const phase = syllabus?.phase;
+const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
 ---
 
 <ContentLayout
@@ -22,8 +34,21 @@ const { Content } = await render(session);
   description={session.data.description}
   {...siteConfig}
 >
-  <p><strong>{formatCourseDate(session.data.date)}</strong></p>
+  <p>
+    <strong>{formatCourseDate(session.data.date)}</strong>
+    {phase && <> · Phase {phaseNumber}, {PHASE_LABELS[phase]}</>}
+  </p>
+
+  <section class="rule" aria-labelledby="rule-heading">
+    <h2 id="rule-heading">The rule this week states</h2>
+    <p class="rule__text">{session.data.rule}</p>
+  </section>
+
   <Content />
+
+  <h2>The creatures it is tested against</h2>
+  <Specimen week={session.data.week} />
+
   <SpecList spec={session.data.spec}>
     What you bring to the session. Written so a reader can tell whether it has
     been met without asking you.
@@ -31,3 +56,28 @@ const { Content } = await render(session);
   <TeachingTeam teachers={session.data.teachers} />
   <RelatedContent entry={session} collections={graphCollections} />
 </ContentLayout>
+
+<style>
+  /* 规则块是每周页面的骨架，所以它不能靠颜色区分，得靠位置和边框。 */
+  .rule {
+    margin: 1.5rem 0 2rem;
+    padding: 0.75rem 0 0.75rem 1rem;
+    border-left: 4px solid var(--at-primary);
+  }
+
+  .rule h2 {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .rule__text {
+    margin: 0.35rem 0 0;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--at-text);
+  }
+</style>
