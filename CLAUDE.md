@@ -299,9 +299,13 @@ ab close --all
 
 Things that cost time:
 
-- **zsh does not word-split unquoted parameters.** `AB="pnpm dlx ..."` then
-  `$AB open` fails with `command not found` because the whole string is treated
-  as one command name. Use a shell function.
+- **zsh does not word-split unquoted parameters**, and this bites twice.
+  `AB="pnpm dlx ..."` then `$AB open` fails with `command not found`, because
+  the whole string is one command name — so use a shell function. It bites
+  again on *arguments*: `for vp in "1920 1080" ...; ab set viewport $vp` answers
+  `Missing arguments for: set viewport` and the viewport silently does not
+  change, so you then audit the old layout twice and read it as a pass. Pass
+  width and height as separate arguments.
 - **`viewport` is a subcommand of `set`**, so bare `agent-browser viewport ...`
   answers `Unknown command`. Same for `device` and `media`.
 - **`set viewport` needs a `reload`** before the screenshot, or you photograph
@@ -342,9 +346,11 @@ Two failures found this way, both invisible to the build:
   the page background `#fffdfa` measures **3.43:1** (axe-core 4.12.1, Chrome,
   2026-09-17), which passes the 3:1 large-text threshold and fails the 4.5:1
   normal-text one. So a heading's *size* and its *colour* cannot be chosen
-  independently: the theme's own `RelatedContent` sets its "Related" h2 to 1rem
-  and leaves it amber, which fails on every content page. The override is in
-  `src/styles/site.css` with the measured ratio written beside it.
+  independently, and the theme does this to itself twice: `RelatedContent` sets
+  its "Related" h2 to 1rem, and `.at-card-title` drops to 20.25px at the phone
+  breakpoint. **The card one passes at 1920 and fails at 390**, which is why
+  auditing one viewport is not auditing. Both overrides are in
+  `src/styles/site.css` with the measured ratios beside them.
 
 Write the measured ratio next to the value, never in a commit message, because
 that is where it goes stale silently.
@@ -362,6 +368,20 @@ written, which is the only reason it exists.
 page's HTML for a selector finds nothing and passes vacuously. The check follows
 the `<link rel=stylesheet>` hrefs. A first version of it did not, and was green
 for the wrong reason.
+
+## Every page needs its own h1, and the MDX layout does not supply one
+
+`MdxPageLayout` sets the document `<title>` and renders the description as a
+lead paragraph. It does **not** emit an `<h1>`, so an `.mdx` page has a
+level-one heading only if its own body starts with `# `. Three index pages
+shipped with none.
+
+Worse, the starter's `heroTitle:` frontmatter looks like it supplies one and
+does not: `BaseLayout` renders the hero only when there is *also* a hero image,
+so on an image-free page `heroTitle` renders nothing at all and the page has no
+visible title. The build's axe pass rates `page-has-heading-one` "moderate" and
+let all three through. Pinned in `spec/course.test.ts` as exactly one `<h1>` per
+built page.
 
 ## Both marking viewports, and the deck
 

@@ -203,6 +203,24 @@ describe("the harness", () => {
   });
 });
 
+describe("every page", () => {
+  // Promise: a reader arriving on any page is told what page they are on.
+  // Three index pages shipped with no level-one heading at all, because the
+  // starter's `heroTitle:` frontmatter only renders alongside a hero image and
+  // suppresses the layout's own h1 when there isn't one. The build's axe pass
+  // rates that rule "moderate" and let it through, so it is pinned here.
+  it("carries exactly one level-one heading", () => {
+    const pages = globSync("dist/**/index.html").filter((file) => !file.includes("/decks/"));
+    expect(pages.length, "no built pages found").toBeGreaterThan(5);
+
+    const bad = pages
+      .map((file) => ({ file, count: (readFileSync(file, "utf8").match(/<h1[\s>]/g) ?? []).length }))
+      .filter(({ count }) => count !== 1);
+    expect(bad, `pages without exactly one h1: ${bad.map((b) => `${b.file}=${b.count}`).join(", ")}`)
+      .toEqual([]);
+  });
+});
+
 describe("site-wide styling", () => {
   // Promise: no page ships the theme's "Related" heading at 3.43:1 against the
   // page background. That fix lives in src/styles/site.css, which this repo has

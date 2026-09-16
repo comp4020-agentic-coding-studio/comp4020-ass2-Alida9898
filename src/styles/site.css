@@ -19,3 +19,13 @@
 .related-content h2 {
   color: var(--at-text);
 }
+
+/* The theme's card heading is the brand accent, and at the phone breakpoint it
+   drops to 20.25px — 15.2pt, under the 18pt large-text threshold — so the same
+   amber that passes at desktop fails at **3.43:1** on the phone (axe-core
+   4.12.1, Chrome, 390x844, 2026-09-17). A heading's size and its colour are not
+   independent choices, and a responsive size makes that a per-breakpoint fact.
+   Body text colour, which measures 17.88:1 on the same background. */
+.at-card-title {
+  color: var(--at-text);
+}
