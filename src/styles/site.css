@@ -1,0 +1,21 @@
+/* 全站样式。这个仓库没有统一的全局样式入口，所以这个文件必须由
+   PageLayout.astro 和每个 [slug].astro 各自 import 一次，spec 里有检查。
+
+   Site-wide CSS. This repo has no single hook for it: MDX pages render through
+   `src/layouts/PageLayout.astro`, but the detail routes import the theme's
+   `ContentLayout` directly, so both paths have to import this file. A check in
+   `spec/bestiary.test.ts` fails if any built page is missing it. */
+
+/* The theme's `RelatedContent` sets its "Related" heading to 1rem, which on
+   this site's 18px root is 18px, and leaves it in the brand accent. Amber
+   #b97d1c on the page background #fffdfa measures **3.43:1** (axe-core 4.12.1,
+   Chrome, 2026-09-17). An accent that clears 3:1 passes as large text and fails
+   as normal text, so shrinking the heading is what broke it, not the colour.
+   Body text colour instead, which is the same token the paragraphs already use.
+
+   `pnpm build` runs axe on an unlaid-out DOM and reported this page clean, so
+   this was only ever findable in a browser. Re-measure with `ab a11y --json`
+   if the brand tokens move. */
+.related-content h2 {
+  color: var(--at-text);
+}

@@ -32,6 +32,14 @@ const holisticMarking = z.object({
 });
 
 export const collections = {
+  // 每周恰好一条规则，至少三个生物。规则的正本在 src/lib/weeks.ts，这里是页面自述，
+  // spec/course.test.ts 检查两边一致。
+  //
+  // A week states exactly one rule and names at least three creatures that test
+  // it. `rule` is a single string, not a list, because a week with two rules is
+  // two weeks; the schema is where that decision is enforced rather than hoped
+  // for. The canonical copy lives in `src/lib/weeks.ts` and `spec/` checks the
+  // two agree.
   sessions: defineCollection({
     loader: courseNodeLoader("sessions"),
     schema: courseNodeSchema
@@ -39,6 +47,8 @@ export const collections = {
         week: weekSchema,
         date: z.coerce.date(),
         teachers: teacherRefs.optional(),
+        rule: z.string().trim().min(20),
+        creatures: z.array(z.string().trim().min(1)).min(3),
       })
       .loose(),
   }),

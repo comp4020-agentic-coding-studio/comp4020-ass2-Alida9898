@@ -5,67 +5,256 @@ belonged to that brief. The template arrives with no rules in it on purpose, so
 every rule below is one that cost something to learn. The platform under this
 repo is documented in `README.md` and is not restated here.
 
-So as you learn what your prototype needs --- a convention the work has to hold
-to, a sensor that keeps catching you out (a linter, say), a fact about the stack
-that is easy to get wrong --- write it down here and wire it into `check`.
-Growing this file is the work.
+So as you learn what this course needs --- a convention the work has to hold to,
+a sensor that keeps catching you out, a fact about the stack that is easy to get
+wrong --- write it down here and wire it into `check`. Growing this file is the
+work.
 
-## How to work in here
+---
+
+# The course this repo builds
+
+**SLOP6608 --- Cryptotaxonomy: A Linnaean System for the Shanhaijing.** One
+question held for twelve weeks: can a rigorous classification system be built
+for the creatures of the 山海经? The answer the course argues toward is *partly,
+and the failures are more interesting than the successes*.
+
+The 608 was allocated to this repo and does not move. The leading 6 is the
+level, chosen because the course assumes a reader who already knows what a type
+specimen is.
+
+## One rule per week, at least three creatures
+
+This is the shape of the whole course, so it is the first rule in the file.
+
+- **Every week states exactly one rule**, its 定式, in the session's
+  frontmatter. One string, never a list. A week with two rules is two weeks
+  pretending to be one, and the content schema in `src/content.config.ts`
+  refuses the second.
+- **Every week illustrates its rule with at least three creatures** from the
+  bestiary, named in frontmatter. Three is where a rule has to survive a case it
+  was not written for; two can always be chosen to agree.
+- **Creatures recur, deliberately.** 九尾狐 carries five weeks and 狌狌 carries
+  two. The same record read under a different rule is *supposed* to look
+  different, and weeks 1 and 8 on 狌狌 are the test of whether that is true. If
+  a recurring creature reads the same in two weeks, the second week has no rule
+  of its own --- that is the defect to look for, not the recurrence.
+- There is no such thing as a week's "primary specimen". An earlier version of
+  this course had one per week and it quietly turned the syllabus into a list of
+  animals, which is a bestiary and not a course.
+
+`src/lib/weeks.ts` is the canonical contract: twelve rows, each with a phase, a
+title, a topic, a rule and a creature list. The session page restates its own
+rule and creatures, because a week has to be able to say its rule on its own
+page, and `spec/course.test.ts` checks the page and the contract agree.
+
+## The twelve weeks are fixed
+
+Do not reorder them, do not merge two into one, and do not add a thirteenth.
+The phases are fixed too. This list and `src/lib/weeks.ts` are checked against
+each other, so changing one tells you about the other.
+
+1. **Why classify monsters** · build
+   Rule: The text is already a classification: it files every creature by where you would meet it, which is a claim about the world and not the absence of one.
+2. **The entry as specimen** · build
+   Rule: Every record follows 其状如X，Y首，见则Z, and the three slots are the first three taxonomic characters.
+3. **Morphology** · build
+   Rule: A composite body is assembled from a small closed set of parts, so the parts and not the whole are what a taxonomy can count.
+4. **Geography and habitat** · build
+   Rule: The 山经 routes can be mapped and the 海经 cannot, so a habitat field that accepts both is recording two different kinds of fact under one name.
+5. **Omens** · stress
+   Rule: An omen belongs to the formula and not to the animal: 见则天下大旱 attaches word for word to at least six unrelated creatures, so it cannot be a character of any of them.
+6. **Use** · stress
+   Rule: Use is the only field that ranks creatures against one another, because it states what a person gets, so a taxonomy built on it sorts by human benefit rather than by kind.
+7. **The 神 and the 獸** · stress
+   Rule: The text's own words 神, 獸, 鳥 and 人 do not sort by body: 陆吾 and 开明兽 guard one mountain with nearly one body and are filed apart, and several records name no kind at all.
+8. **Drift** · stress
+   Rule: A name outlives its record: 九尾狐 is never named in the text, so everything the name now carries was added after the record closed.
+9. **Where classification fails** · break
+   Rule: One name takes many creatures and one creature takes many names, and no field in the entry can hold either fact.
+10. **Comparative systems** · break
+    Rule: Other bestiaries sort by what a creature is for the reader, which is what our 其状如 slot has been doing under a different name all along.
+11. **Modern reconstruction** · break
+    Rule: A reconstruction supplies what the record withholds, and the additions stay legible only because the record is short enough to hold in view.
+12. **The taxonomic congress** · break
+    Rule: A new entry is admissible only if it cites a line and declares which of its own fields that line does not supply.
+
+The deck belongs to **week 3**. It is the one week whose argument is visual, so
+it is the one week a deck earns.
+
+**Weeks 5 and 6 carried the wrong lines** until the edition was actually read.
+Week 5 had 見則天下大旱, which is a real formula but attaches to 顒, 肥遺 and
+four others rather than to 畢方, whose omen is fire. Week 6 had 食之不饑 and
+佩之不迷, which belong to 祝餘 and 迷穀, the herb and the tree on week 1's
+mountain, not to 旋龜. Both were corrected against the text, and that correction
+is now week 5's rule rather than an erratum.
+
+## Never invent the source
+
+This is the rule the course is about, so it is the rule the harness enforces
+hardest. It applies to the agent exactly as it applies to a student.
+
+- **Quoted lines live in `src/lib/citations.ts`, which is generated, not
+  written.** Every string in it was sliced out of the Wikisource 四庫全書 text
+  with 郭璞's interlinear notes and the editorial `<ref>` apparatus stripped.
+  Do not hand-edit it. To add a line, slice it from the same edition.
+- **Nothing else may hold a line of 山海经.** `src/lib/bestiary.ts` references
+  citations by key and has no field that accepts source text, so a
+  plausible-looking quotation cannot be written into it at all. That is the
+  point: the rule is enforced by the shape of the code rather than by anyone
+  remembering it. Keep it that way when you add fields.
+- **Never invent a chapter.** The received text has eighteen 卷, and the five
+  山经 among them carry twenty-six 次 sections. Both lists are transcribed in
+  `src/lib/shanhaijing.ts` from the edition's own headings, including the one
+  inconsistency: 中山經's first section is headed 中山經 and not 中山經之首.
+- **If you cannot find the line, set `verified: false` and stop.** Do not supply
+  a plausible one, do not reconstruct it from a translation, and do not
+  paraphrase into quotation marks. An unverified entry claims nothing --- no
+  omen, no use --- and `spec/course.test.ts` enforces that.
+- **A quotation keeps its script.** The edition prints traditional characters,
+  so quoted lines are traditional. The course's own prose uses simplified.
+  Transliterating a quotation is still altering it, which is why every creature
+  carries both `name` and `nameTrad`.
+- `verified: true` is a claim, not a mood: a verified entry's cited line has to
+  contain the creature's own name. The one exception is 九尾狐, which the text
+  describes and never names, declared as `unnamedInSource` rather than smoothed
+  over, because it is the whole argument of week 8.
+
+Holding this rule produced the course's real findings rather than getting in
+their way. Each is recorded in its entry's `note`: 狌狌 has three records with
+three bodies, 旋龜 has two tails and one use between two records, 肥遺 is one
+name over a snake, a bird and a third thing with 郭璞 writing 疑是同名, 窫窳 has
+two records that cannot describe one body, and 陵魚's line stands in 海內北經
+only inside 袁珂's note arguing that nine passages were misfiled.
+
+## The bestiary
+
+Twenty-five creatures in `src/lib/bestiary.ts`, with at least one record in
+every one of the eighteen 卷. A check enforces the coverage, because reading
+only 南山經 makes the system look far more regular than it is.
+
+Every entry carries `name` and `nameTrad`, `pinyin`, an invented `binomial`,
+`form`, `habitat`, an optional `omen` and `use`, one or more `cites`, and
+`verified`. `kind` is **optional and often absent**, because several records
+never say what kind of thing they are describing, and that absence is week 7's
+material rather than a gap to fill.
+
+The binomial is genus from the source name, species from the diagnostic trait in
+the 其状 clause. It is invented, and every page that prints one says so. A
+taxonomy that hides which parts it made up is the thing this course is against.
+
+## Voice
+
+Deadpan taxonomist. Write as a scholar who takes the project completely
+seriously and never winks at the reader.
+
+- English prose. Creature names and quoted source text stay in Chinese, with
+  pinyin on first use in a page.
+- Short declarative sentences. No exclamation marks.
+- Banned: *dive into*, *explore*, *unpack*, *delve*, *journey*, *whether you are
+  a X or a Y*, and any sentence that tells the reader how to feel about the
+  material.
+- No rhetorical questions in body text. The course has one question and it is in
+  the course description.
+- Vary the section headings between weeks. Twelve pages under the same three
+  headings read as one page twelve times, which is the failure mode the brief
+  names by name.
+
+## One week at a time --- suspended by the author, 2026-09-17
+
+This file used to require generating one week, stopping, and waiting for review,
+because a pass that writes twelve weeks writes twelve versions of the same week.
+The author suspended it to build the whole site in one pass and review
+afterwards, so it is recorded here as suspended rather than deleted: the risk it
+names is real and the review list in `PROCESS.md` is what pays for it. Restore
+it before the next content pass.
+
+---
+
+# How to work in here
 
 - Keep the dev server running (`pnpm dev`) so you see changes as you make them.
-- Run `pnpm check` before you push.
+- Run `pnpm check` before you claim anything is done, and before you push.
 - Open the page in a browser and look at it. The rendered page is the truth;
   your mental model of it isn't.
 - When a check fails, read its output before you change anything.
 - Never commit a red state --- with one exception, and only one: a spec test
   written before the thing it tests, which is red *because the work hasn't
-  happened yet*. Those are the week's contract, they land in the first commit,
-  and turning each one green is the process evidence `PROCESS.md` cites. A test
-  that went red because something broke is never in this category. If you can't
-  say in one sentence why a red test is the planned starting state, it isn't.
+  happened yet*. Those are the contract, they land in the first commit, and
+  turning each one green is the process evidence `PROCESS.md` cites. A test that
+  went red because something broke is never in this category. If you can't say in
+  one sentence why a red test is the planned starting state, it isn't.
+
+## What a spec check is for
+
+`spec/` is read as the record of what this course decided had to stay true about
+itself, so **every check states the promise it protects, in one sentence, above
+the `it`.** Not what it asserts --- that is in the code --- but which promise of
+the course breaks if it goes red. A check whose purpose isn't written down is a
+check nobody can decide to delete.
+
+Test the contract, not the implementation. `spec/data-integrity.test.ts` ships
+with the template and keeps dated material inside the teaching period;
+`spec/course.test.ts` is this course's own and covers one rule per week, three
+creatures per rule, no orphan creatures, real chapters, the assessment total,
+the harness-to-data agreement, and the stylesheet every page needs.
+
+**Prove a check fails before believing it passes.** Every check in
+`spec/course.test.ts` was mutation-tested: an invented chapter, a 次 section
+moved to the wrong 卷, a quoted line with the creature's name deleted, a phase
+changed in this file. Each produced the error it should. A check that has only
+ever been green is a check you have not tested.
 
 ## Which language goes where
 
 The author and I talk in Chinese. **Everything that leaves the conversation is
-English**: commit messages, `PROCESS.md`, `reflections/*.md`, this file, and any
-text the deployed page shows. Those all have a reader who is not the author —
-a marker, a tutor, whoever opens the public repo — and a commit log they cannot
-read is evidence they cannot mark.
+English**: commit messages, `PROCESS.md`, this file, and the deployed page's
+prose. Those all have a reader who is not the author --- a marker, a tutor,
+whoever opens the public repo --- and a commit log they cannot read is evidence
+they cannot mark.
 
 This was got wrong for a whole week: the conversation was Chinese, so the commit
 messages came out Chinese too, and by the time it was noticed the repo was public
 and the history could not be rewritten. So it is written here rather than
 remembered.
 
-Two things that are **not** exceptions:
+Three things that are **not** exceptions:
 
 - **Quoting the author is quoting.** Their words stay in their language, with a
-  short English gloss beside them. `PROCESS.md` does this for the two
-  redirections that changed the brief.
+  short English gloss beside them.
+- **Quoting the 山海经 is quoting**, and it stays in traditional characters.
+  Creature names, 卷 names and section names stay Chinese in body text too ---
+  they are the objects of study, not decoration.
 - **Code comments follow the code's audience**, which in this repo is the author,
   so they stay Chinese. If that ever changes, it changes as one deliberate pass,
   not drifting file by file.
 
-And when the page's own language changes, `lang`, the aria-labels and any
-letter-spacing tuned for one script have to change with it — see the title going
-English and back.
+The page is bilingual by design, so: inline Chinese inside English prose needs
+`lang="zh-Hans"` on its own element, or `lang="zh-Hant"` for a quotation, or a
+screen reader pronounces it with English phonemes. Any letter-spacing or
+font-feature tuned for Latin has to be turned off for those spans ---
+`Specimen.astro` does this and is the pattern to copy.
 
 ## Plan before building, when the ask is more than one thing
 
-Phase 1 of the hunt was built as a complete, working mechanic --- you moved your
-aim until two readings cancelled out --- reviewed, and then thrown away whole.
-The scoping plan existed and was good (`PLAN.md`, cut the explainer down to ear
-asymmetry alone). What was missing was a plan for the *interaction*, so the first
-design that got imagined was the first design that got built, and the question
-underneath it --- how does the page show that the owl works the height out in
-advance? --- never got asked until there was working code to argue with.
+Phase 1 of the A1 hunt was built as a complete, working mechanic, reviewed, and
+then thrown away whole. The scoping plan existed and was good. What was missing
+was a plan for the *interaction*, so the first design that got imagined was the
+first design that got built, and the question underneath it never got asked
+until there was working code to argue with.
 
 So: when a request is more than one task, or when the shape of the thing is not
 obvious yet, write the plan first and get it agreed before building. `PLAN.md`
-for anything that outlives the session; a short numbered list in the conversation
-for anything smaller. A plan is cheap to disagree with. A finished mechanic is
-expensive, because disagreeing with it means someone has to accept the work was
-wasted --- which is pressure to keep a bad design rather than admit it.
+for anything that outlives the session; a short numbered list in the
+conversation for anything smaller. A plan is cheap to disagree with. A finished
+mechanic is expensive, because disagreeing with it means someone has to accept
+the work was wasted --- which is pressure to keep a bad design rather than admit
+it.
+
+This course's own design went through that loop once on paper and it paid:
+"one specimen per week" was a complete, coherent plan that would have produced a
+list of animals, and it was replaced by "one rule per week" before any week
+content existed.
 
 ## Commit as each piece of work finishes, not at the end of a session
 
@@ -73,19 +262,23 @@ Crit 1 nearly shipped with nothing real behind it: a whole Windows 98 re-skin
 was built, checked with `pnpm check`, and confirmed in the browser across many
 turns of back-and-forth --- but never once committed. Because the last real
 commit predated all of it, `git status -sb` showed the local branch level with
-`origin/main`, which reads as "everything's pushed" even though what was
-pushed was a bare stub. A tutor's automated nudge is what caught it, not a
-local check.
+`origin/main`, which reads as "everything's pushed" even though what was pushed
+was a bare stub. A tutor's automated nudge is what caught it, not a local check.
 
 So: after any turn that leaves the working tree passing `pnpm check` with a
 real, reviewed change in it, commit before moving to the next request --- don't
-wait for a natural stopping point, because "the session's about to end" isn't
-a signal available until the deadline is already close. Before treating a
-session as wrapped, run `git status -sb` and `git log --oneline @{upstream}..HEAD`
-and confirm there's nothing sitting uncommitted, not just that the working
-tree is clean.
+wait for a natural stopping point, because "the session's about to end" isn't a
+signal available until the deadline is already close. Before treating a session
+as wrapped, run `git status -sb` and `git log --oneline @{upstream}..HEAD` and
+confirm there's nothing sitting uncommitted, not just that the working tree is
+clean.
 
-## Looking at the page: agent-browser
+**This assignment is marked 45% on process**, so a commit message says which
+promise of the course that commit protects, not which files moved.
+
+---
+
+# Looking at the page: agent-browser
 
 The rendered page is the ground truth, and this project has no browser on the
 PATH. `agent-browser` is not installed globally --- run it through pnpm:
@@ -99,11 +292,12 @@ ab set viewport 1920 1080     # `viewport` lives under `set`, not at top level
 ab reload && ab screenshot /tmp/desktop.png
 ab set viewport 390 844 && ab reload && ab screenshot /tmp/phone.png
 ab a11y                       # axe-core in real Chrome
+ab a11y --json                # the measured contrast ratio, which plain a11y hides
 ab errors                     # page errors
 ab close --all
 ```
 
-Three things that cost time the first run:
+Things that cost time:
 
 - **zsh does not word-split unquoted parameters.** `AB="pnpm dlx ..."` then
   `$AB open` fails with `command not found` because the whole string is treated
@@ -112,124 +306,128 @@ Three things that cost time the first run:
   answers `Unknown command`. Same for `device` and `media`.
 - **`set viewport` needs a `reload`** before the screenshot, or you photograph
   the old layout.
-- **`ab errors` keeps a buffer across navigations, and a stale entry is
-  indistinguishable from a live bug.** An error thrown by the module you saved
-  thirty seconds ago is still listed after `ab open` on a fresh URL, with the
-  old `?t=` timestamp still in the stack trace --- so it reads as "the page is
-  broken right now". Two ways to tell: `ab errors --json` shows the `?t=`
-  timestamp (an old one is stale), and `ab close --all` before reopening
-  clears it for real. `--clear` alone did not. Check what the page actually
-  *does* before believing the buffer.
+- **`ab errors` keeps a buffer across navigations**, and a stale entry is
+  indistinguishable from a live bug. `ab errors --json` shows the `?t=`
+  timestamp, and an old one is stale; `ab close --all` before reopening clears it
+  for real, where `--clear` alone did not.
 - **`ab click <selector>` has silently done nothing** where
-  `ab eval "document.querySelector('…').click()"` worked. A no-op click looks
-  exactly like a page that ignored the click, so it is worth reaching for `eval`
-  before concluding the page is broken --- prefer it when a click is load-bearing
-  evidence.
+  `ab eval "document.querySelector('…').click()"` worked. Prefer `eval` when a
+  click is load-bearing evidence.
+- **Don't audit CSS against the dev server.** Astro serves component styles
+  through the module graph in dev, so they are not in the page's HTML and
+  `curl` finds nothing; worse, the browser can hold a stale copy whose
+  `data-astro-cid-*` hash no longer matches the one on disk, which reads exactly
+  like a specificity bug. Both times this looked like "my CSS isn't applying" it
+  was the dev server. **Build, then `pnpm preview --port 4331`, and audit that.**
+  Per `README.md` the site is judged on `pnpm build` output anyway.
 
-Two checks only a real browser can do, so they do not belong in `pnpm check`:
+## Contrast is a hand-check, and this repo has already failed it twice
 
-- **Colour contrast, and the widening list of things axe cannot see.**
-  `pnpm build` runs axe over every rendered page, but on a build's DOM rather
-  than a laid-out one, so the geometric rules are skipped --- contrast included.
-  A green build is therefore not a contrast result. `ab a11y` runs the same axe
-  in Chrome and does evaluate it, but only for what it can resolve, and three
-  things in a row have fallen outside that:
-  - **SVG `<text>`** axe cannot measure at all, reporting *incomplete*. A
-    hand-check goes stale the moment the background moves, which is how amber
-    labels ended up on a cream plate at 1.77:1 after being measured at 8.6:1 on
-    the dark. Where the geometry allows it, make the rule positional instead ---
-    in A1, `spec/pages.test.ts` forbade a label inside a plate's rect.
-  - **A gradient background** returns *incomplete* for every text node over it,
-    because axe cannot resolve one background colour behind them. Measure by
-    hand against the *lightest* point (worst case for pale text) and write the
-    ratio into the CSS beside the value.
-  - **A `<canvas>` is opaque to axe** --- there are no nodes inside it, so a
-    WebGL or 2D scene is not partially covered, it is entirely uncovered. Nothing
-    automatic says anything about it, in the build's axe pass or in Chrome. If the prototype's
-    whole point lives on a canvas, then *all* of its contrast is a hand-check,
-    and the only durable version of that is to drive the palette from named
-    constants in one module and measure those once. Colours picked inline at
-    each call site cannot be audited at all.
+`pnpm build` runs axe over every rendered page, but on a build's DOM rather than
+a laid-out one, so the geometric rules are skipped and contrast is among them.
+**A green build is not a contrast result.** `ab a11y` runs the same axe in
+Chrome and does evaluate it, but only for what it can resolve: SVG `<text>` and
+text over a gradient come back *incomplete*, and a `<canvas>` is invisible to it
+entirely. **Incomplete is not a pass.**
 
-  Every one of these expires silently when the palette moves, so write the
-  measured ratio next to the constant, not in a commit message.
-- **Both marking viewports.** 1920x1080 and 390x844 each count in full. Check
-  that the core interaction is reachable without a scroll at 1080 --- a page
-  whose interaction is below the fold has buried its own point.
+Two failures found this way, both invisible to the build:
+
+- **`opacity` on text multiplies against a token that already carries alpha.**
+  The theme's `--at-text-secondary` is the body colour at 78%; an extra
+  `opacity: 0.75` on top of it gives 0.585 effective alpha and fails. Use the
+  theme's own `--at-text-secondary` or `--at-text` and **never `opacity` on
+  text.** For a lighter rule or stroke use `color-mix(in srgb, currentColor 30%,
+  transparent)`, which is a colour and not a multiplier.
+- **The brand accent only clears contrast as large text.** Amber `#b97d1c` on
+  the page background `#fffdfa` measures **3.43:1** (axe-core 4.12.1, Chrome,
+  2026-09-17), which passes the 3:1 large-text threshold and fails the 4.5:1
+  normal-text one. So a heading's *size* and its *colour* cannot be chosen
+  independently: the theme's own `RelatedContent` sets its "Related" h2 to 1rem
+  and leaves it amber, which fails on every content page. The override is in
+  `src/styles/site.css` with the measured ratio written beside it.
+
+Write the measured ratio next to the value, never in a commit message, because
+that is where it goes stale silently.
+
+## Site-wide CSS has no single hook in this repo
+
+MDX pages render through `src/layouts/PageLayout.astro`, but the detail routes
+import the theme's `ContentLayout` directly, so there is no one layout to put a
+global stylesheet in. `src/styles/site.css` is imported by `PageLayout.astro`
+and by every page under `src/pages/`, and `spec/course.test.ts` fails any built
+page that does not carry it. That check caught two missed pages the moment it was
+written, which is the only reason it exists.
+
+**Astro extracts component CSS into a linked bundle**, so a check that greps the
+page's HTML for a selector finds nothing and passes vacuously. The check follows
+the `<link rel=stylesheet>` hrefs. A first version of it did not, and was green
+for the wrong reason.
+
+## Both marking viewports, and the deck
+
+1920x1080 and 390x844 each count in full. For this assignment the marker reads
+the home page, a few non-adjacent weeks, an assessment, the deck and the
+policies page at both. Read those pages yourself, at both, before calling the
+site done.
+
+**A deck is only checked for syntax.** The build compiles every deck and catches
+invalid MDX, and nothing checks whether a slide fits or stays legible. Week 3's
+deck has to be opened at both viewports and looked at.
 
 ## Navigation: collapse it on a phone, and make the collapse survive no JS
 
-More than two or three destinations in a horizontal nav, collapse them behind a
-button below the phone breakpoint. In A1 a three-link nav fitted on one line at
-390px --- 358px of 390 --- so nothing *looked* broken; it was still spending a
-whole row of vertical space on the viewport with the least of it, directly above
-the fold, on the page whose interaction has to be reachable without scrolling.
-Two traps, both of which look completely finished while broken:
+This site ships a five-link nav, which is past the two or three that fit a phone
+row. Check what the theme already does before building anything; if it handles
+it, write down that it does. Two traps, both of which look completely finished
+while broken:
 
 - **Ship the button with `hidden` and let the script remove it.** A hamburger
-  that assumes its script ran leaves a button that opens nothing when it did
-  not --- and that failure is invisible, because a dead button looks like a live
-  one. The plain list is the correct no-script state.
+  that assumes its script ran leaves a button that opens nothing when it did not,
+  and that failure is invisible, because a dead button looks like a live one. The
+  plain list is the correct no-script state.
 - **Restore the list unconditionally above the breakpoint.** A phone left closed
   and then rotated past the breakpoint otherwise has no nav at all: the collapsed
   state is stale and nothing on screen says so. This is found by users, not by
   you, because you never rotate your own test device mid-session.
 
-In A1 both were pinned in `spec/nav.test.ts` and `spec/pages.test.ts`.
-`spec/invariants.test.ts` requires a `<nav>` landmark on every page, so even a
-single-screen prototype carries one --- while it stays a single link this
-section costs nothing, and the moment it grows past that, pin them again rather
-than trusting the memory.
-
-## A gesture's direction is untestable where it usually lives
-
-C4's pour gesture sent the water *up* when the hand went *down*. Both directions
-animate smoothly, neither errors, and the suite was green through the whole
-thing --- it was found by a person dragging a glass and saying "why does this go
-the wrong way". The sum was one line inside a `pointermove` handler, which is a
-place a unit test cannot reach: importing the module needs a DOM, an
-`AudioContext` and synthetic `PointerEvent`s before it can assert anything.
-
-So: when a gesture maps input to state, put the arithmetic in a pure function
-and call it from the handler. `pouredLevel(startLevel, dy, travel)` in
-`tuning.ts` exists for no reason except that its direction can then be two lines
-in `spec/tuning.test.ts`. Applies to anything with a sign in it --- scroll,
-drag, zoom, scrub.
-
-## Facts about this stack that have each cost a run
-
-Four came from C5's template and only two survived the move: this repo's
-`tsconfig.include` is `**/*`, and nothing in `spec/` touches jsdom, so the
-whitelist trap and the three jsdom facts retired with that stack. The rest are
-CSS and images, which do not care what builds them.
+# Facts about this stack that have each cost a run
 
 - **`[hidden]` loses to any class that sets `display`.** The UA rule is
   `display: none` at specificity (0,1,0), so `.steps { display: flex }` beats it
   and the attribute does nothing at all. Pair every attribute-driven hide with
   its own `.thing[hidden] { display: none }`.
 - **Raster, when a week uses it:** `filter: invert()` only works on line art (a
-  tonal drawing inverted is a photographic negative --- eye sockets come out
-  brightest), and never back a lossy image with a rect in a "matching" colour,
-  because the paper survives compression a few levels off and seams against it
-  at a hard edge. Bake the margin into the image so there is only one surface.
+  tonal drawing inverted is a photographic negative), and never back a lossy
+  image with a rect in a "matching" colour, because the paper survives
+  compression a few levels off and seams against it at a hard edge. Bake the
+  margin into the image so there is only one surface. For line art prefer
+  `stroke="currentColor"` and no fill, which inverts correctly with no second
+  palette and no filter.
 
-Astro, this repo, not yet paid for --- written down before rather than after:
+Astro and this repo:
 
 - **A root-absolute link in an `.astro` file skips Astro's base handling.**
-  `href="/sessions/"` works on `localhost` and 404s on the deployed site,
-  because everything lives under `/comp4020-ass2-Alida9898/`. Markdown links and
-  the theme's components are rewritten for you; hand-written ones in `.astro`
-  are not. The build's link checker catches it --- so a *green build is the
+  `href="/sessions/"` works on `localhost` and 404s on the deployed site, because
+  everything lives under `/comp4020-ass2-Alida9898/`. Markdown links and the
+  theme's components are rewritten for you; hand-written ones in `.astro` are
+  not. The build's link checker catches it --- so a *green build is the
   evidence*, and a link added without one is not yet checked.
-- **A collection key is four things at once.** `sessions/getting-started` is the
-  file, the page URL, the JSON endpoint and the ref other pages link by.
+- **A collection key is four things at once.** `sessions/01-why-classify-monsters`
+  is the file, the page URL, the JSON endpoint and the ref other pages link by.
   Renaming it means renaming all four in the same commit; renaming one leaves a
   dangling ref, and the build fails on that by design.
 - **`published: false` hides an entry from the production build but not from
   `pnpm dev`.** So the dev server can look complete while the deployed site is
-  missing pages. Anything judged on "the site" is judged on `pnpm build`
-  output, never on what the dev server shows.
-- **`pnpm check:evidence` fails on leftovers, not just on absences.** For A2 it
-  tracks every `STARTER_CONTENT` marker and the unchanged key imagery; the repo
-  ships 18 markers. Remove a marker when --- and only when --- that fragment is
-  actually replaced.
+  missing pages. Anything judged on "the site" is judged on `pnpm build` output,
+  never on what the dev server shows.
+- **`pnpm check:evidence` fails on leftovers, not just on absences.** It greps
+  `src/` for `STARTER_CONTENT` and hashes four starter images. The repo shipped
+  13 markers across 12 files, and `src/pages/index.astro` carries two, so a file
+  is not clear until `git grep -F STARTER_CONTENT -- src` says so. Deleting the
+  file also passes, and dropping a starter portrait along with the person it
+  belonged to is a legitimate way to clear one. It also requires `PROCESS.md`
+  with its template comment gone and at least one citation whose SHA resolves.
+- **`spec/` imports from `src/` fine.** Vitest resolves `astro/zod` through the
+  normal dependency, which is how `bestiary.ts` validates itself at import and is
+  asserted over in `spec/`. Tests that need built output read `dist/`, and
+  `pnpm test` builds first, so there is only ever the one ordering.

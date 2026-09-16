@@ -44,19 +44,21 @@ export const slopCourseMetaSchema = z
 // this API contract when the course is published.
 //
 // The code's last three digits were assigned to this repo when it was
-// provisioned, and no other course in the cohort has them. Change the first
-// digit to your course's level (and `level` to match); keep the other three.
-// STARTER_CONTENT: replace this course record, then remove this comment.
+// provisioned, and no other course in the cohort has them. 608 stays; the
+// leading 6 is the level, and this course is postgraduate because it assumes
+// a reader who already knows what a type specimen is.
 export const courseMeta = slopCourseMetaSchema.parse({
-  code: "SLOP1608",
-  title: "Course Title Goes Here",
+  code: "SLOP6608",
+  title: "Cryptotaxonomy: A Linnaean System for the Shanhaijing",
   session: "Semester 1",
   year: 2027,
-  level: 1,
+  level: 6,
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "One concise paragraph explaining what this course is, who it is for, " +
-    "and why somebody would choose to spend a semester taking it.",
-  tags: ["replace me"],
+    "One question, held for twelve weeks: can the creatures of the 山海經 be " +
+    "classified? Each week applies the same Linnaean method to a harder " +
+    "specimen. The system holds for the beasts, strains at the gods, and " +
+    "breaks on a creature with one name and two bodies.",
+  tags: ["taxonomy", "shanhaijing", "classification"],
 }) satisfies CourseMetaInput;
