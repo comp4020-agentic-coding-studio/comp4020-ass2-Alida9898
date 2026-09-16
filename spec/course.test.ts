@@ -12,6 +12,7 @@ import { globSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { bestiary, citationProblems, citedChapters, recordsOf } from "../src/lib/bestiary";
+import { DROUGHT_OMEN, citations } from "../src/lib/citations";
 import { CHAPTERS } from "../src/lib/shanhaijing";
 import { orphanCreatures, unknownCreatures, weeks } from "../src/lib/weeks";
 
@@ -130,6 +131,30 @@ describe("the bestiary", () => {
       expect(entry.omen, `${entry.name} is unverified but carries an omen`).toBeUndefined();
       expect(entry.use, `${entry.name} is unverified but carries a use`).toBeUndefined();
     }
+  });
+
+  // Promise: week 5's rule claims an omen formula attaches word for word to at
+  // least six unrelated creatures. A course that asserts a count it cannot show
+  // is doing the thing it accuses the reconstructions of, so the repo carries
+  // the six records and this check counts them.
+  it("can show the six records behind week 5's omen rule", () => {
+    const carrying = Object.entries(citations).filter(
+      ([, record]) => !record.commentary && record.line.includes(DROUGHT_OMEN),
+    );
+    const loci = new Set(carrying.map(([, record]) => `${record.chapter}/${record.locus}`));
+    expect(
+      loci.size,
+      `only ${loci.size} cited record(s) carry ${DROUGHT_OMEN}: ${[...loci].join(", ")}`,
+    ).toBeGreaterThanOrEqual(6);
+    const chapters = new Set(carrying.map(([, record]) => record.chapter));
+    expect(chapters.size, "the formula should span more than one 卷").toBeGreaterThanOrEqual(3);
+  });
+
+  // Promise: a quotation from 郭璞's note is never printed as though the base
+  // text said it. The apparatus is flagged in the data, not in prose.
+  it("marks commentary as commentary", () => {
+    const note = citations["feiyi.guopu"];
+    expect(note.commentary, "郭璞's note must be flagged").toBe(true);
   });
 
   // Promise: the eighteen-chapter list is what every citation check rests on,

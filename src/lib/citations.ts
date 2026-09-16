@@ -1,11 +1,16 @@
 // 本文件由脚本从底本切出，**不要手改**。要加引文就回底本里切，别自己敲。
 //
 // GENERATED, NOT WRITTEN. Every string below was sliced out of the Wikisource
-// 四庫全書 text of 山海經 (郭璞注), with the interlinear notes and the editorial
-// <ref> apparatus stripped and nothing else altered. It is a separate module on
-// purpose: prose in `bestiary.ts` references a citation by key and has no way to
-// type a line of its own, so "never invent a quoted line" is enforced by the
-// shape of the code rather than by anyone remembering it.
+// 四庫全書 text of 山海經 (郭璞注). For a base-text line, 郭璞's interlinear
+// notes and the editorial <ref> apparatus are stripped and nothing else is
+// altered. One entry is 郭璞's note itself and is flagged `commentary: true`,
+// because the difference between the text and its apparatus is the course's own
+// distinction and the site has to be able to show which it is quoting.
+//
+// This module is separate on purpose: prose in `bestiary.ts` and in the week
+// pages references a citation by key and has no way to type a line of its own,
+// so "never invent a quoted line" is enforced by the shape of the code rather
+// than by anyone remembering it.
 //
 // Source: https://zh.wikisource.org/wiki/山海經
 // Retrieved: 2026-09-17
@@ -20,22 +25,28 @@ export interface Citation {
   locus?: string;
   /** The line, verbatim, in the edition's traditional characters. */
   line: string;
+  /** True when this is 郭璞's note rather than the base text. */
+  commentary?: boolean;
 }
 
-export const citations = {
+const raw = {
+  "bibi": { chapter: "東山經", section: "東次二經", locus: "姑逢之山", line: "有獸焉，其狀如狐而有翼，其音如鴻鴈，其名曰獙獙，見則天下大旱。" },
   "bifang": { chapter: "西山經", section: "西次三經", locus: "章莪之山", line: "有鳥焉，其狀如鶴，一足，赤文青質而白喙，名曰畢方，其鳴自叫也，見則其邑有譌火。" },
   "bingfeng.a": { chapter: "海外西經", line: "并封在巫咸東，其狀如彘，前後皆有首，黑。" },
   "bingfeng.b": { chapter: "大荒西經", line: "有獸，左右有首，名曰屏蓬。" },
   "boshi": { chapter: "南山經", section: "南山經之首", locus: "基山", line: "有獸焉，其狀如羊，九尾四耳，其目在背，其名曰猼訑，佩之不畏。" },
+  "boyu": { chapter: "東山經", section: "東次四經", locus: "女烝之山", line: "其中多薄魚，其狀如鱣魚而一目，其音如歐，見則天下大旱。" },
   "dijiang": { chapter: "西山經", section: "西次三經", locus: "天山", line: "有神焉，其狀如黃囊，赤如丹火，六足四翼，渾敦無面目，是識歌舞，實為帝江也。" },
   "feiyi.bird": { chapter: "西山經", section: "西山經之首", locus: "英山", line: "有鳥焉，其狀如鶉，黃身而赤喙，其名曰肥遺，食之已癘，可以殺蟲。" },
   "feiyi.feiwei": { chapter: "西山經", section: "西山經之首", locus: "太華之山", line: "有蛇焉，名曰肥𧔥，六足四翼，見則天下大旱。" },
+  "feiyi.guopu": { chapter: "西山經", section: "西山經之首", locus: "太華之山", line: "湯時此蛇見於陽山下。復有肥遺蛇，疑是同名", commentary: true },
   "feiyi.snake": { chapter: "北山經", section: "北山經之首", locus: "渾夕之山", line: "有蛇一首兩身，名曰肥遺，見則其國大旱。" },
   "fuzhu": { chapter: "中山經", section: "中次三經", locus: "敖岸之山", line: "有獸焉，其狀如白鹿而四角，名曰夫諸，見則其邑大水。" },
   "gudiao": { chapter: "南山經", section: "南次二經", locus: "鹿吳之山", line: "水有獸焉，名曰蠱雕，其狀如雕而有角，其音如嬰兒之音，是食人。" },
   "huan": { chapter: "西山經", section: "西次三經", locus: "翼望之山", line: "有獸焉，其狀如狸，一目而三尾，名曰讙，其音如奪百聲，是可以禦凶，服之已癉。" },
   "huantou.a": { chapter: "海外南經", line: "讙頭國在其南，其為人人面有翼，鳥喙，方捕魚。" },
   "huantou.b": { chapter: "大荒南經", line: "驩頭人面鳥喙，有翼，食海中魚，杖翼而行。" },
+  "huayu": { chapter: "東山經", section: "東次四經", locus: "子桐之山", line: "其中多䱻魚，其狀如魚而鳥翼，出入有光，其音如鴛鴦，見則天下大旱。" },
   "jingwei": { chapter: "北山經", section: "北次三經", locus: "發鳩之山", line: "有鳥焉，其狀如烏，文首、白喙、赤足，名曰精衛，其鳴自詨。是炎帝之少女，名曰女娃，女娃游于東海，溺而不返，故為精衛，常銜西山之木石，以堙于東海。" },
   "jiufeng": { chapter: "大荒北經", line: "有神，九首人面鳥身，名曰九鳳。" },
   "jiuweihu": { chapter: "南山經", section: "南山經之首", locus: "青丘之山", line: "有獸焉，其狀如狐而九尾，其音如嬰兒，能食人；食者不蠱。" },
@@ -62,8 +73,26 @@ export const citations = {
   "yayu.a": { chapter: "海內南經", line: "窫窳龍首，居弱水中，在狌狌之西，其狀如貙，龍首，食人。" },
   "yayu.b": { chapter: "海內西經", line: "窫窳者，蛇身人面，貳負臣所殺也。" },
   "yu": { chapter: "南山經", section: "南次三經", locus: "令丘之山", line: "有鳥焉，其狀如梟，人面四目而有耳，其名曰顒，其鳴自號也，見則天下大旱。" },
+  "zhuanyu": { chapter: "南山經", section: "南次三經", locus: "雞山", line: "其中有鱄魚，其狀如鮒而彘毛，其音如豚，見則天下大旱。" },
   "zhuyin": { chapter: "海外北經", line: "鍾山之神名曰燭陰，視為晝，瞑為夜，吹為冬，呼為夏，不飲，不食，不息，息為風，身長千里。" },
   "zouwu": { chapter: "海內北經", line: "林氏國有珍獸，大若虎，五采畢具，尾長于身，名曰騶吾，乘之日行千里。" },
 } as const satisfies Record<string, Citation>;
 
-export type CitationKey = keyof typeof citations;
+export type CitationKey = keyof typeof raw;
+
+/**
+ * `raw` is `as const`, so each entry's type omits the keys it does not carry
+ * and `record.section` fails to typecheck on a 海經 citation. Widening to
+ * `Citation` here keeps the key literals and gives every record the optional
+ * fields, so a consumer can ask for `section` without narrowing first.
+ */
+export const citations: Record<CitationKey, Citation> = raw;
+
+/**
+ * The omen formula week 5 is built on. Six records carry it word for word,
+ * across four 卷 and on creatures with nothing else in common, which is the
+ * evidence for the claim that an omen is a property of the formula rather than
+ * of the animal. The count is checked in `spec/course.test.ts` rather than
+ * asserted in prose.
+ */
+export const DROUGHT_OMEN = "見則天下大旱";
