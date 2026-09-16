@@ -1,21 +1,32 @@
 ---
 title: Marisol Quaye
 description:
-  The founding convenor, responsible for the course's shape and its weekly
-  teaching programme.
-affiliation: Slop University School of Invented Disciplines
+  Systematist and convenor. Supplies the Linnaean machinery the course tries to
+  fit to a text that has no specimens, and rules on what a character is.
+affiliation: Slop University Department of Systematics and Nomenclature
 role: convenor
 email: marisol.quaye@slop.university
-contact: Email for course-level questions; use the weekly session for feedback on work.
-photo: ./marisol-quaye.avif
-photoAlt: A stylised portrait of a person in three-quarter view, flat gold and black shapes on warm cream, in a two-ink risograph print
+contact:
+  Consultation after the Monday session, in the seminar room. Email for anything
+  about the course as a whole, or about a mark.
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+A working systematist, which on this course means the person who knows what the
+method costs. Twenty years of revising genera in a group where the type material
+is real, catalogued and measurable is the background she brings to a text where
+none of that exists, and it is why she is unsentimental about the difference.
 
-Replace this entry. A people page carries a short bio and whatever a student
-needs in order to contact the right person for the right thing --- and nothing
-that will be stale by week 3.
+Her part of the teaching is the machinery: what a character is, what a diagnosis
+has to do, why a binomial is a hypothesis and not a label, and how a rank is
+argued for rather than assigned. She wrote the bestiary's field list, and she is
+the reason it separates the word the record itself uses from the word this course
+would prefer. The invented binomials are hers, and she insists on every page
+saying so.
 
-Consultation hours, contact preferences and the escalation path (who to ask
-first, who to ask when that does not work) are the parts students actually read.
+She takes the course's answer seriously in both directions. A system can be built
+for part of this material, and the parts where it cannot be built are diagnostic
+rather than embarrassing — that is an ordinary result in her own field, where a
+revision that resolves every species is usually a revision that stopped looking.
+
+Ask her about ranks, about characters, about which of two competing
+classifications is testable, and about marks.

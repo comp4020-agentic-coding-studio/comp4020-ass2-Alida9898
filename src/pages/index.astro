@@ -1,49 +1,142 @@
 ---
+import "../styles/site.css";
 import Card from "astro-theme-university/components/Card.astro";
 import CardGrid from "astro-theme-university/components/CardGrid.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
-import heroImage from "../assets/images/hero-home.avif";
+import Specimen from "../components/Specimen.astro";
 import { courseMeta } from "../course-config";
+import { bestiary } from "../lib/bestiary";
+import { CHAPTERS, EDITION } from "../lib/shanhaijing";
+import { PHASE_LABELS, weeks, type Phase } from "../lib/weeks";
 import { sessionLabels, siteConfig } from "../site-config";
 
-// STARTER_CONTENT: replace the hero artwork and its alt text below, then
-// remove this comment.
+// 首页不放大图。模板那张讲堂插画跟这门课没关系，而 hero 一旦存在，第一屏就先是一张
+// 图而不是这门课的问题。ContentLayout 在没有 heroImage 时会自己渲染 h1 和 lead。
+//
+// No hero image. The starter artwork was a lecture theatre, which says nothing
+// about this course, and a hero puts a picture where the question should be.
+// ContentLayout renders the title and the lead itself when `heroImage` is
+// absent, so dropping the prop is the whole change. `src/assets/images/` is
+// left alone: nothing on this page references it.
+//
+// 阶段的周次范围从 weeks.ts 算出来，不写死。Phase spans are derived, so the
+// three-phase claim on this page cannot drift from the syllabus data.
+const PHASE_NOTES: Record<Phase, string> = {
+  build:
+    "Four weeks assembling a system that works: what the text already sorts by, the fixed shape of a single record, the closed set of parts a composite body is made from, and the routes the mountain chapters lay out.",
+  stress:
+    "Four weeks applying that system where it is uncomfortable — to omens, to medicinal use, to the line between a god and a beast, and to a creature whose description outlived the record it came from.",
+  break:
+    "Four weeks on the cases it cannot hold at all, where one name takes several creatures and one creature takes several names, and then on what can be rebuilt once that is admitted.",
+};
+
+const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
+  const span = weeks.filter((week) => week.phase === phase).map((week) => week.week);
+  return {
+    phase,
+    label: PHASE_LABELS[phase],
+    from: Math.min(...span),
+    to: Math.max(...span),
+    note: PHASE_NOTES[phase],
+  };
+});
 ---
 
 <ContentLayout
   title={`${courseMeta.code}: ${courseMeta.title}`}
   description={courseMeta.description}
-  heroImage={heroImage}
-  heroImageAlt="A lecture theatre reduced to flat gold and black shapes, rows of seats sweeping past the frame, in a two-ink risograph print"
   {...siteConfig}
 >
   <ul class="course-tags" aria-label="Course tags">
     {courseMeta.tags.map((tag) => <li>{tag}</li>)}
   </ul>
 
-  <!-- STARTER_CONTENT: replace the authored page below, then remove this comment. -->
-  <h2>What you will do</h2>
+  <h2>The question, and the answer</h2>
   <p>
-    Say what a student spends their time on — the making, reading, arguing or
-    measuring that fills the weeks. Name the artefact they walk out with.
+    This course asks one question and holds it for twelve weeks: whether a rigorous
+    classification system can be built for the creatures of the <span lang="zh-Hant">山海經</span>
+    (Shānhǎijīng).
+  </p>
+  <p>
+    The answer it argues toward is <strong>partly, and the failures are more interesting than the
+    successes</strong>. A Linnaean system fits the beasts of the mountain chapters almost too well,
+    because their records were written to a formula: a comparison, a distinguishing part, a name,
+    a consequence. It strains as soon as the consequence is treated as a character, because a
+    single omen — <q lang="zh-Hant">見則天下大旱</q> — stands word for word in the records of
+    creatures with nothing else in common, and a trait shared by unrelated animals is not a trait
+    of any of them. It fails on <span lang="zh-Hans">九尾狐</span> (jiǔwěihú), which the received
+    text describes and never names: everything the name now carries was attached to it after the
+    record closed, and no field in an entry can hold that fact.
   </p>
 
-  <h2>Who it is for</h2>
+  <h2>Three phases</h2>
   <p>
-    Say who this is aimed at and what they need to already know. Be specific
-    enough that someone can rule themselves in or out without emailing you.
+    The twelve weeks run in three phases, and the order carries the argument. A course that only
+    built the system would never find out where it gives way, so the break is scheduled rather
+    than hoped for. Each week states exactly one rule and tests it against at least three
+    creatures, which is the point at which a rule has to survive a case it was not written for.
+  </p>
+  <ul class="phases">
+    {
+      phases.map((phase) => (
+        <li>
+          <p class="phases__span">Weeks {phase.from}–{phase.to} · {phase.label}</p>
+          <p class="phases__note">{phase.note}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>The bestiary</h2>
+  <p>
+    The weeks work from one fixed set of {bestiary.length} entries, and it reaches every one of
+    the {CHAPTERS.length} <span lang="zh-Hant">卷</span> of the received text rather than the
+    famous opening. Reading only <span lang="zh-Hant">南山經</span> would make the system look far
+    more regular than it is.
+  </p>
+  <p>
+    Every quoted line was sliced from one edition — <span lang="zh-Hant">{EDITION.title}</span>,
+    <span lang="zh-Hant">{EDITION.edition}</span> — with the interlinear notes removed and
+    nothing else altered. No entry holds a line of its own: an entry cites the edition by key, so
+    a plausible-looking quotation cannot be typed into the data at all. Where a line cannot be
+    found, the entry is marked <code>verified: false</code> and claims nothing after that: no
+    omen, no use, and no prose written around the gap. Each entry also carries a Latin binomial,
+    and every page that prints one states that this course assigned it and the text did not.
+  </p>
+  <p>
+    Week 1's specimen is <span lang="zh-Hans">狌狌</span> (xīngxīng), the first beast on the first
+    route. This is the whole of its entry, printed as every week's page prints its own.
+  </p>
+
+  <Specimen week={1} />
+
+  <h2>Week to week</h2>
+  <p>
+    You read the week's records in the edition before the session, not in translation. The session
+    puts the week's one rule under argument against the creatures listed for it. Afterwards you
+    file that week's specimen card.
+  </p>
+  <p>
+    A card is admissible on the same terms as an entry in the bestiary: it cites a line, and it
+    declares which of its own fields that line does not supply. A card that fills a gap with
+    something plausible is marked down for that and for nothing else. Two pieces of graded work
+    carry the semester; the last week is a congress, where new entries are submitted and reviewed
+    by the room rather than by staff alone.
   </p>
 
   <h2>Where to go next</h2>
   <CardGrid columns={2}>
     <Card title={sessionLabels.plural} href="/sessions/">
-      <p>The weekly schedule and what happens in each teaching session.</p>
+      <p>All twelve weeks: each one's rule, the creatures it is tested against, and its primary specimen.</p>
+    </Card>
+    <Card title="Lectures" href="/lectures/">
+      <p>The lecture that opens each week, and the one deck the course ships.</p>
     </Card>
     <Card title="Assessment" href="/assessments/">
       <p>What is marked, what it is worth, and when it is due.</p>
     </Card>
-    <Card title="People" href="/people/">
-      <p>Who teaches the course and how to reach them.</p>
+    <Card title="Week 3 slides" href="/decks/week-03/">
+      <p>Morphology, and whether the parts of a composite body form a grammar. The one week whose argument is visual, so the one week with a deck.</p>
     </Card>
   </CardGrid>
 </ContentLayout>
@@ -64,5 +157,32 @@ import { sessionLabels, siteConfig } from "../site-config";
     color: var(--at-text-secondary);
     background: var(--at-bg-alt);
     font-size: 0.9rem;
+  }
+
+  .phases {
+    margin: 1rem 0 2rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .phases li + li {
+    margin-top: 1rem;
+  }
+
+  .phases__span {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .phases__note {
+    margin: 0.15rem 0 0;
+  }
+
+  /* 中文不跟拉丁字母一样加字距，所以在这些 span 上显式关掉。
+     Chinese runs inside English prose: turn off Latin letter-spacing and
+     font features, which the theme sets for headings and lead text. */
+  [lang^="zh"] {
+    letter-spacing: normal;
+    font-feature-settings: normal;
   }
 </style>
