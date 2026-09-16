@@ -20,11 +20,15 @@
 // the root `<svg>` in CreatureCut.astro, so the line art inverts with the theme
 // and there is no second palette for dark mode. The two creatures whose record
 // names a colour the page can carry — 帝江's cinnabar and 畢方's red markings —
-// use `var(--at-primary)`, never a literal hex. Amber #b97d1c measures 3.45:1
-// on the light background #fffdfa and 5.36:1 on the dark #121212 (computed
-// against WCAG relative luminance, 2026-09-17), so it clears the 3:1 that
-// non-text graphics need in both modes. It is also never load-bearing: the
-// black cut line carries the whole form, and the accent only marks it.
+// use `var(--at-primary)`, never a literal hex. Amber #b97d1c measures 3.44:1
+// against the theme's light surface #fffdfa and 5.82:1 against its dark one
+// #070504 — both `--at-bg`, computed from the same oklch formulas tokens.css
+// uses and measured by `scripts/render-artwork.mjs` on 2026-09-17 — so it
+// clears the 3:1 that non-text graphics need in both modes. Re-measure by
+// re-running that script if the brand accent moves; it prints the numbers and
+// refuses to write an image that fails. The accent is also never load-bearing:
+// the cut line carries the whole form, and the colour only marks it, which is
+// the part axe cannot check and a person has to look at.
 //
 // `opacity` appears nowhere in this file. Lighter strokes are thinner strokes.
 //
