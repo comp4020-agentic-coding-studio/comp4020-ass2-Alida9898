@@ -1,0 +1,271 @@
+---
+// 标本卡片。数据全部来自 bestiary.ts 和 citations.ts，页面不许自己写引文。
+//
+// A bestiary card. Pass `name` for one creature, or `week` to render every
+// creature that week tests its rule against.
+//
+// No page supplies its own citation: the quoted line comes from
+// `citations.ts`, which is machine-sliced from the edition. That is what keeps
+// "never invent a quoted line" true across twelve weeks of content.
+//
+// No colour is invented here. Quiet text uses the theme's own
+// `--at-text-secondary` and never `opacity`, because opacity multiplies
+// against a token that already carries alpha and failed axe in Chrome at 0.585
+// effective alpha while `pnpm build` reported the page clean. The specimen name
+// is set in `--at-text` rather than the theme's amber heading accent: that
+// accent only clears contrast as large text, so a heading's size and its colour
+// cannot be chosen independently.
+import { bestiary, recordsOf, type Creature } from "../lib/bestiary";
+import { EDITION } from "../lib/shanhaijing";
+import { weekOf } from "../lib/weeks";
+import CreatureCut from "./CreatureCut.astro";
+
+interface Props {
+  name?: string;
+  week?: number;
+}
+
+const { name, week } = Astro.props;
+
+let shown: Creature[] = [];
+if (name) {
+  const one = bestiary.find((entry) => entry.name === name);
+  if (one) shown = [one];
+} else if (week !== undefined) {
+  const syllabus = weekOf(week);
+  shown = (syllabus?.creatures ?? [])
+    .map((each) => bestiary.find((entry) => entry.name === each))
+    .filter((entry): entry is Creature => Boolean(entry));
+}
+---
+
+{
+  shown.map((specimen) => (
+    <figure class="specimen">
+      <div class="specimen__head">
+        <div class="specimen__cut">
+          <CreatureCut name={specimen.name} />
+        </div>
+        <figcaption>
+          <p class="specimen__label">Specimen</p>
+          <h3 class="specimen__name">
+            <span lang="zh-Hans">{specimen.name}</span>{" "}
+            <span class="specimen__pinyin">{specimen.pinyin}</span>
+          </h3>
+          <p class="specimen__binomial">
+            <i>{specimen.binomial}</i>{" "}
+            <span class="specimen__note">binomial assigned by this course, not by the text</span>
+          </p>
+        </figcaption>
+      </div>
+
+      <dl class="specimen__fields">
+        <dt>Kind</dt>
+        <dd>
+          {specimen.kind ? (
+            <>
+              <span lang="zh-Hant">{specimen.kind}</span>, the word the record uses
+            </>
+          ) : (
+            <>the record never says</>
+          )}
+        </dd>
+
+        <dt>Form</dt>
+        <dd>{specimen.form}</dd>
+
+        <dt>Habitat</dt>
+        <dd>{specimen.habitat}</dd>
+
+        {specimen.omen && (
+          <>
+            <dt>Omen</dt>
+            <dd>{specimen.omen}</dd>
+          </>
+        )}
+
+        {specimen.use && (
+          <>
+            <dt>Use</dt>
+            <dd>{specimen.use}</dd>
+          </>
+        )}
+
+        <dt>Record{specimen.cites.length > 1 ? "s" : ""}</dt>
+        <dd>
+          <ol class="specimen__citations">
+            {recordsOf(specimen).map((record) => (
+              <li>
+                <p class="specimen__where" lang="zh-Hant">
+                  {record.chapter}
+                  {record.section && ` · ${record.section}`}
+                  {record.locus && ` · ${record.locus}`}
+                </p>
+                <blockquote class="specimen__line" lang="zh-Hant">
+                  {record.line}
+                </blockquote>
+              </li>
+            ))}
+          </ol>
+        </dd>
+      </dl>
+
+      {specimen.unnamedInSource && (
+        <p class="specimen__flag">
+          The edition describes this creature but never gives it this name.
+        </p>
+      )}
+
+      {specimen.note && <p class="specimen__remark">{specimen.note}</p>}
+
+      <p class="specimen__edition">
+        Quoted from <span lang="zh-Hant">{EDITION.title}</span>, {EDITION.edition}. Interlinear
+        notes removed; the base text is otherwise unaltered.
+      </p>
+    </figure>
+  ))
+}
+
+<style>
+  .specimen {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+    border-radius: 2px;
+  }
+
+  .specimen__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .specimen__cut {
+    flex: 0 0 auto;
+    line-height: 0;
+  }
+
+  .specimen__label {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .specimen__name {
+    margin: 0.2rem 0 0;
+    font-size: 1.5rem;
+    color: var(--at-text);
+  }
+
+  /* 中文不跟拉丁字母一样加字距，显式关掉。 */
+  .specimen__name [lang^="zh"],
+  .specimen__where,
+  .specimen__line {
+    letter-spacing: normal;
+    font-feature-settings: normal;
+  }
+
+  .specimen__pinyin {
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--at-text-secondary);
+  }
+
+  .specimen__binomial {
+    margin: 0.15rem 0 0;
+  }
+
+  .specimen__note {
+    font-size: 0.85rem;
+    color: var(--at-text-secondary);
+  }
+
+  .specimen__fields {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.4rem 1.25rem;
+    margin: 1rem 0 0;
+  }
+
+  .specimen__fields dt {
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+    padding-top: 0.15rem;
+  }
+
+  .specimen__fields dd {
+    margin: 0;
+  }
+
+  .specimen__citations {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .specimen__citations li + li {
+    margin-top: 0.75rem;
+  }
+
+  .specimen__citations:has(li:only-child) {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .specimen__where {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--at-text-secondary);
+  }
+
+  .specimen__line {
+    margin: 0.2rem 0 0;
+    padding-left: 0.75rem;
+    border-left: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+    line-height: 1.9;
+  }
+
+  .specimen__flag,
+  .specimen__remark {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .specimen__flag {
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--at-primary);
+  }
+
+  .specimen__edition {
+    margin: 0.75rem 0 0;
+    font-size: 0.8rem;
+    color: var(--at-text-secondary);
+  }
+
+  /* 手机上把图和术语表都压成单列，否则 max-content 那一列会把正文挤没。 */
+  @media (max-width: 34rem) {
+    .specimen {
+      padding: 1rem;
+    }
+
+    .specimen__head {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .specimen__fields {
+      grid-template-columns: 1fr;
+      gap: 0.1rem;
+    }
+
+    .specimen__fields dd + dt {
+      margin-top: 0.6rem;
+    }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+// 一只生物的木刻线图。用法只有一种：<CreatureCut name="帝江" />。
+//
+// The only public entry point for the creature artwork. Drawings live in
+// `src/components/creatures/cuts.ts`; this component looks one up by the name
+// `src/lib/bestiary.ts` prints and renders it.
+//
+// A name with no drawing renders **nothing at all** — no box, no placeholder,
+// no error. Twenty-five creatures are in the bestiary and six are drawn, so
+// "not drawn yet" is the ordinary case and must not be a broken page.
+//
+// 颜色：线全是 currentColor，fill 全是 none，都在根 svg 上设一次。所以深色模式
+// 不需要第二套颜色，图跟着正文颜色翻。只有记录里明写了颜色、而这套配色又接得住的
+// 地方才用 var(--at-primary)（帝江的丹、畢方的赤），组件里不许出现十六进制。
+//
+// Dark mode is handled by not handling it: `stroke="currentColor"` inherits the
+// theme's text colour, so the cut line is near-black on the light background
+// and near-white on the dark one, from one set of paths. `filter: invert()` is
+// not used anywhere. The accent is the theme's own `--at-primary`.
+//
+// No `opacity` anywhere: in this repo it multiplies against tokens that already
+// carry alpha and has failed axe in Chrome. Lighter strokes are thinner strokes.
+import { CUT_VIEWBOX, cutFor } from "./creatures/cuts";
+
+interface Props {
+  /** A creature's printed name, matching a `name` in `src/lib/bestiary.ts`. */
+  name: string;
+  /** Rendered width and height in px. The cut is square. */
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 200, class: className } = Astro.props;
+const cut = cutFor(name);
+---
+
+{
+  cut && (
+    <svg
+      class:list={["creature-cut", className]}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={CUT_VIEWBOX}
+      width={size}
+      height={size}
+      role="img"
+      aria-label={cut.alt}
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <title>{cut.name}</title>
+      <Fragment set:html={cut.body} />
+    </svg>
+  )
+}
+
+<style>
+  .creature-cut {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* 跟着周围的正文颜色走，不锁死成某个 token。 */
+    color: inherit;
+  }
+</style>
