@@ -1,0 +1,149 @@
+---
+// 林奈层级，画成层层嵌套的盒子。第一周用来给整门课立参照点。
+//
+// The Linnaean hierarchy, drawn as nested boxes. Week 1 uses it as the
+// reference point the rest of the course is measured against.
+//
+// Nesting is the claim being illustrated — each rank sits inside the last —
+// so the drawing nests actual elements rather than stacking a picture of
+// nesting. Every label is real HTML text, which means it is selectable,
+// resizable, contrast-checked by axe, and read by a screen reader. Baked-in
+// raster text is none of those, and SVG <text> comes back `incomplete` from
+// axe in Chrome, which this repo does not count as a pass.
+//
+// 颜色跟 CreatureCut 一条路：边框 currentColor，没有十六进制，没有 opacity。
+// Dark mode is handled by not handling it: the border is `currentColor`, so it
+// follows the theme's text colour in both schemes from one set of rules. No
+// `opacity` anywhere — in this repo it multiplies against tokens that already
+// carry alpha and has failed axe in Chrome.
+//
+// Measured contrast against the page background, hand-checked in Chrome because
+// axe returns `incomplete` for every text node on this page and incomplete is
+// not a pass (2026-09-18):
+//   .rank__taxon      18.9px  17.88:1   needs 4.5
+//   .rank__character  16.2px   8.92:1   needs 4.5
+//   .rank__rank       14.4px   8.92:1   needs 4.5  ← the smallest text here
+// The 8.92 figure is `--at-text-secondary`, which is the body colour at 78%
+// alpha. It clears normal-text contrast on its own; it is the extra `opacity`
+// on top of it that has failed before, so there is none.
+//
+// The diagnostic characters are written here rather than copied from a textbook
+// figure: the common one has Chordata as "animals with a backbone", which is
+// Vertebrata, and a course about the rigour of characters cannot print that.
+interface Rank {
+  /** The rank's name in the hierarchy. */
+  rank: string;
+  /** The taxon a human belongs to at this rank. */
+  taxon: string;
+  /** A character that admits a member to this rank. */
+  character: string;
+}
+
+const RANKS: Rank[] = [
+  { rank: "Kingdom", taxon: "Animalia", character: "multicellular, and feeds on other organisms" },
+  { rank: "Phylum", taxon: "Chordata", character: "has a notochord at some stage of life" },
+  { rank: "Class", taxon: "Mammalia", character: "mammary glands, and hair" },
+  { rank: "Order", taxon: "Primates", character: "grasping hands, forward-facing eyes" },
+  { rank: "Family", taxon: "Hominidae", character: "no tail, and a broad shallow ribcage" },
+  { rank: "Genus", taxon: "Homo", character: "upright gait, and a large braincase" },
+  { rank: "Species", taxon: "sapiens", character: "high forehead, thin skull bones" },
+];
+
+interface Props {
+  /** How many ranks to draw, counting from Kingdom. Defaults to all seven. */
+  depth?: number;
+}
+
+const { depth = RANKS.length } = Astro.props;
+const shown = RANKS.slice(0, depth);
+
+// 从最内层往外包，所以渲染时不需要递归组件。
+// Wrapped from the innermost rank outwards, so no recursive component is
+// needed: the reduce builds the nesting as a list of ranks still to open.
+---
+
+<figure class="hierarchy">
+  <div class="hierarchy__stack">
+    {
+      // 只用一层 map 是不够的，嵌套要靠嵌套元素，所以这里手写七层的开合。
+      shown.reduceRight(
+        (inner, level, index) => (
+          <div class="rank" style={`--rank-depth: ${index}`}>
+            <p class="rank__head">
+              <span class="rank__rank">{level.rank}</span>
+              <i class="rank__taxon">{level.taxon}</i>
+            </p>
+            <p class="rank__character">{level.character}</p>
+            {inner}
+          </div>
+        ),
+        null as unknown as astroHTML.JSX.Element,
+      )
+    }
+  </div>
+  <figcaption>
+    The seven ranks Linnaeus nested, with the taxon a human is admitted to at each
+    and one character that admits them. <i>Homo sapiens</i> is the innermost box:
+    every rank outside it is a claim that also holds.
+  </figcaption>
+</figure>
+
+<style>
+  .hierarchy {
+    margin: 2rem 0;
+  }
+
+  .rank {
+    padding: 0.7rem 0.85rem;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+  }
+
+  /* 内层之间留一点气口，最内层不留。 */
+  .rank .rank {
+    margin-top: 0.7rem;
+  }
+
+  .rank__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .rank__rank {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .rank__taxon {
+    font-size: 1.05rem;
+  }
+
+  .rank__character {
+    margin: 0.15rem 0 0;
+    font-size: 0.9rem;
+    color: var(--at-text-secondary);
+  }
+
+  .hierarchy figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--at-text-secondary);
+  }
+
+  /* 手机上七层嵌套的左右内距会把最内层挤没，所以收窄。 */
+  @media (max-width: 34rem) {
+    .rank {
+      padding: 0.55rem 0.5rem;
+    }
+
+    .rank .rank {
+      margin-top: 0.55rem;
+    }
+  }
+</style>
