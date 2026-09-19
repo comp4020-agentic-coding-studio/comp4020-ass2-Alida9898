@@ -84,7 +84,16 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
        gap are sized from that same centred geometry, which is why the rail
        gets wider here rather than narrower. */
     --week-col: calc(var(--at-content-width) + var(--at-content-inset));
-    --week-gap: clamp(3rem, calc(100vw - var(--week-col) - 15rem - 4rem), 4rem);
+    /* 读者看到的「导轨到正文」不是这个间距，是间距 + 竖线到正文的内距（2rem）。
+       所以 4rem 的间距读起来是 108px 的空，太散；收到 2.5rem 之后是 81px。
+       导轨盒子的右缘本来就贴着竖线，所以能收的只有这一段——
+       再往右挪导轨就得连竖线和正文一起右移，那又跟「正文左移」打架。
+       What the reader sees between rail and text is this gap plus the rule's
+       2rem inset, so 4rem read as 108px of air. 2.5rem makes it 81px. The
+       rail's box already sits flush against the rule, so this is the only
+       slack there is: moving the rail further right would mean moving the
+       rule and the column right with it, against the last change. */
+    --week-gap: clamp(2rem, calc(100vw - var(--week-col) - 15rem - 4rem), 2.5rem);
     --week-rail: min(15rem, calc(100vw - var(--week-col) - var(--week-gap) - 4rem));
     --week-band: calc(var(--week-rail) + var(--week-gap));
   }
