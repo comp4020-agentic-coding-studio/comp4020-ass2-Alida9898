@@ -1,33 +1,42 @@
 ---
 import "../styles/site.css";
-import Card from "astro-theme-university/components/Card.astro";
-import CardGrid from "astro-theme-university/components/CardGrid.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import CreatureCut from "../components/CreatureCut.astro";
 import Specimen from "../components/Specimen.astro";
 import { courseMeta } from "../course-config";
 import { bestiary } from "../lib/bestiary";
-import { CHAPTERS, EDITION } from "../lib/shanhaijing";
+import { ALL_SECTIONS, CHAPTERS, EDITION } from "../lib/shanhaijing";
 import { PHASE_LABELS, weeks, type Phase } from "../lib/weeks";
-import { sessionLabels, siteConfig } from "../site-config";
+import { siteConfig } from "../site-config";
 
 // 首页不放大图。模板那张讲堂插画跟这门课没关系，而 hero 一旦存在，第一屏就先是一张
-// 图而不是这门课的问题。ContentLayout 在没有 heroImage 时会自己渲染 h1 和 lead。
+// 图而不是这门课要教的能力。ContentLayout 在没有 heroImage 时会自己渲染 h1 和 lead。
 //
-// No hero image. The starter artwork was a lecture theatre, which says nothing
-// about this course, and a hero puts a picture where the question should be.
-// ContentLayout renders the title and the lead itself when `heroImage` is
-// absent, so dropping the prop is the whole change. `src/assets/images/` is
-// left alone: nothing on this page references it.
+// 版面规则，一次定死，全页照办：
+//   圆角 2px（跟 Specimen 和 Hierarchy 一致），强调色只有 --at-primary 一个，
+//   文字颜色只用 --at-text / --at-text-secondary，任何地方不许 opacity。
+//   暗色模式靠 token 和 currentColor，不写第二套配色。
 //
-// 阶段的周次范围从 weeks.ts 算出来，不写死。Phase spans are derived, so the
-// three-phase claim on this page cannot drift from the syllabus data.
-const PHASE_NOTES: Record<Phase, string> = {
-  build:
-    "Four weeks assembling a system that works: what the text already sorts by, the fixed shape of a single record, the closed set of parts a composite body is made from, and the routes the mountain chapters lay out.",
-  stress:
-    "Four weeks applying that system where it is uncomfortable — to omens, to medicinal use, to the line between a god and a beast, and to a creature whose description outlived the record it came from.",
-  break:
-    "Four weeks on the cases it cannot hold at all, where one name takes several creatures and one creature takes several names, and then on what can be rebuilt once that is admitted.",
+// One radius (2px), one accent (--at-primary), no `opacity` on text anywhere:
+// in this repo opacity multiplies against tokens that already carry alpha and
+// has failed axe in Chrome. Dark mode is handled by the theme's tokens and by
+// `currentColor`, so there is no second palette to keep in sync.
+
+// 每一个数字都从数据里数出来，没有一个是写死的。
+// Every number on this page is counted from committed data. Nothing is typed in.
+const PHASE_NOTES: Record<Phase, { verb: string; note: string }> = {
+  build: {
+    verb: "Build a system that works",
+    note: "Characters, ranks, two-part names. You apply them to the cleanest records in the book and they fit, which is the part that should worry you.",
+  },
+  stress: {
+    verb: "Push it until it strains",
+    note: "Omens, medicinal uses, the line between a god and a beast. Each one is a candidate character that turns out to fail a different test.",
+  },
+  break: {
+    verb: "Take it apart and rebuild",
+    note: "One name over many creatures, one creature under many names. Then other traditions, and then a system of your own for material nobody has sorted.",
+  },
 };
 
 const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
@@ -37,9 +46,31 @@ const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
     label: PHASE_LABELS[phase],
     from: Math.min(...span),
     to: Math.max(...span),
-    note: PHASE_NOTES[phase],
+    ...PHASE_NOTES[phase],
   };
 });
+
+// 有线图的六只。首页只用画过的，没画过的不出现。
+const DRAWN = ["帝江", "陆吾", "毕方", "夫诸", "九尾狐", "并封"];
+
+// 手写的 <a href="/..."> 不会被 Astro 补 base，部署后就是 404。主题的 Card 组件
+// 自己处理，这里不用组件，所以自己补。
+//
+// A root-absolute href written by hand in an `.astro` file skips Astro's base
+// handling: it resolves on localhost and 404s under `/comp4020-ass2-Alida9898/`.
+// The theme's Card does this internally; these links are plain anchors, so they
+// do it here. The build's link checker fails on a miss, which is how the first
+// version of this page was caught.
+const withBase = (path: string): string =>
+  `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
+
+const facts = [
+  { value: String(weeks.length), label: "weeks" },
+  { value: String(bestiary.length), label: "creature records" },
+  { value: String(CHAPTERS.length), label: "chapters, all of them read" },
+  { value: String(ALL_SECTIONS.length), label: "mountain routes" },
+  { value: "1", label: "edition, cited line by line" },
+];
 ---
 
 <ContentLayout
@@ -47,142 +78,356 @@ const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
   description={courseMeta.description}
   {...siteConfig}
 >
-  <ul class="course-tags" aria-label="Course tags">
-    {courseMeta.tags.map((tag) => <li>{tag}</li>)}
-  </ul>
+  <section class="outcome">
+    <h2>What you leave able to do</h2>
+    <ol class="outcome__steps">
+      <li>
+        <h3>Choose characters</h3>
+        <p>
+          Decide which features of a thing can be compared across every case, and
+          say why the ones you rejected do not qualify.
+        </p>
+      </li>
+      <li>
+        <h3>Build the hierarchy</h3>
+        <p>
+          Nest those characters so that a claim made high up holds for everything
+          underneath it, and nothing has to be restated.
+        </p>
+      </li>
+      <li>
+        <h3>Name the limits</h3>
+        <p>
+          State where your own system fails before anyone else finds it. Every
+          system has an edge. Declaring it is the difference between a taxonomy
+          and a guess.
+        </p>
+      </li>
+    </ol>
+    <p class="outcome__transfer">
+      The final assessment hands you material you have not seen and asks for all
+      three.
+    </p>
+  </section>
 
-  <h2>The question, and the answer</h2>
-  <p>
-    This course asks one question and holds it for twelve weeks: whether a rigorous
-    classification system can be built for the creatures of the <span lang="zh-Hant">山海經</span>
-    (Shānhǎijīng).
-  </p>
-  <p>
-    The answer it argues toward is <strong>partly, and the failures are more interesting than the
-    successes</strong>. A Linnaean system fits the beasts of the mountain chapters almost too well,
-    because their records were written to a formula: a comparison, a distinguishing part, a name,
-    a consequence. It strains as soon as the consequence is treated as a character, because a
-    single omen — <q lang="zh-Hant">見則天下大旱</q> — stands word for word in the records of
-    creatures with nothing else in common, and a trait shared by unrelated animals is not a trait
-    of any of them. It fails on <span lang="zh-Hans">九尾狐</span> (jiǔwěihú), which the received
-    text describes and never names: everything the name now carries was attached to it after the
-    record closed, and no field in an entry can hold that fact.
-  </p>
+  <section class="phases">
+    <h2>Three phases, four weeks each</h2>
+    <ol class="phases__list">
+      {
+        phases.map((phase) => (
+          <li class="phase">
+            <p class="phase__span">
+              Weeks {phase.from} to {phase.to}
+            </p>
+            <h3 class="phase__verb">{phase.verb}</h3>
+            <p class="phase__note">{phase.note}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
 
-  <h2>Three phases</h2>
-  <p>
-    The twelve weeks run in three phases, and the order carries the argument. A course that only
-    built the system would never find out where it gives way, so the break is scheduled rather
-    than hoped for. Each week states exactly one rule and tests it against at least three
-    creatures, which is the point at which a rule has to survive a case it was not written for.
-  </p>
-  <ul class="phases">
-    {
-      phases.map((phase) => (
-        <li>
-          <p class="phases__span">Weeks {phase.from}–{phase.to} · {phase.label}</p>
-          <p class="phases__note">{phase.note}</p>
-        </li>
-      ))
-    }
-  </ul>
+  <section class="set">
+    <h2>The training set</h2>
+    <p class="set__intro">
+      The <span lang="zh-Hans">山海经</span> (Shānhǎijīng, the <i>Classic of
+      Mountains and Seas</i>) files hundreds of creatures by where you would meet
+      them and never says what any of them is a kind of. It is a good training
+      set precisely because it resists: a book that sorted itself cleanly would
+      teach you nothing about choosing characters.
+    </p>
 
-  <h2>The bestiary</h2>
-  <p>
-    The weeks work from one fixed set of {bestiary.length} entries, and it reaches every one of
-    the {CHAPTERS.length} <span lang="zh-Hant">卷</span> of the received text rather than the
-    famous opening. Reading only <span lang="zh-Hant">南山經</span> would make the system look far
-    more regular than it is.
-  </p>
-  <p>
-    Every quoted line was sliced from one edition — <span lang="zh-Hant">{EDITION.title}</span>,
-    <span lang="zh-Hant">{EDITION.edition}</span> — with the interlinear notes removed and
-    nothing else altered. No entry holds a line of its own: an entry cites the edition by key, so
-    a plausible-looking quotation cannot be typed into the data at all. Where a line cannot be
-    found, the entry is marked <code>verified: false</code> and claims nothing after that: no
-    omen, no use, and no prose written around the gap. Each entry also carries a Latin binomial,
-    and every page that prints one states that this course assigned it and the text did not.
-  </p>
-  <p>
-    Week 1's specimen is <span lang="zh-Hans">狌狌</span> (xīngxīng), the first beast on the first
-    route. This is the whole of its entry, printed as every week's page prints its own.
-  </p>
+    <ul class="cuts" aria-label="Six creatures from the bestiary, drawn as line art">
+      {
+        DRAWN.map((name) => (
+          <li>
+            <CreatureCut name={name} size={104} />
+            <p lang="zh-Hans">{name}</p>
+          </li>
+        ))
+      }
+    </ul>
 
-  <Specimen week={1} />
+    <dl class="facts">
+      {
+        facts.map((fact) => (
+          <div>
+            <dt>{fact.value}</dt>
+            <dd>{fact.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
 
-  <h2>Week to week</h2>
-  <p>
-    You read the week's records in the edition before the session, not in translation. The session
-    puts the week's one rule under argument against the creatures listed for it. Afterwards you
-    file that week's specimen card.
-  </p>
-  <p>
-    A card is admissible on the same terms as an entry in the bestiary: it cites a line, and it
-    declares which of its own fields that line does not supply. A card that fills a gap with
-    something plausible is marked down for that and for nothing else. Two pieces of graded work
-    carry the semester; the last week is a congress, where new entries are submitted and reviewed
-    by the room rather than by staff alone.
-  </p>
+    <p class="set__rule">
+      Every quoted line comes from one edition, <span lang="zh-Hant"
+        >{EDITION.title}</span
+      >, <span lang="zh-Hant">{EDITION.edition}</span>, and no page writes a line
+      of its own. Where a line cannot be found, the entry says so and claims
+      nothing after that. The binomials are this course's inventions and every
+      page that prints one says so.
+    </p>
+  </section>
 
-  <h2>Where to go next</h2>
-  <CardGrid columns={2}>
-    <Card title={sessionLabels.plural} href="/sessions/">
-      <p>All twelve weeks: each one's rule, the creatures it is tested against, and its primary specimen.</p>
-    </Card>
-    <Card title="Lectures" href="/lectures/">
-      <p>The lecture that opens each week, and the one deck the course ships.</p>
-    </Card>
-    <Card title="Assessment" href="/assessments/">
-      <p>What is marked, what it is worth, and when it is due.</p>
-    </Card>
-    <Card title="Week 3 slides" href="/decks/week-03/">
-      <p>Morphology, and whether the parts of a composite body form a grammar. The one week whose argument is visual, so the one week with a deck.</p>
-    </Card>
-  </CardGrid>
+  <section class="record">
+    <h2>One record, in full</h2>
+    <p>
+      This is a single entry, printed the way every week prints its own. Read the
+      fields and you have read the raw material of the whole course.
+    </p>
+    <Specimen name="狌狌" />
+  </section>
+
+  <section class="next">
+    <h2>Where to go next</h2>
+    <ul class="next__list">
+      <li>
+        <a href={withBase("/sessions/")}>The twelve weeks</a>
+        <p>Each week's rule, the creatures it is tested against, and how the two hours run.</p>
+      </li>
+      <li>
+        <a href={withBase("/assessments/")}>Assessment</a>
+        <p>Five pieces of work. What each is worth, and what the final one asks for.</p>
+      </li>
+      <li>
+        <a href={withBase("/lectures/")}>Lectures</a>
+        <p>The hour that opens each week, and the one deck the course ships.</p>
+      </li>
+      <li>
+        <a href={withBase("/decks/week-03/")}>Week 3 slides</a>
+        <p>Morphology. The one week whose argument is visual, so the one week with a deck.</p>
+      </li>
+    </ul>
+  </section>
 </ContentLayout>
 
 <style>
-  .course-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-block: 0 2rem;
+  /* 一套圆角，一个强调色。全页共用。
+     首屏交给 ContentLayout：它渲染 h1 和 lead（course-config 的 description），
+     所以这里不再自己造一个 hero，否则第一屏会出现两个标题。 */
+  .outcome,
+  .phases,
+  .set,
+  .record,
+  .next {
+    margin-block: 3.5rem;
+  }
+
+  /* 1. 能力。编号推进，不是三张等宽卡。 */
+  .outcome__steps {
+    margin: 1.5rem 0 0;
     padding: 0;
     list-style: none;
+    counter-reset: step;
   }
 
-  .course-tags li {
-    padding: 0.25rem 0.65rem;
-    border-radius: 999px;
-    color: var(--at-text-secondary);
-    background: var(--at-bg-alt);
-    font-size: 0.9rem;
+  .outcome__steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 0 1rem;
+    padding-block: 1.1rem;
+    border-block-start: 1px solid color-mix(in srgb, currentColor 18%, transparent);
   }
 
-  .phases {
-    margin: 1rem 0 2rem;
-    padding: 0;
-    list-style: none;
+  .outcome__steps li::before {
+    content: counter(step);
+    grid-row: 1 / span 2;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--at-primary);
   }
 
-  .phases li + li {
-    margin-top: 1rem;
-  }
-
-  .phases__span {
+  /* 主题的标题色是琥珀 --at-primary，在页面底色上实测 3.44:1（Chrome，
+     2026-09-19）。够 3:1 的大字门槛，不够 4.5:1 的正文门槛，而这些标题是
+     19.8px，属于正文档。所以标题的字号和颜色不能各选各的：这里改回正文色。
+     The step number below stays amber because it is 25.2px, over the 24px
+     large-text threshold, where 3.44:1 is a pass. */
+  .outcome__steps h3 {
     margin: 0;
+    font-size: 1.1rem;
+    color: var(--at-text);
+  }
+
+  .outcome__steps p {
+    margin: 0.2rem 0 0;
+    max-width: 58ch;
+    color: var(--at-text-secondary);
+  }
+
+  .outcome__transfer {
+    margin: 1.25rem 0 0;
+    padding-inline-start: 0.85rem;
+    border-inline-start: 3px solid var(--at-primary);
+    max-width: 58ch;
+  }
+
+  /* 3. 三阶段。横排的带子，跟上面的编号列表不同族。 */
+  .phases__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-block: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .phase {
+    padding: 1.25rem 1.25rem 1.4rem;
+  }
+
+  .phase + .phase {
+    border-inline-start: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  /* 14px 的琥珀小标签实测 3.44:1，不过 4.5:1。改用 --at-text-secondary（8.92:1），
+     同时去掉全大写和字距：它是一行数据标签，不是又一个小标题。 */
+  .phase__span {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--at-text-secondary);
+  }
+
+  .phase__verb {
+    margin: 0.35rem 0 0;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: var(--at-text);
+  }
+
+  .phase__note {
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+    color: var(--at-text-secondary);
+  }
+
+  /* 4. 训练集。线图带 + 数字行，本页唯一的图像区。 */
+  .set__intro,
+  .set__rule {
+    max-width: 62ch;
+  }
+
+  .set__rule {
+    font-size: 0.95rem;
+    color: var(--at-text-secondary);
+  }
+
+  .cuts {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cuts li {
+    text-align: center;
+  }
+
+  .cuts p {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--at-text-secondary);
+    letter-spacing: normal;
+    font-feature-settings: normal;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: start;
+    gap: 0 2.5rem;
+    margin: 0 0 1.5rem;
+    padding-block: 1rem;
+    border-block: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .facts dt {
+    font-size: 1.75rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .facts dd {
+    margin: 0.3rem 0 0;
+    max-width: 14ch;
+    font-size: 0.85rem;
+    color: var(--at-text-secondary);
+  }
+
+  /* 5. 一条记录。Specimen 自带版式，这里只给标题留白。 */
+  .record p {
+    max-width: 62ch;
+  }
+
+  /* 6. 去处。链接列表，不是等宽卡片网格。 */
+  .next__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .next__list li {
+    padding: 1rem 1.25rem 1.2rem 0;
+    border-block-start: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .next__list a {
+    font-size: 1.05rem;
     font-weight: 600;
   }
 
-  .phases__note {
-    margin: 0.15rem 0 0;
+  .next__list p {
+    margin: 0.25rem 0 0;
+    max-width: 42ch;
+    font-size: 0.92rem;
+    color: var(--at-text-secondary);
   }
 
-  /* 中文不跟拉丁字母一样加字距，所以在这些 span 上显式关掉。
-     Chinese runs inside English prose: turn off Latin letter-spacing and
-     font features, which the theme sets for headings and lead text. */
+  /* 中文不跟拉丁字母一样加字距。 */
   [lang^="zh"] {
     letter-spacing: normal;
     font-feature-settings: normal;
+  }
+
+  /* 手机：每一个多列版面都在这里显式塌成单列。 */
+  @media (max-width: 52rem) {
+    .phases__list,
+    .next__list {
+      grid-template-columns: 1fr;
+    }
+
+    .phase {
+      padding-inline: 0;
+    }
+
+    .phase + .phase {
+      border-inline-start: 0;
+      border-block-start: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+    }
+
+    .cuts {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem 0.5rem;
+    }
+
+    .facts {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 1.5rem;
+    }
+
+    .next__list li {
+      padding-inline-end: 0;
+    }
   }
 </style>
