@@ -103,32 +103,33 @@ const items = headings
     color: var(--at-text);
   }
 
-  /* 断点是 80rem（1280px，媒体查询里的 rem 按 16px 算，不是根的 18px）。
+  /* 断点是 72rem（1152px，媒体查询里的 rem 按 16px 算，不是根的 18px）。
      它是算出来的，不是挑出来的：导轨要至少 170px 才容得下一个会换行的条目，
-     而下面那个式子在 1280px 上正好给出 172px。再窄就回到顶部那排链接。
-     The breakpoint is derived, not chosen: the rail needs ~170px to hold an item
-     that wraps, and the formula below yields 172px at 1280px. Below it the same
-     markup falls back to the row at the top of the column. */
-  @media (min-width: 80rem) {
+     而 [slug].astro 里那组式子在 1152px 上给出 234px，再窄就不够了。
+     整组居中之后这个断点比原来低：正文会右让，导轨不必再挤剩下的半边。
+     改这个值要连 [slug].astro 里的那个一起改。
+     The breakpoint is derived, not chosen: the rail needs ~170px to hold an
+     item that wraps, and the sizing in [slug].astro yields 234px at 1152px.
+     Centring the group lowered it — the column gives way instead of the rail
+     being crushed. Keep it in step with the one in [slug].astro. */
+  @media (min-width: 72rem) {
     .toc {
       position: fixed;
       top: 12rem;
-      /* 用 right 锚在正文列左缘往左排，宽度由剩下的空间算出来。
-         偏移量从主题自己的变量算：竖线在 (100% - inset - width) / 2，
-         也就是离页面中线 (inset + width) / 2。之前这里写死 320px，
-         而真值是 324px，所以正文列宽一改导轨就会压到竖线上。
-         The offset is computed from the theme's own variables rather than
-         hardcoded: the rule sits (inset + width) / 2 from the centre line, so
-         the rail tracks the column at any width. A literal 320px was 4px wrong
-         and would have drifted further the moment the column changed. */
-      --toc-offset: calc((var(--at-content-width) + var(--at-content-inset)) / 2);
-      /* 离竖线的间距随窗口长，最宽 4rem，最窄 3rem。窗口越宽先把间距喂饱，
-         喂饱之后多出来的空间才给导轨加宽，到 15rem 封顶。
-         The gap grows with the window to 4rem and never falls below 3rem: spare
-         width feeds the gap first, then the rail, which caps at 15rem. */
-      --toc-gap: clamp(3rem, calc(50vw - var(--toc-offset) - 15rem - 1rem), 4rem);
-      right: calc(50% + var(--toc-offset) + var(--toc-gap));
-      width: min(15rem, calc(50vw - var(--toc-offset) - var(--toc-gap) - 1rem));
+      /* 导轨就是这一整组最左边那一段，所以直接从组的左缘量起，不用再从中线倒推。
+         --week-band / --week-col / --week-rail 都定义在 [slug].astro。
+         这里是 100vw，而 body 的轨道用的是 100%：fixed 定位的百分比只认视口，
+         没法跟 body 的内容盒同基准。macOS 的浮层滚动条下两者相等，
+         这个站也是在那里读和评的；换成占位滚动条会差半个滚动条宽。
+         The rail is simply the leftmost run of the centred group, so it is
+         measured from that group's left edge. The variables are set in
+         [slug].astro, which owns the page's geometry. This uses 100vw where
+         the tracks use 100%, because a fixed element resolves percentages
+         against the viewport and cannot share body's content box. They agree
+         under macOS overlay scrollbars, which is where this site is read and
+         marked; a classic scrollbar would offset the rail by half its width. */
+      left: calc((100vw - var(--week-band) - var(--week-col)) / 2);
+      width: var(--week-rail);
       max-height: calc(100vh - 16rem);
       overflow-y: auto;
       margin: 0;

@@ -70,6 +70,64 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
      this value, and so is the rail, so the three move together. */
   :global(html) {
     --at-content-width: 42rem;
+
+    /* 主题只把正文列居中，导轨挂在它左边，所以看到的那一整组是偏左的：
+       1372px 窗口下左边只剩 18px，右边空了 290px。
+       整组 = 带子（导轨 + 间距）+ 竖线 + 内距 + 正文。要让这一组居中，
+       就把带子的一半补给正文，两边余量自然相等。
+       导轨宽和间距先按「整组居中」算出来，不是按「正文居中」算——
+       这是为什么居中之后导轨反而变宽了，它不再被挤在剩下的半边里。
+       The theme centres the column alone, so the group the reader actually
+       sees — rail, gap, rule, column — sits left of centre with the whole
+       remainder piled up on the right. Reserving a band for the rail and
+       giving the column back half of it centres the group instead. Rail and
+       gap are sized from that same centred geometry, which is why the rail
+       gets wider here rather than narrower. */
+    --week-col: calc(var(--at-content-width) + var(--at-content-inset));
+    --week-gap: clamp(3rem, calc(100vw - var(--week-col) - 15rem - 4rem), 4rem);
+    --week-rail: min(15rem, calc(100vw - var(--week-col) - var(--week-gap) - 4rem));
+    --week-band: calc(var(--week-rail) + var(--week-gap));
+  }
+
+  /* 断点和 Toc.astro 里的那个必须一样，改一个就要改另一个。
+     Keep this breakpoint in step with the one in Toc.astro. */
+  @media (min-width: 72rem) {
+    /* 居中要改的是 body 的轨道，不是任何一个盒子。
+       main 是 subgrid，它的子元素挂在 body 的轨道线上，所以给 main 加外边距
+       只会移动它那个空盒子，标题和正文一动不动——这条路试过，是死的。
+       改轨道则 main、页眉内层、页脚内层一起跟上，因为它们都是 subgrid；
+       而通栏元素跨的是 full-start/full-end，仍然是 0 到 100vw，
+       页脚那道横线和页眉的底色都不受影响。
+       左轨道 = 带子 + 余量，右轨道用 1fr 自动收下同样的余量。
+       Centring is a change to body's tracks, not to any box. main is a subgrid,
+       so its children sit on body's lines and margins on main move an empty
+       box while the text stays — that was tried and it does nothing. Retracking
+       moves main, the header inner and the footer inner together, because all
+       three are subgrids, while full-bleed elements still span full-start to
+       full-end and keep the footer's rule and the header's background at the
+       window edges. The left track carries the band plus the margin; 1fr on
+       the right collects the same margin on its own. */
+    :global(body) {
+      grid-template-columns:
+        [full-start]
+        calc(var(--week-band) + (100% - var(--week-band) - var(--week-col)) / 2)
+        [inset-start]
+        var(--at-content-inset)
+        [content-start]
+        var(--at-content-width)
+        [content-end]
+        1fr
+        [full-end];
+    }
+
+    /* 竖线是 body::after，主题按「正文居中」算它的位置，所以要重算到 inset-start。
+       The rule is body::after, positioned by the theme for a centred column, so
+       it is recomputed onto the new inset-start line. */
+    :global(body::after) {
+      inset-inline-start: calc(
+        var(--week-band) + (100% - var(--week-band) - var(--week-col)) / 2
+      );
+    }
   }
 
   /* 规则块是每周页面的骨架，所以它不能靠颜色区分，得靠位置和边框。 */
