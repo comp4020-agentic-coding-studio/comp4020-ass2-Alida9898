@@ -107,12 +107,17 @@ const items = headings
      放得下 180px 的导轨加 24px 间距。低于这个宽度回到顶部那排链接。
      Week pages run a 40rem column, so from 1180px up the margin holds a 180px
      rail. Below that the same markup falls back to the row at the top. */
-  @media (min-width: 74rem) {
+  @media (min-width: 64rem) {
     .toc {
       position: fixed;
       top: 12rem;
-      left: calc((100vw - 756px) / 2 - 204px);
-      width: 180px;
+      /* 用 right 锚在正文列左缘往左排，宽度由剩下的空间算出来。
+         之前是写死的 left 加固定宽度，留的 24px 间距不够，文字压到了正文的竖线上。
+         Anchored by `right` to the column's left edge with a 40px gutter, and the
+         width is whatever is left over, capped at 200px. Positioned this way the
+         rail cannot cross the column no matter how wide the window is. */
+      right: calc(50% + 320px + 40px);
+      width: min(220px, calc(50vw - 320px - 56px));
       max-height: calc(100vh - 16rem);
       overflow-y: auto;
       margin: 0;
