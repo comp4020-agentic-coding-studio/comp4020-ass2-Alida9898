@@ -3,8 +3,8 @@ title: "The 神 and the 獸"
 description:
   The week the system borrows the text's own kind-words and finds they do not
   sort by body. Two guards on one mountain, filed apart.
-week: 7
-date: 2027-04-19
+week: 6
+date: 2027-03-29
 teachers:
   - idris-fenn
 rule: "The text's own words 神, 獸, 鳥 and 人 do not sort by body: 陆吾 and 开明兽 guard one mountain with nearly one body and are filed apart, and several records name no kind at all."
@@ -21,7 +21,7 @@ spec:
     no kind-word
   - you can cite one record that is called a 神 without being given an office
 related:
-  - lectures/week-07
+  - lectures/week-06
 ---
   - assessments/system-proposal
 

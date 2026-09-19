@@ -1,50 +1,50 @@
 ---
-title: The anonymous beast at 青丘之山
+title: The two failures
 description:
-  Week 8 — a name that postdates its own record, and what that does to a
-  taxonomy whose species names were supplied by later readers.
+  Week 9 — the lecture where the system stops working, stated as two distinct
+  failures rather than one general complaint about the text.
 week: 8
 date: 2027-04-26
 teachers:
   - idris-fenn
 related:
-  - sessions/08-drift
+  - sessions/08-one-name-many-creatures
 ---
 
-This lecture makes one claim and then spends the rest of the hour on its
-consequences. The claim is that 九尾狐 (jiǔwěihú) is a name with no record
-behind it, and that the record usually cited for it names nothing at all.
+The system built in weeks 1 to 4 and stressed in weeks 5 to 8 fails here. This
+lecture states the failure precisely, because a precise failure is a result and
+a vague one is an excuse.
 
 ## Outline
 
-- The 青丘之山 line, read for its nouns
-- What the record grants: a shape, a cry, an appetite, a use
-- 食者不蠱 — the creature as the remedy, not the affliction
-- Where each later property first appears, in the order it appears
-- 狌狌 (xīngxīng) under two graphs, and 讙头 (huāntóu) under two more
-- 精卫 (jīngwèi): drift in a record that already held the story
+- The assumption every week so far has been resting on: a name picks out a kind
+- Failure one, one name over many creatures: 肥遗 (féiyí) in three records,
+  窫窳 (yàyǔ) in two, 旋龟 (xuánguī) and 天吴 (tiānwú) in two apiece
+- Failure two, one creature under many names: 并封 (bìngfēng) and 屏蓬,
+  相柳 (xiāngliǔ) and 相繇
+- 讙 (huān), where one character carries a beast, two mountains and a country
+- 郭璞's 疑是同名, and what it means that the first commentator hedged
+- Why a synonyms field records a conclusion as though it were an observation
 
-## What is at stake
+## Why the two are not symmetrical
 
-A taxonomy is a naming system, so the provenance of a name is not a footnote to
-it. When our week 7 proposals list species, some of those species carry names
-the edition never prints. That is not forgery; it is how every received
-bestiary works. It becomes a problem the moment the name is treated as
-evidence, because a name imported from a later tradition arrives with that
-tradition's conclusions already inside it.
+Linnaean binomials work because a name is an index into a set of specimens. The
+specimen is the anchor; the name is a label that can be revised. In the
+山海经 (Shānhǎijīng) there are no specimens, so the name is doing the anchoring
+itself. When the name is unstable, nothing underneath it holds.
 
-The fox is the clearest case because the gap is so wide. The record offers
-about twenty characters. The name now carries shapeshifting, seduction, a tail
-count that tracks age, and a moral valence the record inverts. Nothing was
-falsified along the way. The record was short, and a short record leaves room.
+Both failures follow from that, and they are not symmetrical. One name over
+three animals attacks the species concept: 肥遗's snake and 肥遗's bird share no
+part, no chapter and no omen. One creature under two names attacks the
+character set instead, because 并封 and 屏蓬 agree on the diagnostic trait —
+symmetry, a head at each end — and disagree on everything the entry form calls
+identity.
 
-The lecture closes on the reverse case. 精卫's record is long: it holds a
-diagnosis and a biography in one sentence. Its drift was not addition but
-selection — later readers kept the girl and dropped the bird. Both directions
-are drift, and a system that cannot mark either is recording the reception
-history as though it were the source.
+The honest response is not repair. It is to record which fields the source
+cannot fill and to mark the entry as contested, which is what the week 12
+admissibility rule exists to enforce.
 
 ## Before the session
 
-Write down, without checking, everything you believe about 九尾狐. Bring it
-sealed. It will be compared against the line.
+Bring your week 7 proposal and all three 肥遗 records. You will be asked to
+apply your own rules to them and to say out loud what your rules produce.

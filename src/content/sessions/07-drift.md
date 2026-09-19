@@ -3,8 +3,8 @@ title: Drift
 description:
   The week the most famous creature in the bestiary turns out to be anonymous.
   What a name accumulates once the record it came from has closed.
-week: 8
-date: 2027-04-26
+week: 7
+date: 2027-04-19
 teachers:
   - idris-fenn
 rule: "A name outlives its record: 九尾狐 is never named in the text, so everything the name now carries was added after the record closed."
@@ -21,7 +21,7 @@ spec:
   - you can name the two spellings under which 狌狌 appears, and where each one
     stands
 related:
-  - lectures/week-08
+  - lectures/week-07
 ---
 
 Here is the whole record at 青丘之山:

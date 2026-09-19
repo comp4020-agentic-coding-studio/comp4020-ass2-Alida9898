@@ -1,52 +1,50 @@
 ---
-title: Kind-words are not ranks
+title: The anonymous beast at 青丘之山
 description:
-  Week 7 — what 神, 獸, 鳥 and 人 are doing in the records, and why a taxonomy
-  cannot promote them to a rank without checking.
+  Week 8 — a name that postdates its own record, and what that does to a
+  taxonomy whose species names were supplied by later readers.
 week: 7
 date: 2027-04-19
 teachers:
   - idris-fenn
 related:
-  - sessions/07-the-shen-and-the-shou
+  - sessions/07-drift
 ---
 
-The claim of this lecture is narrow. The 山海经 (Shānhǎijīng) has four
-kind-words that look like a higher taxonomic rank and are not one, and the
-evidence is available inside a single mountain.
+This lecture makes one claim and then spends the rest of the hour on its
+consequences. The claim is that 九尾狐 (jiǔwěihú) is a name with no record
+behind it, and that the record usually cited for it names nothing at all.
 
 ## Outline
 
-- Where a kind-word sits in the formula, and what sits there when it is absent
-- 昆侖: 陆吾 (lùwú) and 开明兽 (kāimíngshòu), counted part by part
-- 神 in three incompatible senses — an office, a calendar, and a faceless
-  dancer at 天山
-- 精卫 (jīngwèi) as a 鳥 with a biography attached
-- What a taxonomy is allowed to do with a field the source leaves empty
+- The 青丘之山 line, read for its nouns
+- What the record grants: a shape, a cry, an appetite, a use
+- 食者不蠱 — the creature as the remedy, not the affliction
+- Where each later property first appears, in the order it appears
+- 狌狌 (xīngxīng) under two graphs, and 讙头 (huāntóu) under two more
+- 精卫 (jīngwèi): drift in a record that already held the story
 
-## The argument
+## What is at stake
 
-Linnaean ranks are nested: every species sits in exactly one genus, and the
-genus is a claim about shared descent or at least shared structure. A rank that
-does not nest is a label. The test for whether 神 and 獸 nest is to find two
-records with near-identical bodies filed under different words, and 昆侖
-supplies them at no effort. Nine tails against nine heads is the whole
-morphological difference. One of them administers the nine regions of heaven
-and the other stands facing east.
+A taxonomy is a naming system, so the provenance of a name is not a footnote to
+it. When our week 7 proposals list species, some of those species carry names
+the edition never prints. That is not forgery; it is how every received
+bestiary works. It becomes a problem the moment the name is treated as
+evidence, because a name imported from a later tradition arrives with that
+tradition's conclusions already inside it.
 
-So the words sort by relation to the reader's world — who has authority, who is
-game, who is a neighbour — and not by anatomy. That is a coherent principle. It
-is simply a different principle from the one our system has been assuming since
-week 3, when we counted parts.
+The fox is the clearest case because the gap is so wide. The record offers
+about twenty characters. The name now carries shapeshifting, seduction, a tail
+count that tracks age, and a moral valence the record inverts. Nothing was
+falsified along the way. The record was short, and a short record leaves room.
 
-Three consequences follow, and the session argues about all three. A borrowed
-rank imports its lender's principle. A field the source leaves empty is a
-decision, not a gap. And a record that supplies both a body and a life story is
-not a defective record; it is evidence that the entry form we built is narrower
-than the thing it files.
+The lecture closes on the reverse case. 精卫's record is long: it holds a
+diagnosis and a biography in one sentence. Its drift was not addition but
+selection — later readers kept the girl and dropped the bird. Both directions
+are drift, and a system that cannot mark either is recording the reception
+history as though it were the source.
 
-## For the session
+## Before the session
 
-Bring the system proposal in a state you can defend. Bring the two 昆侖 lines
-marked up part by part. You will be asked to rule on 开明兽 by someone who has
-already decided you are wrong.
+Write down, without checking, everything you believe about 九尾狐. Bring it
+sealed. It will be compared against the line.

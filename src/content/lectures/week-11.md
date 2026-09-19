@@ -8,7 +8,7 @@ date: 2027-05-17
 teachers:
   - idris-fenn
 related:
-  - sessions/11-modern-reconstruction
+  - sessions/11-beyond-the-shanhaijing
 ---
 
 A reconstruction is a taxonomic act carried out in a medium that has no way to

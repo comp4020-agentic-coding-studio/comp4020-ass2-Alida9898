@@ -1,0 +1,70 @@
+---
+// 课上反复要提的那种警告，做成一个框，不占标题层级。
+//
+// A warning that belongs beside the argument rather than above it. Section
+// headings are the page's outline; a caution is not a section, so it gets a
+// box and not an `h2`. `label` is the short thing it is warning about.
+//
+// 颜色：左边一道 --at-primary 的实线，正文用 --at-text。标签用
+// --at-text-secondary。不给背景色——主题的 --at-bg-alt 在深色下和框线打架，
+// 而一道竖线在两种配色里都成立。任何地方不用 opacity。
+//
+// No background fill: one accent rule on the inline-start edge reads the same
+// in both colour schemes, where a tinted panel needs a second value and a
+// second contrast measurement. Label is `--at-text-secondary`, measured 8.92:1
+// on the page background (Chrome, 2026-09-19); body is `--at-text` at 17.88:1.
+// No `opacity` anywhere: in this repo it multiplies against tokens that already
+// carry alpha and has failed axe.
+interface Props {
+  /** Short noun phrase for what is being warned about. */
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+{/* div 而不是 aside：aside 是 complementary 地标，同一页放三个就是三个重名地标，
+    axe 的 landmark-unique 会红。这个框是页内旁注，不是页面结构的一部分，
+    可见的 label 本身就是读屏器读到的第一行。
+    Not an `aside`: that is a complementary landmark, and three of them on one
+    page fail axe's landmark-unique. This is an inline note, not page structure. */}
+<div class="caution">
+  <p class="caution__label">{label}</p>
+  <div class="caution__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .caution {
+    margin: 1.75rem 0;
+    padding: 0.85rem 0 0.85rem 1rem;
+    border-inline-start: 3px solid var(--at-primary);
+  }
+
+  .caution__label {
+    margin: 0 0 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .caution__body {
+    color: var(--at-text);
+  }
+
+  /* slot 里是 markdown 段落，收掉首尾的外边距，框才收得住。 */
+  .caution__body :global(> :first-child) {
+    margin-block-start: 0;
+  }
+
+  .caution__body :global(> :last-child) {
+    margin-block-end: 0;
+  }
+
+  .caution__body :global(p) {
+    max-width: 58ch;
+  }
+</style>

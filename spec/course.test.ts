@@ -150,6 +150,25 @@ describe("the bestiary", () => {
     expect(chapters.size, "the formula should span more than one 卷").toBeGreaterThanOrEqual(3);
   });
 
+  // Promise: week 2 prints four counts off the citation data and tells students
+  // the formula is incomplete. If the data changes and the page does not, the
+  // week is asserting a number it can no longer show, which is the exact thing
+  // the course fails a student for.
+  it("still supports the slot counts week 2 prints", () => {
+    const base = Object.values(citations).filter((record) => !record.commentary);
+    const carrying = (slot: string) => base.filter((r) => r.line.includes(slot)).length;
+    expect(base.length, "total base-text lines").toBe(45);
+    expect(carrying("其狀如"), "records with the comparison slot").toBe(21);
+    expect(carrying("名曰"), "records with the name slot").toBe(26);
+    expect(carrying("見則"), "records with the omen slot").toBe(11);
+    expect(
+      base.filter((r) => r.line.includes("其狀如") && r.line.includes("名曰")).length,
+      "records with both comparison and name",
+    ).toBe(13);
+    expect(carrying("其狀如"), "the formula must stay incomplete in our own data")
+      .toBeLessThan(base.length / 2);
+  });
+
   // Promise: a quotation from 郭璞's note is never printed as though the base
   // text said it. The apparatus is flagged in the data, not in prose.
   it("marks commentary as commentary", () => {
@@ -185,7 +204,7 @@ describe("the harness", () => {
     const harness = readFileSync(resolve("CLAUDE.md"), "utf8");
     const rows = [
       ...harness.matchAll(
-        /^\s*(\d{1,2})\.\s+\*\*(.+?)\*\*\s+·\s+(build|stress|break)\s*\n\s*Rule:\s*(.+?)\s*$/gm,
+        /^\s*(\d{1,2})\.\s+\*\*(.+?)\*\*\s+·\s+(build|stress|rebuild)\s*\n\s*Rule:\s*(.+?)\s*$/gm,
       ),
     ].map(([, week, title, phase, rule]) => ({ week: Number(week), title, phase, rule }));
 

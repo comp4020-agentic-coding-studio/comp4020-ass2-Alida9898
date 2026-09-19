@@ -7,12 +7,12 @@ week: 11
 date: 2027-05-17
 teachers:
   - idris-fenn
-rule: "A reconstruction supplies what the record withholds, and the additions stay legible only because the record is short enough to hold in view."
+rule: "A system transfers only as far as its characters do, so the test of one is naming which of its characters the next material will not supply."
 creatures:
-  - 夫诸
-  - 夔
-  - 帝江
-  - 九尾狐
+  - 狌狌
+  - 旋龟
+  - 窫窳
+  - 陵鱼
 spec:
   - you can list six decisions a designer must make about 夫诸 that its record
     does not make

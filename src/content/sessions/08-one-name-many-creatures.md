@@ -3,8 +3,8 @@ title: Where classification fails
 description:
   The week the system breaks. One name over three animals, one animal under two
   names, and an entry form with a single slot for either.
-week: 9
-date: 2027-05-03
+week: 8
+date: 2027-04-26
 teachers:
   - idris-fenn
 rule: "One name takes many creatures and one creature takes many names, and no field in the entry can hold either fact."
@@ -22,7 +22,7 @@ spec:
   - you have located all three 肥遗 records and can say which chapter each sits in
   - you can say why adding a synonyms field does not solve the second failure
 related:
-  - lectures/week-09
+  - lectures/week-08
 ---
 
 Every week since week 2 has assumed that a record's name identifies a creature.

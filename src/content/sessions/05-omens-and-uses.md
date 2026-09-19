@@ -7,13 +7,14 @@ week: 5
 date: 2027-03-22
 teachers:
   - marisol-quaye
-rule: "An omen belongs to the formula and not to the animal: 见则天下大旱 attaches word for word to at least six unrelated creatures, so it cannot be a character of any of them."
+rule: "Neither an omen nor a use is a character of the creature: 见则天下大旱 attaches word for word to at least six unrelated creatures, and a use states what a person gets rather than what the creature is."
 creatures:
   - 顒
   - 肥遗
   - 毕方
   - 軨軨
-  - 夫诸
+  - 旋龟
+  - 猼訑
 spec:
   - you have counted the occurrences of 見則天下大旱 in the five 山經 chapters
     yourself, from the edition

@@ -1,54 +1,65 @@
 ---
-title: Bestiaries that classify by significance
+title: Comparing systems without ranking them
 description:
-  Week 10 — the medieval bestiary and the yōkai catalogue, and the claim that
-  our comparison slot has been doing their job in taxonomic language.
+  How to compare two classification systems. Name the job each was built for,
+  find what each one discards, and resist the urge to declare a winner.
 week: 10
 date: 2027-05-10
 teachers:
   - idris-fenn
 related:
-  - sessions/10-comparative-systems
+  - sessions/10-cross-system-comparison
 ---
 
-Two other traditions of creature-listing, read not for comparison's sake but
-because each one states openly a principle our own system has been using
-without declaring.
+You now have four systems in the room: ours, and the three from last week. The
+obvious question is which is best. That question has no answer, and learning why
+is the point of the hour.
+
+## By the end of the hour
+
+You should be able to compare two classification systems without ranking them,
+by naming the job each was built for and the features each one discards. You
+should be able to say what "better" would even mean for a given pair.
 
 ## Outline
 
-- The *Physiologus* inheritance: describe the animal, then say what it means
-- Why the phoenix is not a problem for that system, and what that implies about
-  ours
-- 鳥山石燕's 画図百鬼夜行 and the catalogue whose unit is the encounter
-- 珍獸 on 驺吾 (zōuwú): a classifier that is a price
-- 烛阴 (zhúyīn), described entirely in units of the observer's calendar
-- 其狀如 re-read as a claim about the reader
+- Why "which is better" is malformed without a stated job
+- Fitness for purpose: the same material, two purposes, two correct answers
+- What a system discards, and why the discard list is the real comparison
+- Convergence: when two systems agree, what that does and does not prove
+- The features nobody can file, and what to do about them
 
-## The shared principle
+## Name the job first
 
-A significance-based bestiary has no species problem because it never asserts
-that its entries are kinds. It asserts that they are meanings, and meanings are
-allowed to be assigned. That is not a weaker system. It is a system whose
-warrant matches what its sources can support.
+A system built to answer "what kind of thing is this" and a system built to
+answer "what should I do if I meet this" are not competitors. Ask which is
+better and you have asked an incomplete question, like asking whether a ruler is
+better than a thermometer.
 
-Our system has asserted more than that since week 2, and the assertion rests on
-the comparison slot. 其狀如 looked like morphology because it names body parts.
-It is not, because the term of comparison is always something the reader is
-presumed to know. A record saying *like a horse* tells you where to stand, not
-what to measure.
+So the comparison always runs: for this job, which system loses less?
 
-Three of this week's four creatures make the point without argument. 驺吾's
-most specific label is a valuation. 烛阴 is measured in days and seasons rather
-than in body. 九尾狐 (jiǔwěihú) has no name in the edition, so everything it now
-denotes was assigned — which is precisely how a significance-based system
-expects a name to work. Only 夔 (kuí) resists, and it resists by being a list
-of weather with one foot attached.
+## The discard list
 
-The lecture stops short of a recommendation. Week 11 asks what a modern
-reconstruction does with the same gap.
+Every filing throws something away. That is not a defect; it is what
+classification is. A system that kept everything would be the material itself.
+
+What matters is whether the system knows what it threw away. Ours does, because
+week 2 made blanks visible and week 8 made the failures explicit. A system that
+silently drops a feature is worse than one that drops the same feature loudly.
+
+So when you compare two systems, do not compare their categories. Compare their
+discard lists.
+
+## When two systems agree
+
+Two independent systems putting the same creatures together looks like evidence
+that the grouping is real.
+
+Be careful. It is evidence only if the systems chose their characters
+independently. If both sorted by visible body parts, agreement tells you they
+used the same character, not that the group exists.
 
 ## Before the session
 
-Bring both comparative entry forms filled in for one creature, and one sentence
-on what the essay's move will cost the creature you chose.
+Bring last week's notes on whichever of the three systems you found most
+foreign. You will be filing our creatures in it.

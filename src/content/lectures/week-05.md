@@ -8,7 +8,7 @@ date: 2027-03-22
 teachers:
   - marisol-quaye
 related:
-  - sessions/05-omens
+  - sessions/05-omens-and-uses
 ---
 
 The first of the stress weeks. A character that repeats across unrelated

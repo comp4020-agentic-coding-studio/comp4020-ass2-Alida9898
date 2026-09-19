@@ -54,30 +54,30 @@ Do not reorder them, do not merge two into one, and do not add a thirteenth.
 The phases are fixed too. This list and `src/lib/weeks.ts` are checked against
 each other, so changing one tells you about the other.
 
-1. **Why classify monsters** · build
+1. **What a classification system is** · build
    Rule: The text is already a classification: it files every creature by where you would meet it, which is a claim about the world and not the absence of one.
-2. **The entry as specimen** · build
-   Rule: Every record follows 其状如X，Y首，见则Z, and the three slots are the first three taxonomic characters.
-3. **Morphology** · build
+2. **Reading the source text** · build
+   Rule: 其状如X，Y首，见则Z is a template the text reaches for and often leaves incomplete, so the first character a taxonomy has to handle is an absent one.
+3. **Morphological classification** · build
    Rule: A composite body is assembled from a small closed set of parts, so the parts and not the whole are what a taxonomy can count.
-4. **Geography and habitat** · build
+4. **Geographic classification** · build
    Rule: The 山经 routes can be mapped and the 海经 cannot, so a habitat field that accepts both is recording two different kinds of fact under one name.
-5. **Omens** · stress
-   Rule: An omen belongs to the formula and not to the animal: 见则天下大旱 attaches word for word to at least six unrelated creatures, so it cannot be a character of any of them.
-6. **Use** · stress
-   Rule: Use is the only field that ranks creatures against one another, because it states what a person gets, so a taxonomy built on it sorts by human benefit rather than by kind.
-7. **The 神 and the 獸** · stress
+5. **Omens and uses** · stress
+   Rule: Neither an omen nor a use is a character of the creature: 见则天下大旱 attaches word for word to at least six unrelated creatures, and a use states what a person gets rather than what the creature is.
+6. **The god and the beast** · stress
    Rule: The text's own words 神, 獸, 鳥 and 人 do not sort by body: 陆吾 and 开明兽 guard one mountain with nearly one body and are filed apart, and several records name no kind at all.
-8. **Drift** · stress
+7. **Drift** · stress
    Rule: A name outlives its record: 九尾狐 is never named in the text, so everything the name now carries was added after the record closed.
-9. **Where classification fails** · break
+8. **One name, many creatures** · stress
    Rule: One name takes many creatures and one creature takes many names, and no field in the entry can hold either fact.
-10. **Comparative systems** · break
-    Rule: Other bestiaries sort by what a creature is for the reader, which is what our 其状如 slot has been doing under a different name all along.
-11. **Modern reconstruction** · break
-    Rule: A reconstruction supplies what the record withholds, and the additions stay legible only because the record is short enough to hold in view.
-12. **The taxonomic congress** · break
-    Rule: A new entry is admissible only if it cites a line and declares which of its own fields that line does not supply.
+9. **Other systems** · rebuild
+   Rule: Other bestiaries sort by what a creature is for the reader, so their top division is a fact about the reader rather than about the creatures.
+10. **Cross-system comparison** · rebuild
+   Rule: Putting one creature through two systems shows which of its features each system had to ignore, and the ignored features are where the two systems actually disagree.
+11. **Beyond the 山海经** · rebuild
+   Rule: A system transfers only as far as its characters do, so the test of one is naming which of its characters the next material will not supply.
+12. **The taxonomic congress** · rebuild
+   Rule: A new entry is admissible only if it cites a line and declares which of its own fields that line does not supply.
 
 The deck belongs to **week 3**. It is the one week whose argument is visual, so
 it is the one week a deck earns.

@@ -3,16 +3,16 @@ title: Comparative systems
 description:
   Two bestiaries built on principles ours has been using without admitting it.
   The week the 其状如 slot is exposed as a statement about the reader.
-week: 10
-date: 2027-05-10
+week: 9
+date: 2027-05-03
 teachers:
   - idris-fenn
-rule: "Other bestiaries sort by what a creature is for the reader, which is what our 其状如 slot has been doing under a different name all along."
+rule: "Other bestiaries sort by what a creature is for the reader, so their top division is a fact about the reader rather than about the creatures."
 creatures:
   - 驺吾
   - 烛阴
-  - 九尾狐
   - 夔
+  - 九尾狐
 spec:
   - you can name the organising principle of the medieval bestiary in one
     sentence, without using the word "religious"
@@ -21,7 +21,7 @@ spec:
   - your essay names the creature you are reclassifying and the system you are
     reclassifying it into
 related:
-  - lectures/week-10
+  - lectures/week-09
 ---
   - assessments/reclassification-essay
 

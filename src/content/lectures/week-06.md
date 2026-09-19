@@ -1,50 +1,52 @@
 ---
-title: Sorting by benefit
+title: Kind-words are not ranks
 description:
-  The use clause as a transaction rather than a description, and what a taxonomy
-  becomes when its primary key is what a person gets.
+  Week 7 — what 神, 獸, 鳥 and 人 are doing in the records, and why a taxonomy
+  cannot promote them to a rank without checking.
 week: 6
 date: 2027-03-29
 teachers:
-  - marisol-quaye
+  - idris-fenn
 related:
-  - sessions/06-use
+  - sessions/06-the-god-and-the-beast
 ---
 
-The second stress week, and the last lecture before the midterm proposal. Its
-subject is the one field in the entry with a direction: everything else says what
-a creature is, and this one says what it is for.
+The claim of this lecture is narrow. The 山海经 (Shānhǎijīng) has four
+kind-words that look like a higher taxonomic rank and are not one, and the
+evidence is available inside a single mountain.
 
 ## Outline
 
-- The four verbs: 食之, 佩之, 服之, 乘之, and what each assumes about access to the
-  animal
-- Benefits grouped by what they avert, which is mostly illness, fear and
-  infertility
-- Use as the only orderable field, and what an order costs
-- 驺吾 (zōuwú), 珍獸, and a classification that is a valuation
-- Creatures with no use, and why that is a blank rather than a zero
+- Where a kind-word sits in the formula, and what sits there when it is absent
+- 昆侖: 陆吾 (lùwú) and 开明兽 (kāimíngshòu), counted part by part
+- 神 in three incompatible senses — an office, a calendar, and a faceless
+  dancer at 天山
+- 精卫 (jīngwèi) as a 鳥 with a biography attached
+- What a taxonomy is allowed to do with a field the source leaves empty
 
-## Sorting on a transaction
+## The argument
 
-A field stating what a person gets is a field about the person. Sorted on it, the
-bestiary reorganises into things worn, things eaten, things taken as medicine and
-one thing ridden, and those classes cut across every part of the body. The sort
-is coherent, repeatable and useful, and it is not a taxonomy, because it groups by
-our purposes rather than by the creatures' kinds.
+Linnaean ranks are nested: every species sits in exactly one genus, and the
+genus is a claim about shared descent or at least shared structure. A rank that
+does not nest is a label. The test for whether 神 and 獸 nest is to find two
+records with near-identical bodies filed under different words, and 昆侖
+supplies them at no effort. Nine tails against nine heads is the whole
+morphological difference. One of them administers the nine regions of heaven
+and the other stands facing east.
 
-That is not a reason to reject it. It is a reason to label it. A system declaring
-its primary key to be human benefit is honest; a system sorting by benefit while
-calling the result a natural order is the thing this course is against.
+So the words sort by relation to the reader's world — who has authority, who is
+game, who is a neighbour — and not by anatomy. That is a coherent principle. It
+is simply a different principle from the one our system has been assuming since
+week 3, when we counted parts.
 
-## What the midterm is marked on
+Three consequences follow, and the session argues about all three. A borrowed
+rank imports its lender's principle. A field the source leaves empty is a
+decision, not a gap. And a record that supplies both a body and a life story is
+not a defective record; it is evidence that the entry form we built is narrower
+than the thing it files.
 
-The proposal needs a primary key and a defence of it. A defence naming the key's
-cost is worth more than one claiming there is none. Every candidate key so far has
-a cost written down in a session page, which is what those pages are for.
+## For the session
 
-## Two things to bring
-
-Bring the four verbs with one creature each, from the edition. Bring one creature
-whose use you would refuse to put on a card, and be ready to say what the refusal
-is protecting.
+Bring the system proposal in a state you can defend. Bring the two 昆侖 lines
+marked up part by part. You will be asked to rule on 开明兽 by someone who has
+already decided you are wrong.
