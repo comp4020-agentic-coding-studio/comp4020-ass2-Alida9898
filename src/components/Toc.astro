@@ -103,13 +103,16 @@ const items = headings
     color: var(--at-text);
   }
 
-  /* 正文列 900px 居中，导轨 200px 加 32px 间距，所以要 900 + 2*232 ≈ 1364px。 */
-  @media (min-width: 87rem) {
+  /* 周页的正文列是 40rem（约 756px 含内距），1180px 起两侧各有 ~212px，
+     放得下 180px 的导轨加 24px 间距。低于这个宽度回到顶部那排链接。
+     Week pages run a 40rem column, so from 1180px up the margin holds a 180px
+     rail. Below that the same markup falls back to the row at the top. */
+  @media (min-width: 74rem) {
     .toc {
       position: fixed;
       top: 12rem;
-      left: calc((100vw - 900px) / 2 - 232px);
-      width: 200px;
+      left: calc((100vw - 756px) / 2 - 204px);
+      width: 180px;
       max-height: calc(100vh - 16rem);
       overflow-y: auto;
       margin: 0;

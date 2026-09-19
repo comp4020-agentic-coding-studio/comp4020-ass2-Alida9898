@@ -57,6 +57,16 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
 </ContentLayout>
 
 <style>
+  /* 周页要在左边留出目录导轨的位置，所以正文列比站里其他页窄一档。
+     48rem 的列在 1280px 的窗口里两侧各剩 190px，放不下导轨；收到 40rem 之后
+     剩 280px，够了。行宽从约 75ch 降到约 62ch，仍在舒适区内。
+     Week pages carry a contents rail in the left margin, so their column is one
+     step narrower than the rest of the site. At 48rem there is no room for the
+     rail at the width this site is actually read at. */
+  :global(html) {
+    --at-content-width: 40rem;
+  }
+
   /* 规则块是每周页面的骨架，所以它不能靠颜色区分，得靠位置和边框。 */
   .rule {
     margin: 1.5rem 0 2rem;
