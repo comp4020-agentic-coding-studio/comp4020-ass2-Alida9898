@@ -1,0 +1,215 @@
+---
+title: Morphological classification
+description:
+  Four composite bodies taken apart into parts and counts. Two of them differ
+  only in where a number sits, one disagrees with itself between its two
+  records, and one is assembled out of no animal at all.
+week: 3
+date: 2027-03-08
+teachers:
+  - marisol-quaye
+rule: "A composite body is assembled from a small closed set of parts, so the parts and not the whole are what a taxonomy can count."
+creatures:
+  - 帝江
+  - 陆吾
+  - 天吴
+  - 开明兽
+spec:
+  - you can write a composite body as parts and integers, with nothing left in
+    prose
+  - you can name two creatures whose inventories differ only in where a number
+    sits, and say how the text files each of them
+  - you can say what your inventory does with 帝江, in one sentence that does not
+    excuse itself
+---
+
+import Caution from "../../components/Caution.astro";
+import Specimen from "../../components/Specimen.astro";
+
+## Why this week exists
+
+Week 2 left you with columns and a rule about blanks. One of those columns was
+the comparison, <span lang="zh-Hant">其狀如</span> X, shaped like X. It works
+when X is one animal you already know: a horse, an eagle, a white deer.
+
+The records worth arguing about do not do that. They put two or three animals
+into one body. One of them puts no animal in at all.
+
+So this week asks whether a body can be taken apart. If a composite is a list of
+parts and numbers, and the list of parts the text draws on is short, then you
+have a vocabulary — and a vocabulary is the first thing a taxonomy needs. We
+build one here, out of four records that each make it harder.
+
+## Two bodies on one mountain
+
+<span lang="zh-Hans">陆吾</span> (lùwú) guards
+<span lang="zh-Hant">昆侖</span> (kūnlún), the mountain the text treats as the
+god's lower capital.
+
+<Specimen name="陆吾" />
+
+<span lang="zh-Hans">开明兽</span> (kāimíngshòu) stands on the same mountain,
+in a different chapter.
+
+<Specimen name="开明兽" />
+
+Take both bodies apart and write down only what the lines supply:
+
+| part | 陆吾 | 开明兽 |
+|---|---|---|
+| body | tiger | tiger |
+| face | human | human |
+| claw | tiger | — |
+| head | — | nine |
+| tail | nine | — |
+
+An em dash is the record not saying, which week 2 established is not the same as
+a zero.
+
+Two of those five rows are identical. The rest is one number. The whole
+difference between these two bodies is that <span lang="zh-Hant">九</span>,
+nine, attaches to <span lang="zh-Hant">尾</span> in one line and to
+<span lang="zh-Hant">首</span> in the other.
+
+So the part is not the character. The part is the noun the character is stated
+in, and the number is the character. That is the half of the rule you can act on
+today.
+
+<Caution label="Anatomy is not what the text sorts them by">
+  <span lang="zh-Hans">陆吾</span> is a <span lang="zh-Hant">神</span>, and its
+  line says what it does: <span lang="zh-Hant">司天之九部及帝之囿時</span>, it
+  administers the nine regions of heaven and the seasons of the god's park.
+  <span lang="zh-Hans">开明兽</span> carries <span lang="zh-Hant">獸</span>,
+  beast, inside its own name.
+
+  Same mountain, nearly the same body, filed apart. A parts inventory cannot see
+  the difference, and this week does not fix that. Week 6 is spent on it.
+</Caution>
+
+## The same name, counted twice
+
+<span lang="zh-Hans">天吴</span> (tiānwú) has two records, and they disagree.
+
+<Specimen name="天吴" />
+
+<span lang="zh-Hant">八首人面</span>, eight heads with human faces, is the only
+thing both lines say. <span lang="zh-Hant">海外東經</span> gives it eight feet,
+eight tails and a blue-yellow back. <span lang="zh-Hant">大荒東經</span> gives
+it a tiger's body and ten tails, and mentions no feet.
+
+The previous section said the number is the character. This section says the
+number moves. Both lines name <span lang="zh-Hant">天吳</span> and neither is a
+copy of the other, so the strongest character in the system is unstable across
+two records of one name.
+
+There are three things you can do about that, and only one of them is honest.
+You can pick a record and not say which. You can average them, which invents a
+creature with nine tails that no line describes. Or you keep both records, each
+in its own row, each citing the line it came from. The bestiary does the third.
+Its entry for <span lang="zh-Hans">天吴</span> carries two citations and a
+`form` field that names both bodies.
+
+## A body with no animal in it
+
+<span lang="zh-Hans">帝江</span> (dìjiāng) is filed on
+<span lang="zh-Hant">天山</span>, further along the same western route as
+<span lang="zh-Hant">昆侖</span>. Its record breaks the comparison rather than
+the count.
+
+<Specimen name="帝江" />
+
+Four clauses, four different problems:
+
+- <span lang="zh-Hant">其狀如黃囊</span>. The comparison slot holds a sack.
+  The slot works exactly as designed and points outside the animal kingdom,
+  and nothing in the entry form notices.
+- <span lang="zh-Hant">六足四翼</span>. Six feet, four wings. Still parts, still
+  integers. The vocabulary survives the case it was least likely to survive.
+- <span lang="zh-Hant">渾敦無面目</span>. No face. The distinguishing feature is
+  an absence.
+- <span lang="zh-Hant">是識歌舞</span>. It knows song and dance. Not a part, not
+  a count, not a use.
+
+Every other composite in this course is assembled from animals a reader has
+already met. This one is assembled from none of them, and its record is no
+shorter and no vaguer for it. The finding is about our method, not about the
+creature: recognition was never doing the work, so losing it costs less than it
+looks.
+
+<Caution label="A stated absence is not a missing value">
+  Week 2 gave three reasons a cell can be blank: the material says the value is
+  nothing, the material does not say, nobody has checked.
+  <span lang="zh-Hant">無面目</span> is the first.
+  <span lang="zh-Hans">开明兽</span>'s silence about claws is the second.
+
+  Written carelessly both come out as an em dash, and the one real finding in
+  <span lang="zh-Hans">帝江</span>'s body is filed as an oversight.
+</Caution>
+
+## Eight words, and what the records did with them
+
+Now the whole week at once. Every cell below is what a cited line supplies and
+nothing else:
+
+<div class="parts-table">
+
+| part | 陆吾 | 开明兽 | 天吴 | 帝江 |
+|---|---|---|---|---|
+| body | tiger | tiger | — / tiger | sack |
+| head | — | nine | eight | — |
+| face | human | human | human | none, stated |
+| claw | tiger | — | — | — |
+| foot | — | — | eight / — | six |
+| wing | — | — | — | four |
+| tail | nine | — | eight / ten | — |
+| back | — | — | blue-yellow / — | — |
+| colour | — | — | — | yellow, red |
+
+</div>
+
+<span lang="zh-Hans">天吴</span> has two records, so where they differ the cell
+shows <span lang="zh-Hant">海外東經</span> first and
+<span lang="zh-Hant">大荒東經</span> second.
+<span lang="zh-Hans">帝江</span>'s body cell holds a sack because that is what
+the comparison supplies; it is the only cell in the table that is not an animal
+part.
+
+Eight part-words — body, head, face, claw, foot, wing, tail, back — and colour,
+which is not a part but attaches to one.
+<span lang="zh-Hant">背青黃</span> uses both at once. Four records, five lines,
+and not one of them reaches for a word outside that list. The vocabulary is
+closed before the counting starts.
+
+Four bodies side by side is a visual argument and prose cannot hold it. The
+[slides](/decks/week-03/) draw the four inventories with the counts as labels.
+It is the only deck this semester, and this is the reason.
+
+<Caution label="These eight words are ours">
+  They are derived from four records chosen to make this week's argument. The
+  <span lang="zh-Hans">山海经</span> has no parts list of its own, and this is
+  not a count over the eighteen <span lang="zh-Hant">卷</span>.
+
+  A fifth record can add a ninth word. When one does, that is a result about the
+  vocabulary and gets written down as one. It is not a creature that does not
+  fit.
+</Caution>
+
+## What you leave with
+
+A parts vocabulary, agreed in the room. Write it down before anyone uses it. An
+unwritten vocabulary grows a word every time a body does not fit, and nobody
+notices the moment it stopped being closed.
+
+This week's specimen card is parts and integers only. Anything that will not
+decompose goes under a heading reading *residue*, and the residue is the part of
+the card that gets read first.
+<span lang="zh-Hans">帝江</span>'s <span lang="zh-Hant">是識歌舞</span> is
+residue. So is <span lang="zh-Hans">陆吾</span>'s
+<span lang="zh-Hant">司天之九部</span>.
+
+Two of this week's four are filed on a route you can walk:
+<span lang="zh-Hans">陆吾</span> and <span lang="zh-Hans">帝江</span> are both
+in <span lang="zh-Hant">西山經</span>, a few mountains apart. The other two are
+in <span lang="zh-Hant">海內西經</span> and the eastern
+<span lang="zh-Hant">海經</span>, which give no route at all. Next week is about
+what happens when one habitat column is asked to hold both.

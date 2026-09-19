@@ -147,6 +147,26 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
     }
   }
 
+  /* 第三周那张五列的零件表，在 390 上会撑出横向滚动。主题的 .at-table-wrap 是个
+     滚动容器但不带 tabindex（它的注释说现代浏览器会自己让滚动容器可聚焦），
+     axe 4.12 在 Chrome 里仍然判 scrollable-region-focusable 为 serious。
+     与其争这个，不如让表在 390 上就装得下：缩这一张，别的表不动——
+     第 1、2 周的表本来就不溢出，跟着缩只会更难读。
+     The five-column parts table on week 3 overflows at 390. The theme's
+     wrapper is a scroll container with no tabindex, which axe 4.12 reports as
+     a serious violation in Chrome, so this makes the table fit instead of
+     arguing with the tool. Scoped to this one table: the tables on weeks 1 and
+     2 already fit, and shrinking them would only make them harder to read. */
+  @media (max-width: 40rem) {
+    :global(.parts-table table) {
+      font-size: 0.78rem;
+    }
+
+    :global(.parts-table :is(th, td)) {
+      padding-inline: 0.4rem;
+    }
+  }
+
   /* 规则块是每周页面的骨架，所以它不能靠颜色区分，得靠位置和边框。 */
   .rule {
     margin: 1.5rem 0 2rem;
