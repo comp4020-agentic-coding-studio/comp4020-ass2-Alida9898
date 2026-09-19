@@ -56,9 +56,9 @@ export const courseMeta = slopCourseMetaSchema.parse({
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "One question, held for twelve weeks: can the creatures of the 山海经 be " +
-    "classified? Each week applies the same Linnaean method to a harder " +
-    "specimen. The system holds for the beasts, strains at the gods, and " +
-    "breaks on a creature with one name and two bodies.",
+    "Build a classification system for any material, and learn it on a book " +
+    "that resists. The 山海经 files hundreds of creatures by where you would " +
+    "meet them and never says what any of them is a kind of. Twelve weeks: " +
+    "build a system, push it until it strains, then design your own.",
   tags: ["taxonomy", "shanhaijing", "classification"],
 }) satisfies CourseMetaInput;
