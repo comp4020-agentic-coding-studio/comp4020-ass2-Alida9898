@@ -117,7 +117,12 @@ const items = headings
       position: fixed;
       top: 12rem;
       /* 导轨就是这一整组最左边那一段，所以直接从组的左缘量起，不用再从中线倒推。
+         四分之一不是二分之一：整组视觉居中，左边余量只占剩余的四分之一，
+         这个除数要和 [slug].astro 的左轨道一致，改一个就要改另一个。
          --week-band / --week-col / --week-rail 都定义在 [slug].astro。
+         The quarter, not a half: the group is optically centred, so the left
+         margin takes a quarter of the leftover. This divisor has to match the
+         left track in [slug].astro — change one and you change both.
          这里是 100vw，而 body 的轨道用的是 100%：fixed 定位的百分比只认视口，
          没法跟 body 的内容盒同基准。macOS 的浮层滚动条下两者相等，
          这个站也是在那里读和评的；换成占位滚动条会差半个滚动条宽。
@@ -128,7 +133,7 @@ const items = headings
          against the viewport and cannot share body's content box. They agree
          under macOS overlay scrollbars, which is where this site is read and
          marked; a classic scrollbar would offset the rail by half its width. */
-      left: calc((100vw - var(--week-band) - var(--week-col)) / 2);
+      left: calc((100vw - var(--week-band) - var(--week-col)) / 4);
       width: var(--week-rail);
       max-height: calc(100vh - 16rem);
       overflow-y: auto;

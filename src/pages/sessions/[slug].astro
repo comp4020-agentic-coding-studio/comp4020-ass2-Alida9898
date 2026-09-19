@@ -98,19 +98,27 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
        改轨道则 main、页眉内层、页脚内层一起跟上，因为它们都是 subgrid；
        而通栏元素跨的是 full-start/full-end，仍然是 0 到 100vw，
        页脚那道横线和页眉的底色都不受影响。
-       左轨道 = 带子 + 余量，右轨道用 1fr 自动收下同样的余量。
        Centring is a change to body's tracks, not to any box. main is a subgrid,
        so its children sit on body's lines and margins on main move an empty
        box while the text stays — that was tried and it does nothing. Retracking
        moves main, the header inner and the footer inner together, because all
        three are subgrids, while full-bleed elements still span full-start to
        full-end and keep the footer's rule and the header's background at the
-       window edges. The left track carries the band plus the margin; 1fr on
-       the right collects the same margin on its own. */
+       window edges.
+
+       几何居中偏右：正文是一整块黑，导轨是稀疏的几行字，等分两边余量之后
+       眼睛仍然把重心读在右边。所以左边只给四分之一，右边留四分之三，
+       整组往左让半个边距——这是视觉居中，不是几何居中。
+       间距和导轨宽都不变，动的只是两边余量怎么分。
+       Splitting the leftover evenly still reads right-heavy: the column is a
+       solid block and the rail is a few sparse lines. The left margin takes a
+       quarter of the leftover and the right three quarters, moving the group
+       half a margin left. This is optical centring, not geometric. The gap and
+       the rail keep their widths; only the split changes. */
     :global(body) {
       grid-template-columns:
         [full-start]
-        calc(var(--week-band) + (100% - var(--week-band) - var(--week-col)) / 2)
+        calc(var(--week-band) + (100% - var(--week-band) - var(--week-col)) / 4)
         [inset-start]
         var(--at-content-inset)
         [content-start]
@@ -125,7 +133,7 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
        it is recomputed onto the new inset-start line. */
     :global(body::after) {
       inset-inline-start: calc(
-        var(--week-band) + (100% - var(--week-band) - var(--week-col)) / 2
+        var(--week-band) + (100% - var(--week-band) - var(--week-col)) / 4
       );
     }
   }
