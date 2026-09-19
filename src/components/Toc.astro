@@ -54,36 +54,71 @@ const items = headings
 }
 
 <style>
+  /* 两种形态，同一份标记：
+     宽屏——左边距里的固定导轨；
+     窄屏——正文顶部的一排行内链接，而不是整个消失。
+     之前只有前一种，断点定在 87rem，结果作者自己的窗口就看不到它。
+     Two forms, one markup: a fixed rail in the left margin when the margin is
+     wide enough to hold it, and an inline row of links at the top of the column
+     when it is not. The first version only had the rail and hid it below 87rem,
+     which is wider than the window this site is actually read in. */
+
   .toc {
-    display: none;
+    margin: 0 0 2.5rem;
+    padding-block: 0.85rem;
+    border-block: 1px solid color-mix(in srgb, currentColor 18%, transparent);
   }
 
-  /* 正文列约 900px 居中，两侧各剩 (100vw - 900px)/2。
-     目录占 200px 加 32px 间距，所以要 900 + 2*232 ≈ 1364px 才放得下。 */
+  .toc__title {
+    margin: 0 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .toc__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc__list a {
+    font-size: 0.9rem;
+    color: var(--at-text-secondary);
+    text-decoration: none;
+  }
+
+  .toc__list a:hover,
+  .toc__list a:focus-visible {
+    color: var(--at-text);
+    text-decoration: underline;
+  }
+
+  .toc__list li.is-current a {
+    color: var(--at-text);
+  }
+
+  /* 正文列 900px 居中，导轨 200px 加 32px 间距，所以要 900 + 2*232 ≈ 1364px。 */
   @media (min-width: 87rem) {
     .toc {
-      display: block;
       position: fixed;
       top: 12rem;
       left: calc((100vw - 900px) / 2 - 232px);
       width: 200px;
       max-height: calc(100vh - 16rem);
       overflow-y: auto;
-    }
-
-    .toc__title {
-      margin: 0 0 0.6rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--at-text-secondary);
+      margin: 0;
+      padding-block: 0;
+      border: 0;
     }
 
     .toc__list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+      display: block;
       border-inline-start: 1px solid color-mix(in srgb, currentColor 20%, transparent);
     }
 
@@ -100,18 +135,9 @@ const items = headings
     .toc__list a {
       font-size: 0.85rem;
       line-height: 1.3;
-      color: var(--at-text-secondary);
-      text-decoration: none;
       display: block;
     }
 
-    .toc__list a:hover,
-    .toc__list a:focus-visible {
-      color: var(--at-text);
-      text-decoration: underline;
-    }
-
-    .toc__list li:has(a:target),
     .toc__list li.is-current {
       border-inline-start-color: var(--at-primary);
     }

@@ -16,6 +16,7 @@
 // accent only clears contrast as large text, so a heading's size and its colour
 // cannot be chosen independently.
 import { bestiary, recordsOf, type Creature } from "../lib/bestiary";
+import { glossFor } from "../lib/glosses";
 import { EDITION } from "../lib/shanhaijing";
 import { weekOf } from "../lib/weeks";
 import CreatureCut from "./CreatureCut.astro";
@@ -104,6 +105,9 @@ if (name) {
                 <blockquote class="specimen__line" lang="zh-Hant">
                   {record.line}
                 </blockquote>
+                {glossFor(record.key) && (
+                  <p class="specimen__gloss">{glossFor(record.key)}</p>
+                )}
               </li>
             ))}
           </ol>
@@ -229,6 +233,16 @@ if (name) {
     padding-left: 0.75rem;
     border-left: 2px solid color-mix(in srgb, currentColor 35%, transparent);
     line-height: 1.9;
+  }
+
+  /* 译文：斜体，紧跟在引文下面，颜色跟正文一致（--at-text-secondary 实测 8.92:1）。
+     跟正文里的引文用同一套约定，读者一眼知道哪行是原文哪行是我们的。 */
+  .specimen__gloss {
+    margin: 0.35rem 0 0;
+    padding-left: 0.75rem;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--at-text-secondary);
   }
 
   .specimen__flag,

@@ -377,7 +377,11 @@ export function creature(name: string): Creature | undefined {
 
 /** The records behind a creature, resolved from `citations.ts`. */
 export function recordsOf(entry: Creature) {
-  return entry.cites.map((key) => citations[key]);
+  // key 一起带出来，页面才能按 key 去 glosses.ts 查我们自己的译文。
+  // The key comes back with the record so a page can look up this course's own
+  // translation in `glosses.ts`. The two are separate modules because one is
+  // machine-sliced from the edition and the other is written by us.
+  return entry.cites.map((key) => ({ key, ...citations[key] }));
 }
 
 /** Every 卷 the bestiary cites. */
