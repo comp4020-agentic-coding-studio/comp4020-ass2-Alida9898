@@ -1,9 +1,12 @@
-# Open decisions, paused 2026-09-17
+# Open decisions — curriculum pivot, 2026-09-19
 
-Written because the author paused the review to think. This file holds what is
-**decided and built**, what is **open**, and what must not drift while the open
-questions are settled. It is not the process account: `PROCESS.md` records what
-happened, and nothing here has happened yet.
+Supersedes the 2026-09-17 pause note, which is folded in below rather than
+dropped: three of its four open questions are still open, and the fourth turned
+out to be the reason for this pivot.
+
+This file holds what is **decided**, what is **open**, and what must not drift
+while the open questions are settled. `PROCESS.md` records what happened; this
+records what has not happened yet.
 
 ## Where it stands
 
@@ -12,38 +15,128 @@ happened, and nothing here has happened yet.
 | `pnpm check` | green: 39 pages, 18 tests, 0 type errors, no broken links |
 | `pnpm check:evidence` | passes |
 | axe in Chrome, 1920x1080 and 390x844 | 0 violations on 7 sampled pages, no overflow at 390 |
-| commits | 11, local only |
+| commits | 16, local only |
 | repo visibility | **private**. Not pushed, Pages not enabled, no live URL |
 
-Deploying is held deliberately. It flips the repo permanently public, the author
-has not finished reviewing, and nothing about it is reversible.
+Deploying is still held. It flips the repo permanently public, the author has not
+finished reviewing, and nothing about it is reversible.
 
-## Decided, and built
+---
 
-The twelve week topics and the three phases are the author's, transcribed from
-their brief and unchanged: 12 of 12 phases match, 11 of 12 titles are word for
-word theirs. The one changed title is week 7, `The god/beast boundary` rendered
-as `The 神 and the 獸`, because the harness keeps the text's own words in
-Chinese.
+# The pivot
 
-Per the author's second instruction, "one specimen per week" is gone. Each week
-now states exactly one rule and names at least three creatures, creatures recur
-across weeks, and the rule lives in frontmatter with `src/lib/weeks.ts` as the
-canonical copy.
+The course stops being an argument about whether the 山海经 can be classified and
+becomes training in building classification systems. The 山海经 is the dataset you
+learn on, not the subject. The exit skill: given unfamiliar material, pick
+traits, build a hierarchy, and state where it fails — so that meeting something
+new means reaching for the nearest tag rather than starting from nothing.
 
-**The twelve rules are mine, not the author's.** They gave the pattern and one
-worked example, week 2. That layer has not been reviewed, and it is the layer
-the author could not follow when reading the site, which is the honest
-explanation for "I could not tell what the twelve weeks were about".
+**This resolves what the pause note filed as Open 2.** That note had already
+found that weeks 5 to 8 each eliminate a proposed character using a criterion
+from taxonomic practice that the course never states aloud, and concluded that a
+student who never sees the ruler reads twelve weeks as twelve anecdotes. The
+pivot is that diagnosis acted on: the ruler becomes the subject and the book
+becomes the whetstone.
+
+Phase boundaries do not move — 1–4, 5–8, 9–12. The third phase changes name and
+purpose, from BREAK to REBUILD.
+
+## The twelve weeks, before and after
+
+| # | now | after | change |
+|---|-----|-------|--------|
+| 1 | Why classify monsters | What is a classification system | keep, reframe |
+| 2 | The entry as specimen | Reading the source text | keep |
+| 3 | Morphology | Morphological classification | keep — **deck stays here** |
+| 4 | Geography and habitat | Geographic classification | keep |
+| 5 | Omens | Omens and uses | **merge 5+6** |
+| 6 | Use | The god/beast boundary | was 7 |
+| 7 | The 神 and the 獸 | Drift across texts | was 8 — **see Blocker A** |
+| 8 | Drift | One name many creatures | was 9 |
+| 9 | Where classification fails | Other systems | was 10, **split** |
+| 10 | Comparative systems | Cross-system comparison | was 10, **split** |
+| 11 | Modern reconstruction | Beyond the 山海经 | **replaced** |
+| 12 | The taxonomic congress | Taxonomic congress | keep, reweighted |
+
+Week 11 is the load-bearing new week: it is where the skill stops being about
+this book. Without it the pivot is a rename.
+
+Week 2 also picks up the job the pause note proposed for it — stating the
+criteria before any character is extracted — and weeks 5 to 8 each name the
+criterion they are applying. Under the pivot that is no longer an addition to
+the course; it is the course.
+
+## What the pivot does not touch
+
+Enforced by schema and tests, and nothing in the brief asks to drop them, so
+every rewritten week still has to satisfy:
+
+- one rule per week, one string, its 定式
+- at least three creatures per week
+- all 25 bestiary creatures used at least once — no orphans
+- never invent the source; quoted lines only from `citations.ts`
+- the deck belongs to week 3 only
+
+## Assessment
+
+Current weights total 100: specimen cards 20, bestiary entry 30, peer review 10,
+reclassification essay 15, system proposal 25.
+
+| assessment | now | after | why |
+|---|---|---|---|
+| Specimen cards | 20 | 20 | unchanged |
+| Bestiary entry | 30 | 25 | makes room for the new final |
+| Peer review | 10 | 10 | unchanged |
+| Reclassification essay | 15 | 15 | unchanged |
+| **System proposal** → **Classification design** | 25 | **30** | becomes the final |
+
+The final becomes: design a classification system for material you have not
+seen, justify the traits you chose, build the hierarchy, and name at least one
+limitation of your own system. It moves to the end of semester so that it can be
+the final, and week 12's congress is where it is presented.
+
+---
+
+# Blockers — each needs one word
+
+**A. Week 7 "drift across texts" has no sources.** `citations.ts` holds only the
+四庫全書 山海經. Zero 搜神記, zero 聊齋 in the repo, and the rule says an
+unfindable line claims nothing. Raised twice before and still unanswered.
+
+- **A1 (recommended):** keep drift inside the 山海经. 九尾狐 is described and
+  never named in the received text, so everything the name now carries was
+  attached after the record closed. That is drift, it is citable today, and it
+  is already the strongest case in the bestiary.
+- **A2:** build a multi-source citation apparatus first — a `source` field,
+  slices of 搜神記 and 聊齋 from Wikisource, checks taught about three editions.
+  Separate work that has to land before week 7 can be written.
+
+Weeks 9 and 10 are not blocked: naming a Japanese yokai catalogue or a European
+bestiary in prose is not quoting one, and the current week 10 already does this.
+
+**B. The prose register is not settled.** `src/content/lectures/week-01.md` is
+rewritten as a sample in the Calling Bullshit register — second person, learning
+objectives, topic fragments, no epigram at the end of every paragraph. Look at it
+before I write twenty-three more. If it is wrong, it is one page thrown away
+instead of twenty-four.
+
+**C. Rhetorical questions.** Calling Bullshit opens topics with them. CLAUDE.md
+bans them in body text. Keep the ban, or lift it.
+
+**D. One week at a time.** CLAUDE.md says to restore this rule before the next
+content pass, and this is that pass. Restoring it literally means twelve review
+rounds. Suspending it again means one pass and one review, which is what
+produced the pages the author could not read. Recommend: restore it per phase —
+four reviews rather than twelve or one.
+
+---
+
+# Still open from the pause
 
 ## Open 1: the missing world
 
-The author's diagnosis, and it is correct: the site never says what the 山海经
-**is** before asking a student to extract characters from it. The book reads as
-a survey, filed along routes with stated bearings and distances. A student
-arriving has nowhere to learn the shape of the territory.
-
-The data for it already exists and is already cited:
+The site never says what the 山海经 **is** before asking a student to extract
+characters from it. The data for a reference page already exists and is cited:
 
 | | |
 |---|---|
@@ -54,85 +147,85 @@ That split *is* week 4's argument, sitting in the citation data. One half can be
 walked as a line; the other half is four directions with no interior.
 
 **Proposal.** A standing reference page outside the twelve weeks, in the nav,
-generated from `citations.ts` so it cannot drift from the content. It carries the
-eighteen 卷 in the edition's order split into the two groups, the twenty-six 次
-routes under the five 山經, where each of the twenty-five creatures sits, and the
-one structural fact that `habitat` holds two different kinds of thing. Week 1
-gets a short orientation paragraph pointing at it, which is inside the author's
-own week 1 topic rather than a change to it.
+generated from `citations.ts` so it cannot drift. Eighteen 卷 in the edition's
+order split into the two groups, the twenty-six 次 routes under the five 山經,
+where each of the twenty-five creatures sits, and the fact that `habitat` holds
+two different kinds of thing.
 
-**The open question is how far the drawing goes.**
+How far the drawing goes:
 
-1. **Structure only.** The two groups, the twenty-six routes, the creatures
-   placed. No spatial claim. Buildable now, entirely from committed data.
-2. **Route chains.** Extract each route's full mountain sequence with its stated
-   bearings and distances from the edition, and draw the five 山經 as polylines
-   with creature-bearing mountains marked, against the 海經 drawn as what it
-   actually is. Makes "this half is mappable and that half is not" visible at a
-   glance, which is the course's own week 4 claim. Costs a fresh extraction pass,
-   and anything not found stays blank rather than invented.
-3. **No drawing.** Structure page as prose only.
+1. **Structure only.** Groups, routes, creatures placed. No spatial claim.
+   Buildable now from committed data.
+2. **Route chains.** Extract each route's mountain sequence with its stated
+   bearings and distances and draw the five 山經 as polylines, against the 海經
+   drawn as what it actually is. Costs a fresh extraction pass; anything not
+   found stays blank rather than invented.
+3. **No drawing.** Prose only.
 
-Recommended: 2, because it is the only version where the argument is visible
-rather than asserted. Not started, because the cost is the author's call.
+Recommended: 2. Under the pivot this gets *more* valuable, not less — it is a
+worked example of the exit skill, a classification of the source material itself
+built from cited data.
 
-## Open 2: the method is never taught
+## Open 2 — closed
 
-Separate gap, same root. Weeks 5 to 8 each eliminate one proposed character, and
-each elimination silently uses a criterion from taxonomic practice that the
-course never states:
+Absorbed by the pivot. See the top of this file.
 
-| week | eliminates | criterion used but not taught |
-|---|---|---|
-| 5 | the omen | a character varies with the thing, not with the description |
-| 6 | use | a character is intrinsic, not relational |
-| 7 | the kind-words 神 / 獸 | a classifier word is not a rank unless it partitions |
-| 8 | the name | what a type specimen is for: fixing a name to a thing |
-| 9 | the whole system | a monothetic class cannot hold one name over many things |
+## Open 3: two specimens moved without saying so
 
-So the course does teach classification design, but only by implication. A
-student who never sees the ruler reads twelve weeks as twelve anecdotes.
+From the author's first brief, ten specimens are still in the week they were put
+in. Two are not, and both moves were the agent's:
 
-**Proposal.** Week 2 already owns "the entry as specimen"; it also states the
-criteria before any character is extracted, and weeks 5 to 8 each name the
-criterion they are applying. No change to the fixed topics or phases.
+- **陆吾** left week 4 for weeks 3 and 7. Week 4 now carries 夫诸, 陵鱼, 讙头,
+  驺吾.
+- **蛊雕** left week 10 for weeks 2 and 12. Week 10 now carries 驺吾, 烛阴,
+  九尾狐, 夔.
 
-Not started. It interacts with Open 1, and the author may want one page to carry
-both the world and the method.
+The pivot re-themes weeks 6 to 11 and merges 5 with 6, so every creature list
+has to be rebuilt anyway. The question that survives: does each week get one
+named lead specimen, on top of the three that stress the rule, or not. The ≥3
+rule is assumed to hold; say if it should not.
 
-## Open 3: two specimens I moved without saying so
+## Open 4: two consequences
 
-The author assigned one specimen per week in their first brief. Ten are still in
-the week they put them in. Two are not, and both moves were mine:
-
-- **陆吾** left week 4 and is now in weeks 3 and 7. Week 4 asks whether the
-  mountain chapters can be mapped, and I wanted a set of loci with decreasing
-  positional precision; 陆吾 guards 昆侖 and is a post rather than a precision
-  case. Week 4 now carries 夫诸, 陵鱼, 讙头, 驺吾.
-- **蛊雕** left week 10 and is now in weeks 2 and 12. Week 10 now carries 驺吾,
-  烛阴, 九尾狐, 夔.
-
-Both are defensible and neither was agreed. Put back, or keep, is the author's
-call. If Open 1 lands, week 4's creature set may want revisiting anyway.
-
-## Open 4: two consequences to settle with the above
-
-- **The nav reaches six links** if the reference page lands. The harness already
-  requires collapsing past two or three on a phone, so the nav work arrives with
-  it. Two traps are recorded in `CLAUDE.md`: ship the button `hidden` and let
-  the script remove it, and restore the list unconditionally above the
+- **The nav reaches six links** if the reference page lands. Collapsing it on a
+  phone arrives with it. Two traps are in `CLAUDE.md`: ship the button `hidden`
+  and let the script remove it, and restore the list unconditionally above the
   breakpoint.
-- **`PROCESS.md` is 631 words** against a 400 to 600 band. Whatever is decided
-  here needs room in it, so something in it has to go. The two moved specimens
-  above belong in it as a declared divergence from the brief, and currently are
-  not in it.
+- **`PROCESS.md` is 631 words** against a 400 to 600 band. The pivot needs room
+  in it, so something has to go. The two moved specimens belong in it as a
+  declared divergence and currently are not.
 
-## Must not drift while this is open
+## Also unresolved, from the review conversation
 
-- The twelve week topics and the three phases are fixed by the author.
+- The home page still renders **four** specimen cards under prose that promises
+  one, and the phrase "primary specimen" survives in two places that the harness
+  retired.
+- The syllabus the author pasted on 2026-09-18 carried pre-correction lines:
+  畢方's omen is 見則其邑有譌火, not 見則天下大旱, and 旋龜's use is
+  佩之不聾，可以為底, not 食之不饑 / 佩之不迷. The corrected lines are what the
+  merged week 5 will use.
+
+---
+
+# Order of work, once A–D are answered
+
+1. `CLAUDE.md` and `src/lib/weeks.ts` in one commit — `spec/course.test.ts:184`
+   parses the week list out of CLAUDE.md and checks it against `weeks.ts`, so
+   they cannot move separately without a red state.
+2. `spec/course.test.ts` — `:140` hard-codes week 5 as the omens week; the new
+   week 5 is omens *and* uses. Update the check, prove it fails first.
+3. Redistribute creatures so nothing is orphaned once 5 and 6 merge.
+4. Twelve session pages and twelve lecture pages, phase by phase.
+5. Assessments: rename and reweight, confirm the sum is still 100.
+6. Home page: reframe to the skill; remove the four cards and the two leftover
+   "primary specimen" phrases.
+7. Week 3 deck: still morphology, so it survives. Open it at both viewports.
+8. `pnpm check`, both viewports, then commit.
+
+# Must not drift
+
 - Quoted lines only ever come from `src/lib/citations.ts`, which is generated.
   Nothing else may hold a line of 山海经, and an unfindable line is
   `verified: false` with nothing claimed around it.
-- `CLAUDE.md`'s "one week at a time" rule stays marked **suspended** rather than
-  deleted until the next content pass restores it.
+- The deck belongs to week 3.
 - No push, no visibility flip, no Pages, until the author says so.
