@@ -154,11 +154,60 @@ seriously and never winks at the reader.
 - Banned: *dive into*, *explore*, *unpack*, *delve*, *journey*, *whether you are
   a X or a Y*, and any sentence that tells the reader how to feel about the
   material.
-- No rhetorical questions in body text. The course has one question and it is in
-  the course description.
-- Vary the section headings between weeks. Twelve pages under the same three
-  headings read as one page twelve times, which is the failure mode the brief
-  names by name.
+- Rhetorical questions are allowed, used the way
+  [Calling Bullshit](https://callingbullshit.org/syllabus.html) uses them: to
+  open a topic, then answer it in the next sentence. Not for atmosphere.
+
+### Say the thing. Do not be coy.
+
+**This is the rule the author has had to give twice, so it is written down.**
+Plain speech, every time. The model this course copies is Calling Bullshit:
+second person, short sentences, named things, no performance.
+
+Concretely banned, with the actual sentences that earned the ban:
+
+- **Withholding a name the sentence is about.** "the invented encyclopedia that
+  gets all three wrong" --- say *Borges' fake Chinese encyclopedia*. If a reader
+  has to work out which thing you mean, you are charging admission.
+- **A flourish carrying no information.** "before anyone offered to improve on
+  it", "One session spent finding the sentence where the map stops". Delete the
+  clause; the sentence is better.
+- **An epigram at the end of every paragraph.** One or two in a page is voice.
+  One per paragraph is a tic, and it is the single clearest sign an agent wrote
+  the page.
+- **Teasing the finding instead of stating it.** "the finding that the grid does
+  not track the animal at all" --- state what the week covers. A description
+  exists so a reader can decide whether to read the page.
+- **"The week the system breaks"-style openers.** Four session descriptions
+  began "The week the ...". It is coy and it is repetitive.
+
+A page description says what is on the page. A heading says what the section
+contains. Neither is a place to be clever.
+
+### Every week has the same spine
+
+A reader picks up any week cold, so the slots do not move:
+
+1. **`## Why this week exists`** --- the only heading that is identical in all
+   twelve weeks. It connects to the previous week, names what the system is
+   still missing, and says why this is the next step. Write it first.
+2. **Two to four working sections**, headings of their own, each carrying part
+   of the argument with the week's creatures in it.
+3. **`## What you leave with`** --- the artefact, and what carries forward.
+
+Warnings, caveats and "do not misread this" go in a `<Caution>` box, never in a
+heading: the outline is the argument, and a caveat is not a section. Vary the
+working-section headings between weeks --- the spine is what repeats, not the
+body. Timetables ("Two hours", "Forty minutes on ...") are not curriculum and do
+not appear.
+
+**Introduce a thing before you use it.** Week 1 taught how to classify before it
+said what the 山海经 is, which is backwards. A page that assumes the reader
+already has the context is a page written for its author.
+
+**A specimen card appears where its example is first discussed**, not collected
+at the foot of the page. The record is this course's unit of study, so the
+reader meets one before being asked to reason about one.
 
 ## One week at a time --- suspended by the author, 2026-09-17
 

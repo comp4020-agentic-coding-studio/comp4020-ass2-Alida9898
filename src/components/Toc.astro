@@ -1,0 +1,163 @@
+---
+// 每周页左侧的固定目录。一周页有五六个 h2，正文又长，读者需要一个不动的骨架。
+//
+// A fixed contents rail for a week page. It sits in the left margin, which is
+// otherwise dead space at desktop widths, and it does not scroll away.
+//
+// 只收 h2。h3 在这个站里是段落内部的小标题，放进来目录就变成第二篇文章。
+// Depth-2 only: h3 is used inside sections here, and including it would turn a
+// six-item rail into a twenty-item one.
+//
+// 宽度不够就整个不显示，不挤正文。手机上直接不渲染——页面本身够短，
+// 而一个折叠目录是又一个要维护的无 JS 回退。
+// Below the breakpoint it is display:none rather than reflowed into the column:
+// the rail exists because the margin is empty, and when the margin is not empty
+// the page reads fine without it.
+//
+// 颜色只用主题 token，没有 opacity。当前项用 --at-primary 的一道左边线，
+// 不用颜色区分，因为琥珀在这个字号上只有 3.44:1。
+// The current item is marked with an accent rule, not accent text: amber
+// measures 3.44:1 on this background and these labels are 14px.
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// 主题给每个标题挂了一个 "#" 锚点，它会被算进 heading.text，所以要剥掉。
+// The theme appends a "#" anchor to each heading, and Astro's `headings` picks
+// it up as part of the text. Strip it, or every rail item ends in a hash.
+const items = headings
+  .filter((heading) => heading.depth === 2)
+  .map((heading) => ({ ...heading, text: heading.text.replace(/\s*#\s*$/, "") }));
+---
+
+{
+  items.length > 2 && (
+    <nav class="toc" aria-label="On this page">
+      <p class="toc__title">On this page</p>
+      <ol class="toc__list">
+        {items.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    display: none;
+  }
+
+  /* 正文列约 900px 居中，两侧各剩 (100vw - 900px)/2。
+     目录占 200px 加 32px 间距，所以要 900 + 2*232 ≈ 1364px 才放得下。 */
+  @media (min-width: 87rem) {
+    .toc {
+      display: block;
+      position: fixed;
+      top: 12rem;
+      left: calc((100vw - 900px) / 2 - 232px);
+      width: 200px;
+      max-height: calc(100vh - 16rem);
+      overflow-y: auto;
+    }
+
+    .toc__title {
+      margin: 0 0 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--at-text-secondary);
+    }
+
+    .toc__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-inline-start: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    }
+
+    .toc__list li {
+      padding-inline-start: 0.75rem;
+      border-inline-start: 2px solid transparent;
+      margin-inline-start: -1px;
+    }
+
+    .toc__list li + li {
+      margin-block-start: 0.5rem;
+    }
+
+    .toc__list a {
+      font-size: 0.85rem;
+      line-height: 1.3;
+      color: var(--at-text-secondary);
+      text-decoration: none;
+      display: block;
+    }
+
+    .toc__list a:hover,
+    .toc__list a:focus-visible {
+      color: var(--at-text);
+      text-decoration: underline;
+    }
+
+    .toc__list li:has(a:target),
+    .toc__list li.is-current {
+      border-inline-start-color: var(--at-primary);
+    }
+  }
+</style>
+
+<script>
+  // 当前读到哪一节，用 IntersectionObserver 标出来。脚本没跑也没关系：
+  // 目录仍然是一串可用的锚点链接，只是不高亮。
+  //
+  // Progressive enhancement: without this the rail is still a working list of
+  // anchors. `scroll` listeners are not used anywhere in this repo.
+  const rail = document.querySelector(".toc");
+  if (rail) {
+    const links = new Map<string, HTMLElement>();
+    for (const anchor of rail.querySelectorAll<HTMLAnchorElement>("a[href^='#']")) {
+      const parent = anchor.parentElement;
+      if (parent) links.set(decodeURIComponent(anchor.hash.slice(1)), parent);
+    }
+
+    const seen = new Set<string>();
+    const mark = () => {
+      for (const [id, li] of links) li.classList.toggle("is-current", seen.has(id));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) seen.add(entry.target.id);
+          else seen.delete(entry.target.id);
+        }
+        // 屏幕上同时有几节时，只留最上面那一节。
+        const visible = [...seen];
+        if (visible.length > 1) {
+          const first = [...links.keys()].find((id) => seen.has(id));
+          seen.clear();
+          if (first) seen.add(first);
+        }
+        mark();
+      },
+      { rootMargin: "0px 0px -70% 0px" },
+    );
+
+    for (const id of links.keys()) {
+      const heading = document.getElementById(id);
+      if (heading) observer.observe(heading);
+    }
+  }
+</script>

@@ -5,8 +5,8 @@ import { getPublishedCollection } from "astro-course-university/content";
 import RelatedContent from "astro-course-university/components/RelatedContent.astro";
 import SpecList from "astro-course-university/components/SpecList.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
-import Specimen from "../../components/Specimen.astro";
 import TeachingTeam from "../../components/TeachingTeam.astro";
+import Toc from "../../components/Toc.astro";
 import { formatCourseDate } from "../../lib/dates";
 import { PHASE_LABELS, weeks } from "../../lib/weeks";
 import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { session } = Astro.props;
-const { Content } = await render(session);
+const { Content, headings } = await render(session);
 
 // 阶段从大纲查，不由页面自己写，这样十二周不可能各说各话。
 // The phase is looked up from the syllabus rather than restated in frontmatter,
@@ -44,10 +44,9 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
     <p class="rule__text">{session.data.rule}</p>
   </section>
 
-  <Content />
+  <Toc headings={headings} />
 
-  <h2>The creatures it is tested against</h2>
-  <Specimen week={session.data.week} />
+  <Content />
 
   <SpecList spec={session.data.spec}>
     What you bring to the session. Written so a reader can tell whether it has
