@@ -103,21 +103,32 @@ const items = headings
     color: var(--at-text);
   }
 
-  /* 周页的正文列是 40rem（约 756px 含内距），1180px 起两侧各有 ~212px，
-     放得下 180px 的导轨加 24px 间距。低于这个宽度回到顶部那排链接。
-     Week pages run a 40rem column, so from 1180px up the margin holds a 180px
-     rail. Below that the same markup falls back to the row at the top. */
-  @media (min-width: 64rem) {
+  /* 断点是 80rem（1280px，媒体查询里的 rem 按 16px 算，不是根的 18px）。
+     它是算出来的，不是挑出来的：导轨要至少 170px 才容得下一个会换行的条目，
+     而下面那个式子在 1280px 上正好给出 172px。再窄就回到顶部那排链接。
+     The breakpoint is derived, not chosen: the rail needs ~170px to hold an item
+     that wraps, and the formula below yields 172px at 1280px. Below it the same
+     markup falls back to the row at the top of the column. */
+  @media (min-width: 80rem) {
     .toc {
       position: fixed;
       top: 12rem;
       /* 用 right 锚在正文列左缘往左排，宽度由剩下的空间算出来。
-         之前是写死的 left 加固定宽度，留的 24px 间距不够，文字压到了正文的竖线上。
-         Anchored by `right` to the column's left edge with a 40px gutter, and the
-         width is whatever is left over, capped at 200px. Positioned this way the
-         rail cannot cross the column no matter how wide the window is. */
-      right: calc(50% + 320px + 40px);
-      width: min(220px, calc(50vw - 320px - 56px));
+         偏移量从主题自己的变量算：竖线在 (100% - inset - width) / 2，
+         也就是离页面中线 (inset + width) / 2。之前这里写死 320px，
+         而真值是 324px，所以正文列宽一改导轨就会压到竖线上。
+         The offset is computed from the theme's own variables rather than
+         hardcoded: the rule sits (inset + width) / 2 from the centre line, so
+         the rail tracks the column at any width. A literal 320px was 4px wrong
+         and would have drifted further the moment the column changed. */
+      --toc-offset: calc((var(--at-content-width) + var(--at-content-inset)) / 2);
+      /* 离竖线的间距随窗口长，最宽 4rem，最窄 3rem。窗口越宽先把间距喂饱，
+         喂饱之后多出来的空间才给导轨加宽，到 15rem 封顶。
+         The gap grows with the window to 4rem and never falls below 3rem: spare
+         width feeds the gap first, then the rail, which caps at 15rem. */
+      --toc-gap: clamp(3rem, calc(50vw - var(--toc-offset) - 15rem - 1rem), 4rem);
+      right: calc(50% + var(--toc-offset) + var(--toc-gap));
+      width: min(15rem, calc(50vw - var(--toc-offset) - var(--toc-gap) - 1rem));
       max-height: calc(100vh - 16rem);
       overflow-y: auto;
       margin: 0;
@@ -131,18 +142,22 @@ const items = headings
     }
 
     .toc__list li {
-      padding-inline-start: 0.75rem;
+      padding-inline-start: 1rem;
       border-inline-start: 2px solid transparent;
       margin-inline-start: -1px;
     }
 
+    /* 条目会换行，所以条目之间的空隙必须明显大于行距，否则两个标题读起来像一个。
+       行距 1.35 约 6px，条目间距 0.9rem 约 16px，差不多两倍半。
+       Items wrap here, so the space between them has to beat the space inside
+       them: ~6px between lines against ~16px between items. */
     .toc__list li + li {
-      margin-block-start: 0.5rem;
+      margin-block-start: 0.9rem;
     }
 
     .toc__list a {
-      font-size: 0.85rem;
-      line-height: 1.3;
+      font-size: 0.95rem;
+      line-height: 1.35;
       display: block;
     }
 

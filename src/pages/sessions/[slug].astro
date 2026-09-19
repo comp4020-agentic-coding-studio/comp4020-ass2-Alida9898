@@ -58,12 +58,18 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
 
 <style>
   /* 周页要在左边留出目录导轨的位置，所以正文列比站里其他页窄一档。
-     48rem 的列放不下导轨；34rem 之后左边距足够，行宽约 52ch，接近书籍正文的宽度。
+     根字号是 18px，所以 42rem = 756px，行宽约 84 字符——比常规的 45–75 长，
+     这是为了页眉换来的：页眉一行要 291+27+360+27+45 = 750px，低于这个值
+     搜索按钮会单独掉到第二行，周页的页眉就和站内其它页不一样了。
+     主题的那条竖线画在 (100% - --at-content-inset - --at-content-width) / 2，
+     所以这个值一改，竖线和导轨都跟着动——Toc.astro 从同一组变量算自己的位置。
      Week pages carry a contents rail in the left margin, so their column is one
-     step narrower than the rest of the site. At 48rem there is no room for the
-     rail at the width this site is actually read at. */
+     step narrower than the rest of the site. 42rem is the first step that still
+     fits the header on one row: it needs 750px, and below that the search button
+     drops to a second row on its own. The theme's vertical rule is drawn from
+     this value, and so is the rail, so the three move together. */
   :global(html) {
-    --at-content-width: 34rem;
+    --at-content-width: 42rem;
   }
 
   /* 规则块是每周页面的骨架，所以它不能靠颜色区分，得靠位置和边框。 */
