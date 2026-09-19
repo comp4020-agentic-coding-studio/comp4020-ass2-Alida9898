@@ -20,8 +20,6 @@ spec:
     than a creature
   - your essay names the creature you are reclassifying and the system you are
     reclassifying it into
-related:
-  - lectures/week-09
 ---
   - assessments/reclassification-essay
 

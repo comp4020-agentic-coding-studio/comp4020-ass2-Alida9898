@@ -20,8 +20,6 @@ spec:
   - your system proposal names what its kind field does when the record supplies
     no kind-word
   - you can cite one record that is called a 神 without being given an office
-related:
-  - lectures/week-06
 ---
   - assessments/system-proposal
 

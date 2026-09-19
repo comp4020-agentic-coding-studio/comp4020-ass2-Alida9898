@@ -20,8 +20,6 @@ spec:
     supplies
   - you can name the two spellings under which 狌狌 appears, and where each one
     stands
-related:
-  - lectures/week-07
 ---
 
 Here is the whole record at 青丘之山:

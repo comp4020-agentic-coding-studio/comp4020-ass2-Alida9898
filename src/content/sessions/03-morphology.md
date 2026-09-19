@@ -20,8 +20,6 @@ spec:
     where the text files them
   - you can say what your inventory does with 帝江, in one sentence that does not
     excuse itself
-related:
-  - lectures/week-03
 ---
 
 Last week's middle slot took any counted part. This week asks what the whole

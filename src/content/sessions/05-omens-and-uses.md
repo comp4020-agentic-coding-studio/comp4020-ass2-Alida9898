@@ -22,8 +22,6 @@ spec:
     you claim exists
   - you can argue either side of keeping the omen column, and say which side you
     are on
-related:
-  - lectures/week-05
 ---
 
 The consequence slot has looked like the most promising character since week 2.

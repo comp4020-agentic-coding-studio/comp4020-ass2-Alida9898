@@ -19,8 +19,6 @@ spec:
     not supply
   - each of your two peer reviews names one undeclared field, or states that it
     found none and why
-related:
-  - lectures/week-12
 ---
 
 The rule has two clauses and the second one is the whole course. Citing a line

@@ -18,8 +18,6 @@ spec:
   - you can file one creature in two systems and list what each filing dropped
   - you can say which of two systems is better at a stated job, and name the job
   - you can name one feature that neither system has anywhere to put
-related:
-  - lectures/week-10
 ---
 
 ## Why this week exists

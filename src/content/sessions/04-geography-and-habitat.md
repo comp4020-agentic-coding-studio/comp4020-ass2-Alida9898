@@ -20,8 +20,6 @@ spec:
     say what was missing from it
   - you can state your position on splitting the habitat field, ready to defend in
     the week 7 proposal
-related:
-  - lectures/week-04
 ---
 
 The habitat field on every card so far has accepted a string, and a string will

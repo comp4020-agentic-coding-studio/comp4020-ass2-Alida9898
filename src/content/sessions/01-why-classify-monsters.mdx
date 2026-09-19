@@ -1,9 +1,9 @@
 ---
-title: What the 山海经 already sorts by
+title: What a classification system is
 description:
-  The first workshop. You take the toolkit from this morning's lecture to a book
-  that has already classified itself, and find out what its principle is before
-  proposing a better one.
+  Linnaeus' three moves, the invented encyclopedia that gets all three wrong,
+  and the ordering the 山海经 had already applied to itself before anyone offered
+  to improve on it.
 week: 1
 date: 2027-02-22
 teachers:
@@ -15,65 +15,157 @@ creatures:
   - 猼訑
   - 九尾狐
 spec:
-  - you can state what the 山海经 sorts by, and point at the table of contents to
+  - you can say what a classification system is made of and which part a given
+    attempt is missing
+  - you can look at a category and say whether it is a character or something
+    else wearing a character's clothes
+  - you can state what the 山海经 sorts by, and point at its table of contents to
     show it
-  - you can name one pair of creatures its principle separates that a system
-    sorting by body would put together
-  - you can name one thing 狌狌's record supplies and one thing it withholds
 related:
-  - lectures/week-01
+  - assessments/specimen-cards
 ---
 
-This morning you got three moves: choose characters, nest them, name in two
-parts. This afternoon you meet the material, and the first thing to establish is
-that somebody got here before you.
+import Hierarchy from "../../components/Hierarchy.astro";
+import Caution from "../../components/Caution.astro";
+import Specimen from "../../components/Specimen.astro";
 
-The 山海经 (Shānhǎijīng, the *Classic of Mountains and Seas*) is usually
-described as a chaotic catalogue of monsters. It is not chaotic. It is sorted,
-by a principle it applies without a single exception, and you cannot improve on
-a system until you can say what the existing one does.
+## Why this week exists
 
-## Start with the cover
+You already classify things. A folder structure, a way of sorting laundry, a
+mental shelf for people you have met once. Most of these you built without
+deciding anything, and most fail the same way: two things that belong together
+end up apart and you cannot say why.
 
-山 is mountain. 海 is sea. 經 is classic. The book divides exactly where its name
-divides: five chapters of mountains, thirteen of seas. The top level of the
-classification is printed on the title page.
+This course is about doing it on purpose, and by week 12 you build a system for
+material nobody has handed you one for. Week 1 is the toolkit, and the first look
+at what we are going to use it on.
 
-The received text has eighteen 卷 (juàn, scrolls). Almost every chapter title is
-a compass direction: 南 south, 西 west, 北 north, 東 east, 中 centre.
+## What Linnaeus actually did
 
-- Five 山經 (shānjīng, mountain classics) — south, west, north, east, centre.
-  Between them, twenty-six numbered routes.
-- Four 海外經 (hǎiwàijīng), beyond the seas — south, west, north, east.
-- Four 海內經 (hǎinèijīng), within them — south, west, north, east.
-- Four 大荒經 (dàhuāngjīng), the great wilderness — east, south, west, north.
-  Same principle, different rotation.
-- One more, headed 海內經 again, with no direction at all.
+Before the eighteenth century a plant's name was a diagnostic phrase, a string of
+Latin adjectives long enough to tell it from its neighbours. It is a description
+pretending to be a label. It grows whenever somebody finds a similar plant, it
+differs between authors, and you cannot alphabetise it.
 
-Inside a route, each creature is filed under the mountain or the water where it
-is found. Not under anything about its body. Nothing in the book puts two
-creatures together because they look alike.
+Linnaeus made three moves, and they are the three moves any classification has to
+make.
 
-So what question is this system answering? What will I meet if I go there. And
-it answers that completely.
+**He chose characters.** A small set of features you can check on every specimen:
+how many stamens, mammary glands or not, how many toes. The choice is the whole
+game, and it is a choice. He sorted plants by their sexual parts, which was
+neither obvious nor uncontroversial.
 
-By this morning's test, that is a classification. It has a character — location.
-It applies it to every entry. It never switches to a different kind of question
-halfway, which is more than the Celestial Emporium managed.
+**He nested them into ranks.** Kingdom, phylum, class, order, family, genus,
+species, each inside the last.
 
-## Four creatures, one route
+**He gave two-part names.** Genus plus species. *Homo sapiens*. One name, one
+kind, everywhere.
 
-狌狌 (xīngxīng), 鹿蜀 (lùshǔ), 猼訑 (bóshī) and 九尾狐 (jiǔwěihú) are all filed
-in 南山經之首 (nánshānjīng zhī shǒu), the head of the southern mountain classic,
-which is the first route in the book. They stand on four mountains along it, in
-this order: 招搖之山 (zhāoyáo), 杻陽之山 (niǔyáng), 基山 (jī) and 青丘之山
-(qīngqiū). The suffix 之山 means "mountain of".
+What does the nesting actually buy? Economy.
 
-They appear in that order because that is the order you would walk past them.
-Nothing else determines it.
+<Hierarchy />
 
-Now look at what that costs. Two of these have nine tails. 猼訑 has them on a
-sheep, at 基山:
+Say *Homo sapiens* and you have also said primate, mammal, chordate, animal
+without writing any of it down. Six statements ride along with the name. A flat
+list carries none of that, which is why a folder structure with two hundred
+folders at the top level is unusable and one with six is not.
+
+Underneath all three moves sits an assumption about evidence. Linnaeus had
+specimens; where he had none he had a drawing, and where he had neither he had
+the written testimony of someone who claimed to have stood next to the animal.
+The system takes for granted that behind every name there is a body somebody
+could in principle produce.
+
+## Our specimen is a record
+
+The 山海经 (Shānhǎijīng, the *Classic of Mountains and Seas*) produces no bodies.
+What it produces is entries, so the entry is our specimen. This is one, printed
+the way every week of this course prints its own:
+
+<Specimen name="狌狌" />
+
+Read the fields and you have read the raw material of the whole semester. A
+comparison to an animal you are assumed to know, a distinguishing part, a name, a
+place, sometimes a consequence. No author to ask, no second observer, nothing to
+measure. Every difficulty in the remaining eleven weeks comes from that.
+
+<Caution label="The binomial is ours">
+  *Xingxing albiauritum* is not in the 山海经. This course assigns every creature
+  a two-part name as an exercise in Linnaeus' third move, and every page that
+  prints one says so.
+
+  A taxonomy that hides which parts it made up is the thing this course is
+  against.
+</Caution>
+
+## The encyclopedia Borges invented
+
+In a 1942 essay on John Wilkins, Borges describes a Chinese encyclopedia that
+does not exist, the Celestial Emporium of Benevolent Knowledge, and quotes its
+division of animals into fourteen classes. Among them: those belonging to the
+Emperor, embalmed ones, suckling pigs, mermaids, stray dogs, those drawn with a
+very fine camel-hair brush, those that resemble flies from a distance, and those
+included in this classification.
+
+Foucault put it on the first page of *Les mots et les choses* and said he laughed
+out loud.
+
+Why is it funny? Not because the animals are strange; mermaids are no odder than
+a platypus. It is funny because every category sorts by a different kind of
+question. Who owns it. What state it is in. What it looks like from far away.
+Whether it is on this list. Linnaeus counted stamens every single time.
+
+That gives you a test you will use all semester. Take any category and ask what
+question it answers. If two categories in one system answer different kinds of
+question, the system has a level problem.
+
+<Caution label="Arbitrary is not the same as broken">
+  The Borges list is usually produced to prove all classification is arbitrary,
+  so no system is better than any other.
+
+  Watch what that argument does to itself. The joke works only because you can
+  tell the Emporium is bad, which means you applied a standard, which means one
+  exists. Arbitrary means the boundary could have been drawn elsewhere, and
+  nearly every boundary could. Broken means the system cannot do the job it
+  claims. Only the second is fatal, and weeks 9 to 12 depend on the difference.
+</Caution>
+
+## What the text already sorts by
+
+The 山海经 is usually called a chaotic catalogue of monsters. It is not chaotic,
+and you cannot improve on a system until you can say what the existing one does.
+
+Start with the cover. 山 is mountain, 海 is sea, 經 is classic, and the book
+divides exactly where its name divides: five chapters of mountains, thirteen of
+seas. The top level of the classification is printed on the title page.
+
+The received text has eighteen 卷 (juàn, scrolls), and almost every chapter title
+is a compass direction: 南 south, 西 west, 北 north, 東 east, 中 centre.
+
+- Five 山經 (shānjīng, mountain classics), holding twenty-six numbered routes
+- Four 海外經 (hǎiwàijīng), beyond the seas, running south, west, north, east
+- Four 海內經 (hǎinèijīng), within them, same rotation
+- Four 大荒經 (dàhuāngjīng), the great wilderness, running east, south, west,
+  north
+- One more, headed 海內經 again, with no direction at all
+
+Inside a route each creature is filed under the mountain or water where it is
+found, never under anything about its body. So what question does this system
+answer? What will I meet if I go there. And it answers that completely.
+
+By the test above, that is a classification. It has a character, it applies it to
+every entry, and it never changes question halfway, which is more than the
+Celestial Emporium managed.
+
+## What that filing costs
+
+狌狌, 鹿蜀 (lùshǔ), 猼訑 (bóshī) and 九尾狐 (jiǔwěihú) all stand on the same
+route, 南山經之首 (nánshānjīng zhī shǒu), on four mountains in this order:
+招搖之山 (zhāoyáo), 杻陽之山 (niǔyáng), 基山 (jī) and 青丘之山 (qīngqiū). The
+suffix 之山 means "mountain of". They appear in that order because that is the
+order you would walk past them.
+
+Two of them have nine tails. 猼訑 has them on a sheep, at 基山:
 
 > 有獸焉，其狀如羊，九尾四耳，其目在背，其名曰猼訑，佩之不畏。
 >
@@ -85,41 +177,32 @@ The beast at 青丘之山 has them on a fox:
 
 > 有獸焉，其狀如狐而九尾，其音如嬰兒，能食人；食者不蠱。
 >
-> *There is a beast there, shaped like a fox but with nine tails, and its cry
-> is like an infant's. It can eat people. Eat it and you will not be harmed by
-> 蠱 (gǔ), poisoning by witchcraft.*
-
-The italic line under each quotation is this course's own translation, printed
-inside the quotation so it cannot be mistaken for the record. The quoted lines
-stay in the traditional characters the edition prints, because changing the
-script of a quotation is still changing the quotation.
+> *There is a beast there, shaped like a fox but with nine tails, and its cry is
+> like an infant's. It can eat people. Eat it and you will not be harmed by 蠱
+> (gǔ), poisoning by witchcraft.*
 
 Two records, several mountains apart, sharing a feature the text never mentions
 they share. A system sorting by body would have filed them together. This one
-files 猼訑 next to whatever else stands on 基山.
+files 猼訑 next to whatever else stands on 基山. That disagreement is the course.
 
-That disagreement is the course. Everything from week 3 onward is an attempt to
-re-file this material by body, and every week it costs something.
+The edition never calls the second one 九尾狐. It is an unnamed beast, and the
+name it is filed under here arrived centuries later. Week 7 is about how.
 
-One more thing about the second record: the edition never calls it 九尾狐. It is
-an unnamed beast. The name it is filed under here arrived centuries later, and
-week 7 is about how.
+<Caution label="The italic line is ours, not the edition's">
+  The italic under each quotation is this course's own translation, printed
+  inside the quotation so it cannot be mistaken for the record. It does not
+  replace the line above it.
 
-## In the room
-
-Two hours.
-
-- **Thirty minutes.** The table of contents, on the screen, in the edition's own
-  order. We read the eighteen headings and mark which are directions.
-- **Fifty minutes.** The 招搖之山 passage, slowly. We mark up the formula, and
-  name its slots. Those names are provisional and we keep them all semester, so
-  argue about them now rather than in week 8.
-- **Forty minutes.** Groups. Ten creatures from 南山經, no rules supplied, sort
-  them. Then each group says which character it reached for and why. Nobody
-  reaches for location, and that is the finding.
+  Quoted lines stay in the traditional characters the edition prints, because
+  changing the script of a quotation is still changing the quotation.
+</Caution>
 
 ## What you leave with
 
-The slot names the room agreed on, which week 2 formalises, and a specimen card
-for 狌狌 that you do not hand in. The first card that counts is due at the end of
-week 2.
+Column names for the record's slots, argued in the room, which week 2 formalises
+and the whole semester keeps.
+
+One rule never bends, starting now: you cite the line, or you declare which line
+you could not find. A plausible-sounding quotation with nothing behind it is the
+single thing that fails an assessment outright. We are building a system for a
+text nobody can re-examine, so the citation is all the evidence there is.

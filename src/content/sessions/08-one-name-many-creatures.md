@@ -21,8 +21,6 @@ spec:
     each one attacks
   - you have located all three 肥遗 records and can say which chapter each sits in
   - you can say why adding a synonyms field does not solve the second failure
-related:
-  - lectures/week-08
 ---
 
 Every week since week 2 has assumed that a record's name identifies a creature.

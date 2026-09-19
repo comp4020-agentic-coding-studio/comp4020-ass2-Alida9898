@@ -19,8 +19,6 @@ spec:
   - you can say what 渾敦無面目 requires a renderer to draw
   - you can name one creature whose reconstructions have become the source for
     later reconstructions
-related:
-  - lectures/week-11
 ---
 
 Every reconstruction is an argument about a record, made in a medium that
