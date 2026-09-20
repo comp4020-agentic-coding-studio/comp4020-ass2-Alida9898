@@ -7,32 +7,39 @@ after them is older and is kept for the decisions it records, not for its status
 |---|---|
 | `pnpm check` | green: 27 pages, 19 tests, 0 type errors, 0 axe violations, 0 broken links |
 | `pnpm check:evidence` | passes, 5 cited commits resolve |
-| commits | **37, not pushed** |
+| commits | 40, **pushed**; `main` level with `origin/main` |
 | repo | `comp4020-agentic-coding-studio/comp4020-ass2-Alida9898`, **private** |
 | marking | process 45%, deployed artefact 20%, response to brief 35% |
 
 ## Do these in this order
 
-1. **Push.** `git push origin main`. The repo stays private; this is not `/ship`
-   and does not flip visibility. Thirty-seven commits exist only on one laptop,
-   and process is 45% of the mark — a history nobody can fetch is evidence
-   nobody can mark. The agent's attempt was blocked by the permission
-   classifier, so the author runs it.
+1. ~~**Push.**~~ Done. `main` is level with `origin/main`, repo still private.
 2. **Check `PROCESS.md`'s length against the brief.** It is 691 prose words.
    The 400-to-600 band recorded further down this file is an earlier note about
    the brief and appears nowhere the repo can verify — not `README.md`, not
    `spec/`, not `check-evidence.ts`. If 600 is hard, cut ~90 words; the section
    `What the checks do not cover` is the newest and should survive, so cut from
    `How I knew the checks were right`.
-3. **Week 10.** 530 words and the only week quoting no source line at all. It
-   needs writing, not a spine. See defect 2 below.
-4. **The three contradictions**, all small: week 10 claims week 9 covered three
-   systems including a modern database (it covers two, no database); week
-   references run one number low from week 8 onward; week 11's frontmatter names
-   four creatures its prose never mentions, which means `weeks.ts` and
-   CLAUDE.md's week list, not the page.
-5. **The remaining eleven week pages** to the skeleton below. Lowest value of
-   the five — the shape is agreed and written down, so this is execution.
+3. ~~**Week 10.**~~ Written. Now `.mdx`, four worked examples, four cited lines,
+   two `<Caution>` boxes, the two logistics headings gone. Each example is a
+   different shape of disagreement rather than a list of what each creature
+   loses: 夔's two drop lists are complements, 帝江's 是識歌舞 is held by none of
+   the three systems, 驺吾 is the one only our system fails, and 九尾狐 returns
+   nothing because what needs filing is a date and all three systems lack the
+   field. Glosses added for `kui` and `zouwu`, which had none.
+4. **Two contradictions left.** The week 9 / week 10 one is fixed: week 10 now
+   says two systems and names them, and the modern database is gone. Still open:
+   week references run one number low from week 8 onward, and week 11's
+   frontmatter names four creatures its prose never mentions, which means
+   `weeks.ts` and CLAUDE.md's week list, not the page.
+5. **The remaining ten week pages** to the skeleton below. The shape is agreed
+   and written down, so this is execution.
+
+   The opener heading is settled: **`## What this week does`**, and CLAUDE.md's
+   spine rule now says so. Weeks 1, 2, 3 and 10 carry it. Weeks 4 to 9, 11 and 12
+   have **no opener heading at all** — they open on an untitled lead paragraph —
+   so a spec check pinning the opener would go red on eight pages today. Add that
+   check as the last step of this item, not before it.
 
 ## Settled overnight, do not reopen
 
@@ -416,12 +423,9 @@ Verified, not reported. Ordered by what a reader sees.
 1. ~~Weeks 6 and 9 printed a stranded frontmatter list item as the first line of
    the body.~~ Fixed, commit `23628d2`.
 
-2. **Week 10 is not written.** 530 words against a 640 to 780 band for the rest.
-   It is the only one of the nine that quotes **no** line of 山海經 — every other
-   week carries one or two. Its examples are one-sentence bullets that restate
-   findings sourced to other weeks. Reframing its headings would make an empty
-   page look finished, which is worse than leaving it obviously unfinished.
-   It needs writing, not a spine.
+2. ~~**Week 10 is not written.**~~ Written, 2026-09-21. It was 530 words against
+   a 640 to 780 band and the only week quoting no line of 山海經 at all. It now
+   quotes four, each through `<Specimen>` rather than typed into the page.
 
 3. **Week 11's frontmatter names four creatures the body never mentions.**
    Listed: 狌狌, 旋龟, 窫窳, 陵鱼 — zero occurrences each. Discussed: 夫诸, 夔,
@@ -431,9 +435,8 @@ Verified, not reported. Ordered by what a reader sees.
 4. **Week 5 has the same fault, smaller.** 旋龟 and 猼訑 are listed and absent;
    夫诸 is discussed and unlisted.
 
-5. **Week 10 contradicts week 9 in print.** `10:25` says last week looked at
-   three systems including "the modern database". Week 9 presents two and never
-   mentions a database.
+5. ~~**Week 10 contradicts week 9 in print.**~~ Fixed in the rewrite. Week 10's
+   opener now names week 9's two systems and says what each sorts by.
 
 6. **Week references run one low from week 8 onward.** `08` calls week 9 "week
    10"; `09` calls week 8 "week 9" and week 7 "week 8"; `11` calls week 7 "week

@@ -188,11 +188,17 @@ contains. Neither is a place to be clever.
 
 A reader picks up any week cold, so the slots do not move:
 
-1. **`## Why this week exists`** --- the only heading that is identical in all
-   twelve weeks. It connects to the previous week, names what the system is
-   still missing, and says why this is the next step. Write it first.
+1. **`## What this week does`** --- the only heading that is identical in all
+   twelve weeks. One sentence connecting to the previous week, one stating this
+   week's job, then a list of what is coming, each item naming its own creature
+   and what that creature is there to do. Write it first. It used to read `## Why
+   this week exists`, which invited a paragraph of justification where a reader
+   wanted a contents list.
 2. **Two to four working sections**, headings of their own, each carrying part
-   of the argument with the week's creatures in it.
+   of the argument with the week's creatures in it. Number them `Example N:` or
+   `Step N:` only where the sections really are parallel cases or real sequence;
+   a week whose sections are exposition takes plain headings, because numbering
+   them claims an order that is not there.
 3. **`## What you leave with`** --- the artefact, and what carries forward.
 
 Warnings, caveats and "do not misread this" go in a `<Caution>` box, never in a

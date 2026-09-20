@@ -42,6 +42,10 @@ export const glosses: Record<string, string> = {
     "There is a god-person with eight heads and human faces, a tiger's body and ten tails. It is called 天吳.",
   dijiang:
     "There is a god there, shaped like a yellow sack, red as cinnabar fire, with six feet and four wings, a shapeless blur with no face. It knows song and dance. This is 帝江.",
+  kui:
+    "On it there is a beast, shaped like an ox, grey-bodied and hornless, with one foot. Going in and out of the water it always brings wind and rain. Its light is like the sun and the moon, its voice like thunder. It is called 夔.",
+  zouwu:
+    "In 林氏國 there is a treasure-beast, as big as a tiger, bearing all five colours, its tail longer than its body. It is called 騶吾. Ride it a thousand 里 in a day.",
 };
 
 /** The course's translation of a cited line, or undefined if we have not made one. */
