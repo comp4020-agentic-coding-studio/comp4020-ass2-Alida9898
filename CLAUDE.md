@@ -192,6 +192,17 @@ saying so at all.
 stay deadpan — inside the course the work is serious and the findings are real.
 The framing pages are the ones that admit what the whole thing is.
 
+**Self-deprecating is not discouraging, and the first correction overshot into
+the second.** "Watch the system get torn down and rebuilt, mostly by the
+material, which was not written to be classified and has no interest in
+helping" and "a classification system that works in four of its nine fields,
+and a much longer list of the places where it does not" are accurate and they
+read as a warning against enrolling. The author's own sentences are light and
+they invite: the joke is that the subject is useless, not that the course is
+punishing. Admit the limit in an aside — *it will work about half the time, and
+the half where it does not is the half worth having* — and keep the invitation
+in the main clause.
+
 - English prose. Creature names and quoted source text stay in Chinese, with
   pinyin on first use in a page.
 - Short declarative sentences. No exclamation marks.
