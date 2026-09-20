@@ -95,6 +95,75 @@ describe("the twelve weeks", () => {
   it("uses every bestiary creature in at least one week", () => {
     expect(orphanCreatures()).toEqual([]);
   });
+
+  // Promise: a week's creature list is a claim about that week's page, not
+  // decoration in its frontmatter. Week 11 shipped naming four creatures its
+  // prose never mentioned and week 5 named two, and every check above passed:
+  // they are in the bestiary, there are at least three, none is an orphan. The
+  // page does not print its own frontmatter list, so a match here is a match in
+  // the rendered prose or on a specimen card.
+  it("discusses every creature its own week names", () => {
+    expect(sessions.length, "no session pages in the built API").toBe(12);
+
+    const silent: string[] = [];
+    for (const node of sessions) {
+      const html = readFileSync(resolve("dist", node.id, "index.html"), "utf8");
+      const body = html.slice(html.indexOf("<main"), html.lastIndexOf("</main>"));
+      for (const creature of (node.meta?.creatures ?? []) as string[]) {
+        if (!body.includes(creature)) silent.push(`${node.id} names ${creature}`);
+      }
+    }
+    expect(silent, `named in frontmatter, absent from the page: ${silent.join("; ")}`).toEqual([]);
+  });
+
+  // Promise: the opener connects to the week before it, and connects to the
+  // right one. Week references ran one number low from week 8 onward — week 8
+  // called week 9 "week 10", week 9 called week 8 "week 9" — and the drift
+  // started exactly where the late-written material started. Nothing could see
+  // it, because a wrong week number is still a valid page.
+  it("opens each week by naming the week before it", () => {
+    const wrong: string[] = [];
+    for (const node of sessions) {
+      const week = (node.meta?.week ?? 0) as number;
+      if (week < 2) continue;
+      const html = readFileSync(resolve("dist", node.id, "index.html"), "utf8");
+      const body = html.slice(html.indexOf("<main"), html.lastIndexOf("</main>"));
+      // From the opener heading to the next heading of any level.
+      const from = body.indexOf('id="what-this-week-does"');
+      const opener = body.slice(from, body.indexOf("<h2", from + 1));
+      if (!new RegExp(`[Ww]eek ${week - 1}\\b`).test(opener.replace(/<[^>]*>/g, " "))) {
+        wrong.push(`week ${week} does not name week ${week - 1} in its opener`);
+      }
+    }
+    expect(wrong, wrong.join("; ")).toEqual([]);
+  });
+
+  // Promise: a reader picks up any week cold and finds the same first slot.
+  // CLAUDE.md fixes the spine, and its one identical heading is the opener.
+  // Eight pages shipped with no opener heading at all — they began on an
+  // untitled lead paragraph — which no check could see, because every other
+  // page check counts h1s rather than reading h2s.
+  it("opens every week with the same heading", () => {
+    const wrong: string[] = [];
+    for (const node of sessions) {
+      const html = readFileSync(resolve("dist", node.id, "index.html"), "utf8");
+      const body = html.slice(html.indexOf("<main"), html.lastIndexOf("</main>"));
+      // The layout's own rule box is an h2 too, and it carries a scoped
+      // `data-astro-cid-*`. The page's own headings come from MDX and do not,
+      // so that attribute is what separates the layout's chrome from the week.
+      const first = [...body.matchAll(/<h2([^>]*)>([\s\S]*?)<\/h2>/g)].find(
+        ([, attrs]) => !attrs.includes("data-astro-cid"),
+      );
+      // The theme appends an anchor link inside the heading, which survives
+      // tag-stripping as a trailing "#".
+      const text = first?.[2]
+        .replace(/<[^>]*>/g, "")
+        .replace(/#$/, "")
+        .trim();
+      if (text !== "What this week does") wrong.push(`${node.id} opens on ${text ?? "no h2"}`);
+    }
+    expect(wrong, `weeks not opening on "What this week does": ${wrong.join("; ")}`).toEqual([]);
+  });
 });
 
 describe("the bestiary", () => {

@@ -27,19 +27,20 @@ after them is older and is kept for the decisions it records, not for its status
    the three systems, 驺吾 is the one only our system fails, and 九尾狐 returns
    nothing because what needs filing is a date and all three systems lack the
    field. Glosses added for `kui` and `zouwu`, which had none.
-4. **Two contradictions left.** The week 9 / week 10 one is fixed: week 10 now
-   says two systems and names them, and the modern database is gone. Still open:
-   week references run one number low from week 8 onward, and week 11's
-   frontmatter names four creatures its prose never mentions, which means
-   `weeks.ts` and CLAUDE.md's week list, not the page.
-5. **The remaining ten week pages** to the skeleton below. The shape is agreed
-   and written down, so this is execution.
+4. ~~**The three contradictions.**~~ All fixed, and each is now pinned by a
+   check. Week 10 names week 9's two systems and the modern database is gone
+   from `weeks.ts`'s week 9 topic, which was its source. Week references were
+   re-derived across all twelve pages. Week 11's creature list in `weeks.ts` is
+   now the four its prose works — 夫诸, 夔, 帝江, 九尾狐 — and the four it used
+   to name are each still carried by another week, so nothing was orphaned.
+5. ~~**The remaining week pages.**~~ Weeks 4 to 9, 11 and 12 rewritten to the
+   skeleton, all now `.mdx` with specimen cards where their examples are first
+   discussed. Every page opens on `## What this week does`, two to four working
+   sections, `## What you leave with`. Fourteen logistics headings deleted.
 
-   The opener heading is settled: **`## What this week does`**, and CLAUDE.md's
-   spine rule now says so. Weeks 1, 2, 3 and 10 carry it. Weeks 4 to 9, 11 and 12
-   have **no opener heading at all** — they open on an untitled lead paragraph —
-   so a spec check pinning the opener would go red on eight pages today. Add that
-   check as the last step of this item, not before it.
+   Weeks 1 and 2 carry the new opener heading but their opener *bodies* are
+   still the pre-pivot paragraph rather than the contents list the slot now
+   specifies. That is the one piece of item 5 left.
 
 ## Settled overnight, do not reopen
 
@@ -106,11 +107,16 @@ Kept because items 4 and 5 are still open and are recorded nowhere else.
 2. ~~Weeks 3 to 12 prose.~~ Week 3 done (`9aefe5b`). The rest is item 5 at the
    top, with the shape agreed and written down.
 3. ~~Week 3's deck.~~ Opened at both viewports and corrected (`ca611d1`).
-4. **Assessments.** Still five, summing to 100, but the final has not been
+4. **Assessments.** Still five, summing to 100, and the final has still not been
    rewritten as "design a classification system for unseen material". Proposed
-   weights are in the table below and are not yet applied. **Several week pages
-   state assessment weights in their logistics sections; those weights have to be
-   reconciled with `src/content/assessments/` before those sections are deleted.**
+   weights in the table below are still not applied.
+
+   The in-page weights are reconciled: no week page states a weight any more, so
+   no weight exists in two places. Two were attached to the wrong week and were
+   found only by reading the assessment frontmatter — week 6 said the system
+   proposal was due at the end of week 6 (it is week 7) and week 9 said the
+   reclassification essay was due at the end of week 9 (it is week 10). Each week
+   now links the assessment through `related` instead of restating it.
 5. **The visual pass.** Deliberately last. Not a marking criterion.
 
 ## Assessment, proposed and not yet applied
@@ -427,28 +433,39 @@ Verified, not reported. Ordered by what a reader sees.
    a 640 to 780 band and the only week quoting no line of 山海經 at all. It now
    quotes four, each through `<Specimen>` rather than typed into the page.
 
-3. **Week 11's frontmatter names four creatures the body never mentions.**
-   Listed: 狌狌, 旋龟, 窫窳, 陵鱼 — zero occurrences each. Discussed: 夫诸, 夔,
-   帝江, 九尾狐 — none listed. `weeks.ts` and CLAUDE.md's week list carry the
-   wrong four, so fixing this touches the contract, not just the page.
+3. ~~**Week 11's frontmatter names four creatures the body never mentions.**~~
+   Fixed in `weeks.ts`. CLAUDE.md turned out not to list creatures at all, only
+   rules, so the contract change was one line.
 
-4. **Week 5 has the same fault, smaller.** 旋龟 and 猼訑 are listed and absent;
-   夫诸 is discussed and unlisted.
+4. ~~**Week 5 has the same fault, smaller.**~~ Fixed by writing the section the
+   skeleton called for and the page did not have. 旋龟 and 猼訑 both carry a
+   use, so they are the evidence in `Why a use is not a character either` —
+   旋龟 has two records and one use between them, which is the argument.
 
 5. ~~**Week 10 contradicts week 9 in print.**~~ Fixed in the rewrite. Week 10's
    opener now names week 9's two systems and says what each sorts by.
 
-6. **Week references run one low from week 8 onward.** `08` calls week 9 "week
-   10"; `09` calls week 8 "week 9" and week 7 "week 8"; `11` calls week 7 "week
-   8"; `12` calls week 8 "week 9". Weeks 4 to 7 and 10 are correct. The drift
-   starts exactly where the late-written material starts.
+6. ~~**Week references run one low from week 8 onward.**~~ Re-derived across
+   all twelve pages and pinned. Two more were found in `src/lib/bestiary.ts`,
+   which nobody had looked at: 肥遗's note called itself the anchor of week 9,
+   and the `kind` field's comment credited the missing-kind material to week 7.
+   They are week 8 and week 6. CLAUDE.md carried the same week 7 error.
 
-**`spec/course.test.ts` catches none of 3 to 6.** It checks that a week names at
-least three creatures, that they are not repeated, that the bestiary holds them,
-and that no bestiary creature is unused. It never checks that a creature a week
-names appears in that week's prose, and it never checks that a week's reference
-to another week points at the right one. Both are cheap to add and both would
-have gone red today.
+**`spec/course.test.ts` caught none of 3 to 6.** It now has three more checks,
+each mutation-tested against the exact bug it protects against:
+
+- *discusses every creature its own week names* — reads the built page and
+  fails on a frontmatter creature the prose never mentions. Not vacuous: the
+  page does not print its own creature list.
+- *opens every week with the same heading* — the layout's rule box is an h2 too
+  and carries a scoped `data-astro-cid-*`, which is what separates the theme's
+  chrome from the week's own first heading.
+- *opens each week by naming the week before it* — this one went red on week 6
+  the moment it was written, for real, and the page was reworded.
+
+Still unchecked: a week reference in the *body* rather than the opener. A
+generic check needs to know which week each claim belongs to, which is not
+cheap, so those were re-derived by hand this pass.
 
 ---
 

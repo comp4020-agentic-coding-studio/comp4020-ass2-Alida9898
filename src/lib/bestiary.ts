@@ -30,7 +30,7 @@ export const creatureSchema = z.strictObject({
   /**
    * The word the record itself uses. Absent where the text supplies none,
    * which is not an oversight in this file: several records never say what
-   * kind of thing they are describing, and week 7 is about that.
+   * kind of thing they are describing, and week 6 is about that.
    */
   kind: z.enum(["獸", "鳥", "神", "龜", "魚", "蟲", "蛇", "人"]).optional(),
 
@@ -213,7 +213,7 @@ export const bestiary: Creature[] = [
     use: "食之已癘，可以殺蟲 — the bird cures pestilence and kills vermin",
     cites: ["feiyi.snake", "feiyi.bird", "feiyi.feiwei"],
     verified: true,
-    note: "One name over a snake, a bird and a third thing, with contradictory omens and a use belonging to only one of them. 郭璞 notices and writes 疑是同名, a suspicion rather than a ruling. The worst case in the book, and the anchor of week 9.",
+    note: "One name over a snake, a bird and a third thing, with contradictory omens and a use belonging to only one of them. 郭璞 notices and writes 疑是同名, a suspicion rather than a ruling. The worst case in the book, and the anchor of week 8.",
   },
   {
     name: "精卫",

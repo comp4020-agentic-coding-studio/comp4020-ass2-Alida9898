@@ -3,7 +3,7 @@
 // The syllabus contract. One rule per week, stated as a thesis, and at least
 // three creatures that put it under pressure. A creature may recur: the same
 // record read under a different rule is meant to look different, and weeks 1
-// and 8 on 狌狌 are the test of whether that is true.
+// and 7 on 狌狌 are the test of whether that is true.
 //
 // Each week's session page restates its own rule and creature list in
 // frontmatter. `spec/course.test.ts` checks that the page and this file agree,
@@ -100,7 +100,7 @@ export const weeks: Week[] = [
     week: 9,
     phase: "rebuild",
     title: "Other systems",
-    topic: "Japanese yōkai, the medieval European bestiary, and the modern database.",
+    topic: "Two bestiaries that sort by what a creature is for the reader.",
     rule: "Other bestiaries sort by what a creature is for the reader, so their top division is a fact about the reader rather than about the creatures.",
     creatures: ["驺吾", "烛阴", "夔", "九尾狐"],
   },
@@ -118,7 +118,7 @@ export const weeks: Week[] = [
     title: "Beyond the 山海经",
     topic: "Classification as a general skill: new material, no system supplied.",
     rule: "A system transfers only as far as its characters do, so the test of one is naming which of its characters the next material will not supply.",
-    creatures: ["狌狌", "旋龟", "窫窳", "陵鱼"],
+    creatures: ["夫诸", "夔", "帝江", "九尾狐"],
   },
   {
     week: 12,

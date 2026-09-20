@@ -36,7 +36,7 @@ This is the shape of the whole course, so it is the first rule in the file.
   was not written for; two can always be chosen to agree.
 - **Creatures recur, deliberately.** 九尾狐 carries five weeks and 狌狌 carries
   two. The same record read under a different rule is *supposed* to look
-  different, and weeks 1 and 8 on 狌狌 are the test of whether that is true. If
+  different, and weeks 1 and 7 on 狌狌 are the test of whether that is true. If
   a recurring creature reads the same in two weeks, the second week has no rule
   of its own --- that is the defect to look for, not the recurrence.
 - There is no such thing as a week's "primary specimen". An earlier version of
@@ -136,7 +136,7 @@ only 南山經 makes the system look far more regular than it is.
 Every entry carries `name` and `nameTrad`, `pinyin`, an invented `binomial`,
 `form`, `habitat`, an optional `omen` and `use`, one or more `cites`, and
 `verified`. `kind` is **optional and often absent**, because several records
-never say what kind of thing they are describing, and that absence is week 7's
+never say what kind of thing they are describing, and that absence is week 6's
 material rather than a gap to fill.
 
 The binomial is genus from the source name, species from the diagnostic trait in
