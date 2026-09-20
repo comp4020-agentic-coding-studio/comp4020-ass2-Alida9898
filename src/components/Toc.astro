@@ -8,11 +8,16 @@
 // Depth-2 only: h3 is used inside sections here, and including it would turn a
 // six-item rail into a twenty-item one.
 //
-// 宽度不够就整个不显示，不挤正文。手机上直接不渲染——页面本身够短，
-// 而一个折叠目录是又一个要维护的无 JS 回退。
-// Below the breakpoint it is display:none rather than reflowed into the column:
-// the rail exists because the margin is empty, and when the margin is not empty
-// the page reads fine without it.
+// 三种宽度三种处理：≥72rem 左边距里的固定导轨；中间宽度正文顶部一排行内链接；
+// 手机上完全不渲染。手机那一档是因为每周正文开头的 outline 已经在说同样的事，
+// 两个几乎重合的列表叠在一起，读者会以为自己看重了——而手机上竖向空间最紧，
+// 行内那一排的收益也最小。
+// Three widths, three treatments: a fixed rail in the left margin at 72rem and
+// up, an inline row at the top of the column between there and the phone
+// breakpoint, and nothing at all on a phone. The phone case is dropped because
+// a week's prose now opens with an outline saying the same thing, and two
+// near-identical lists stacked on top of each other read as a mistake. Vertical
+// space is scarcest there and the inline row buys least.
 //
 // 颜色只用主题 token，没有 opacity。当前项用 --at-primary 的一道左边线，
 // 不用颜色区分，因为琥珀在这个字号上只有 3.44:1。
@@ -67,6 +72,14 @@ const items = headings
     margin: 0 0 2.5rem;
     padding-block: 0.85rem;
     border-block: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  /* 40rem 和 [slug].astro 里零件表用的是同一个断点，"手机" 在这个仓库里就是它。
+     The phone breakpoint, shared with the parts table in [slug].astro. */
+  @media (max-width: 40rem) {
+    .toc {
+      display: none;
+    }
   }
 
   .toc__title {
