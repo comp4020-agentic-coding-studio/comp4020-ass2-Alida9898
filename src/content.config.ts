@@ -65,21 +65,6 @@ export const collections = {
       .loose(),
   }),
 
-  lectures: defineCollection({
-    loader: courseNodeLoader("lectures"),
-    schema: courseNodeSchema
-      .extend({
-        week: weekSchema,
-        date: z.coerce.date(),
-        teachers: teacherRefs.optional(),
-        slides: z
-          .string()
-          .regex(/^\/decks\/[a-z0-9-]+\/$/)
-          .optional(),
-      })
-      .loose(),
-  }),
-
   people: defineCollection({
     loader: courseNodeLoader("people"),
     schema: ({ image }) =>

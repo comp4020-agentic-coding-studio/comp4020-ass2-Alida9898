@@ -7,13 +7,16 @@ import { sessionLabels, siteConfig } from "../../site-config";
 
 <ContentLayout
   title={sessionLabels.plural}
-  description={`The twelve-week teaching schedule: what happens in each ${sessionLabels.singular.toLowerCase()}, what to prepare, and what leaves the room.`}
+  description={`Twelve weeks, each stating one rule and testing it against at least three creatures. Every ${sessionLabels.singular.toLowerCase()} names the rule on its own page.`}
   {...siteConfig}
 >
   <p>
-    The internal collection and URL stay <code>sessions</code>. Set the visible
-    singular and plural names once in <code>src/site-config.ts</code> and use
-    the language your course deserves everywhere readers see it.
+    The weeks run in three phases of four. The first builds a classification
+    system that works on the cleanest records, the second puts it under load
+    until fields start failing, and the third rebuilds from what survived. Each
+    week states exactly one rule and is tested against at least three creatures,
+    and creatures recur on purpose: the same record read under a different rule
+    is supposed to look different.
   </p>
   <SessionsGrid />
 </ContentLayout>

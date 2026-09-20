@@ -401,6 +401,101 @@ describe("every page", () => {
   });
 });
 
+describe("nothing the reader was not meant to see", () => {
+  const BASE = "/comp4020-ass2-Alida9898/";
+  const builtPages = () =>
+    globSync("dist/**/index.html")
+      .map((file) => file.replace(/\\/g, "/"))
+      .filter((file) => !file.includes("/decks/"));
+
+  // Promise: a page talks to the reader, never to whoever is building the site.
+  // The sessions index shipped a starter paragraph telling the developer to set
+  // the collection's display names in `src/site-config.ts`, and it reached the
+  // deployed site because `check:evidence` greps for the literal
+  // STARTER_CONTENT marker and the starter's prose does not carry one.
+  it("names no repo source path on any page", () => {
+    const leaks: string[] = [];
+    for (const file of builtPages()) {
+      const html = readFileSync(file, "utf8");
+      const body = html.slice(html.indexOf("<main"), html.lastIndexOf("</main>")) || html;
+      for (const [path] of body.matchAll(/src\/[a-z0-9._/-]+\.(?:ts|astro|mdx|md|css)/g)) {
+        leaks.push(`${file}: ${path}`);
+      }
+    }
+    expect(leaks, `pages naming a repo file: ${leaks.join(", ")}`).toEqual([]);
+  });
+
+  // Promise: every page that ships is a page somebody can arrive at. /lectures/
+  // outlived the collection it listed: the content was deleted in the pivot,
+  // nav stopped linking it, and the route kept building a page whose entire
+  // body was instructions for filling the collection in. The link checker
+  // cannot see this, because an orphan has no broken link — it has no link.
+  it("leaves no page unreachable from the home page", () => {
+    const pages = new Set(builtPages());
+    const toFile = (href: string) => {
+      const rest = href.slice(BASE.length).replace(/^\/+|\/+$/g, "");
+      return rest.endsWith(".html") ? `dist/${rest}` : `dist/${rest ? rest + "/" : ""}index.html`;
+    };
+
+    const seen = new Set<string>();
+    const queue = ["dist/index.html"];
+    while (queue.length) {
+      const current = queue.pop() as string;
+      if (seen.has(current) || !pages.has(current)) continue;
+      seen.add(current);
+      const html = readFileSync(current, "utf8");
+      for (const [, href] of html.matchAll(/href="([^"#?]+)"/g)) {
+        if (href.startsWith(BASE)) queue.push(toFile(href));
+      }
+    }
+
+    const orphans = [...pages].filter((page) => !seen.has(page)).sort();
+    expect(orphans, `built but unreachable: ${orphans.join(", ")}`).toEqual([]);
+  });
+});
+
+describe("characters the reader's machine may not have", () => {
+  // Promise: no character the course quotes renders as a tofu box. 肥𧔥's 𧔥 is
+  // U+27525, outside the Basic Multilingual Plane; no stock system font carries
+  // it, so it showed as an empty box on the one page whose argument is that the
+  // character is written differently. `site.css` now loads a 4.9 KB one-glyph
+  // subset for it. A second astral character added to a citation would come
+  // back as a box and nothing would say so, which is what this catches.
+  it("covers every astral character it quotes with the bundled subset", () => {
+    const declared = new Set<number>();
+    const css = readFileSync("src/styles/site.css", "utf8");
+    for (const [, range] of css.matchAll(/unicode-range:\s*([^;]+);/g)) {
+      for (const part of range.split(",")) {
+        const span = part.trim().replace(/^U\+/i, "").split("-");
+        const from = parseInt(span[0], 16);
+        const to = parseInt(span[1] ?? span[0], 16);
+        for (let cp = from; cp <= to; cp++) declared.add(cp);
+      }
+    }
+    expect(declared.size, "no unicode-range declared in site.css").toBeGreaterThan(0);
+
+    const uncovered = new Set<string>();
+    const files = globSync("src/content/**/*.md*")
+      .concat(globSync("src/lib/*.ts"))
+      .concat(globSync("src/decks/**/*.mdx"));
+    for (const file of files) {
+      for (const char of readFileSync(file, "utf8")) {
+        const cp = char.codePointAt(0) as number;
+        // Astral CJK only. The planes to watch are the SIP and TIP, U+20000
+        // upward; emoji sit *below* them at U+1F000, so a `cp < 0x1f000` guard
+        // excludes the whole of CJK Extension B — including U+27525 itself.
+        // The first version of this check did exactly that and was green for
+        // the wrong reason until it was mutation-tested.
+        if (cp >= 0x20000 && cp <= 0x3ffff && !declared.has(cp)) {
+          uncovered.add(`U+${cp.toString(16).toUpperCase()} (${char}) in ${file}`);
+        }
+      }
+    }
+    expect([...uncovered], `astral characters with no bundled glyph: ${[...uncovered].join(", ")}`)
+      .toEqual([]);
+  });
+});
+
 describe("site-wide styling", () => {
   // Promise: no page ships the theme's "Related" heading at 3.43:1 against the
   // page background. That fix lives in src/styles/site.css, which this repo has

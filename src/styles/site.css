@@ -29,3 +29,29 @@
 .at-card-title {
   color: var(--at-text);
 }
+
+/* 肥𧔥 的 𧔥 是 U+27525，在 BMP 之外，系统字体一个都没有，页面上就是个豆腐块。
+   整套扩展 B 字体 19MB，这一个字 4.9KB，所以只做了一个字的子集。
+   unicode-range 保证只有真的印了这个字的页面才会去取它。
+   来源和授权见 src/assets/fonts/README.md。
+
+   A one-glyph subset for U+27525, the 𧔥 of 肥𧔥, which no stock system font
+   carries and which therefore rendered as a tofu box on the one page whose
+   argument is that the character is written differently. `unicode-range` keeps
+   the fetch to pages that actually print it. */
+@font-face {
+  font-family: "SLOP Ext B";
+  src: url("../assets/fonts/slop-ext-b.woff2") format("woff2");
+  unicode-range: U+27525;
+  font-display: swap;
+}
+
+/* 主题声明的是 html { font-family: var(--at-font-body) }。这里不重写那个栈——
+   重写就要把主题的哈希字体名抄进来，主题一升级就对不上。改用 html:root 提高
+   特异性，把子集插到栈首，其余原样继承。
+   The theme sets `html { font-family: var(--at-font-body) }`. Restating that
+   stack would hardcode its hashed family name, so this prepends instead, at a
+   higher specificity so bundle order cannot decide the outcome. */
+html:root {
+  font-family: "SLOP Ext B", var(--at-font-body);
+}

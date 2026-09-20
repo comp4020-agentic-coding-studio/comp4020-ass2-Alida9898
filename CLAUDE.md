@@ -562,12 +562,21 @@ while broken:
   unquoted multi-line scalar, so one `things by it: a mountain` in it fails the
   whole build with `bad indentation of a mapping entry` pointing at the line
   after the colon. Use an em dash, or quote the string.
-- **`𧔥` in 肥𧔥 is U+27505, outside the BMP,** and renders as a tofu box in the
-  site's font stack. It is in the generated `citations.ts` and is correct; it is
-  the rendering that fails. Week 8's argument is that the name is spelled with a
-  different second character, so the one place it matters is the one place a
-  reader sees a box. Not fixed: covering CJK Extension B needs a font nobody
-  ships.
+- **`𧔥` in 肥𧔥 is U+27525, outside the BMP,** and no stock system font carries
+  it, so it rendered as a tofu box — on the one page whose argument is that the
+  name's second character is written differently. Fixed by bundling a **one-glyph
+  subset**: covering CJK Extension B needs 19 MB, covering *this character* needs
+  4.9 KB. `src/assets/fonts/` has the file, its OFL licence and how it was cut;
+  `site.css` loads it behind `unicode-range: U+27525`, so only a page that prints
+  the character fetches it, and `html:root` prepends the family so the theme's
+  own stack is not restated.
+
+  Two things that cost time here. The codepoint was first recorded as U+27505,
+  which is a different character — read it out of the file with `ord()` rather
+  than off a chart. And astral CJK starts at **U+20000, above the emoji block at
+  U+1F000**, so a `cp < 0x1f000` guard meant to skip emoji silently excludes the
+  whole of Extension B. The check written to pin this had that bug and was green
+  for the wrong reason until it was mutation-tested.
 
 Astro and this repo:
 
