@@ -165,6 +165,33 @@ taxonomy that hides which parts it made up is the thing this course is against.
 Deadpan taxonomist. Write as a scholar who takes the project completely
 seriously and never winks at the reader.
 
+### The framing pages are the exception, and the author has had to say so twice
+
+**The home page and the syllabus are allowed to be funny about the course, and
+have to be.** They are where a prospective student decides, and what they are
+deciding about is an experiment that does not end with a working taxonomy of
+the 山海经. Selling that in the register of a scholar who believes it worked is
+not deadpan, it is a false prospectus.
+
+So the framing pages open on the author's own pitch and keep its jokes: *Want to
+learn something with no use whatsoever?* · *Come and classify monsters. Feel the
+complexity.* · *it may give you ideas the next time you design a classification
+of something that matters.* Yes, "Feel the complexity" tells the reader how to
+feel, and the ban above stands everywhere else.
+
+An earlier pass recorded the author's words in `PLAN.md` under a gloss saying
+they needed "a register pass" because "the deadpan taxonomist does not wink".
+**That gloss was the agent's, not the author's, and it was wrong.** Acting on it
+produced a home page section that stated the bargain accurately and was not
+worth reading. The self-deprecation is the honest content here, not decoration
+laid over it: the course really is experimental and the system really does fail
+in five of its nine fields, and a page that cannot say so lightly ends up not
+saying so at all.
+
+**Where the line sits.** The twelve week pages, the assessments and the policies
+stay deadpan — inside the course the work is serious and the findings are real.
+The framing pages are the ones that admit what the whole thing is.
+
 - English prose. Creature names and quoted source text stay in Chinese, with
   pinyin on first use in a page.
 - Short declarative sentences. No exclamation marks.

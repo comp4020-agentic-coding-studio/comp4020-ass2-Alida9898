@@ -497,12 +497,19 @@ between the outcomes and the three phases. It states the bargain: the course
 does not end with a working taxonomy of the 山海经, the answer it argues for is
 *partly*, and what you keep is the list of places the system failed.
 
-The register was changed and the content was not. "Come and classify monsters"
-and "Feel the complexity" are a barker's call and the deadpan taxonomist does
-not wink, so the self-deprecation is carried by what the sentence admits —
-"Does the course end with a working taxonomy? No." — rather than by its tone.
-The rhetorical question is the Calling Bullshit kind: opened, then answered in
-the next three words.
+**That register pass was wrong and the author overruled it**, twice. The note
+in `30366ba` saying the words needed toning down to "the course's own deadpan
+register rather than as a joke" was the agent's editorial judgement written into
+this file, not the author's instruction — the commit message says as much. Acting
+on it produced an accurate home page section nobody would read.
+
+The author's position: the syllabus has to be self-mocking and enjoyable,
+*because* the course is an experiment and the result is not a working
+classification system. The jokes are the honest part. The syllabus now opens on
+the author's own words, kept — "Want to learn something with no use whatsoever?",
+"Come and classify monsters. Feel the complexity." — and CLAUDE.md's voice rule
+carries the exception so the next pass does not sand it off again: framing pages
+admit what the course is, week pages stay deadpan.
 
 The original, kept because it is the author's own words and the gloss above is
 not:

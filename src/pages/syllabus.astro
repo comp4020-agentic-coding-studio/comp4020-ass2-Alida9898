@@ -63,19 +63,36 @@ const marked = (text: string) =>
   {...siteConfig}
 >
   <section class="syl">
-    <h2>The question</h2>
-    <p class="syl__lead">
-      Can a rigorous classification system be built for the creatures of the
-      <span lang="zh-Hans">山海经</span>? The course holds that one question for
-      twelve weeks. The answer it argues for is <i>partly</i>, and the failures
-      are more interesting than the successes.
+    <h2>What this course is</h2>
+    <p class="syl__lead">Want to learn something with no use whatsoever?</p>
+    <p>
+      You are reading a book that catalogues monsters by geography. It occurs to
+      you that you could build something like a modern taxonomy on top of it.
+      This is the course where twelve weeks are spent finding out that you
+      cannot, quite.
     </p>
     <p>
-      The <span lang="zh-Hans">山海经</span> files hundreds of creatures by where
-      you would meet them and never says what any of them is a kind of. That
-      makes it a training set rather than a subject: you build a classification
-      system on it, watch which of its fields survive contact with the records,
-      and leave with the method rather than with the taxonomy.
+      Come and classify monsters. Feel the complexity. Watch the system get torn
+      down and rebuilt, mostly by the material, which was not written to be
+      classified and has no interest in helping. You will end the semester
+      holding a classification system that works in four of its nine fields, and
+      a much longer list of the places where it does not.
+    </p>
+    <p>
+      That is the honest advertisement. The course is an experiment and it does
+      not end with a working taxonomy of the{" "}
+      <span lang="zh-Hans">山海经</span>. If one were available somebody would
+      have produced it at some point in the last two thousand years. What it
+      ends with is the method, and the method is the part that transfers: it may
+      give you ideas the next time you design a classification of something that
+      matters.
+    </p>
+    <p>
+      The formal version of the same question, for anybody who has to write this
+      down on a form. Can a rigorous classification system be built for the
+      creatures of the <span lang="zh-Hans">山海经</span>? The course holds that
+      question for twelve weeks and argues for <i>partly</i>. The failures are
+      the interesting half, and they are the half you are assessed on.
     </p>
   </section>
 
@@ -180,8 +197,8 @@ const marked = (text: string) =>
   <section class="syl">
     <h2>What the course quotes, and how</h2>
     <p>
-      Every quoted line comes from one edition,
-      <span lang="zh-Hant">{EDITION.title}</span>,
+      Every quoted line comes from one edition,{" "}
+      <span lang="zh-Hant">{EDITION.title}</span>,{" "}
       <span lang="zh-Hant">{EDITION.edition}</span>. The received text has
       {CHAPTERS.length} <span lang="zh-Hant">卷</span>, and the course reads all
       of them: the working bestiary is {bestiary.length} creatures carrying
