@@ -87,6 +87,35 @@ const marked = (text: string) =>
   </section>
 
   <section class="syl">
+    <h2>What you need before you start</h2>
+    <p>Two things, and neither of them is a reading list.</p>
+    <p>
+      <strong
+        >A basic acquaintance with the <span lang="zh-Hans">山海经</span></strong
+      >. Nobody expects you to have read all {CHAPTERS.length}{" "}
+      <span lang="zh-Hant">卷</span>, and nobody in the room will have. You
+      should arrive knowing what kind of book it is: a geographical survey that
+      files creatures by where you would meet them, in records that are
+      routinely three clauses long. Week 1 introduces it properly. If you are
+      meeting the title for the first time on this page, read one chapter of any
+      complete edition beforehand and you will be fine.
+    </p>
+    <p>
+      <strong>Enough taxonomy to know what a type specimen is</strong>. This is a
+      6000-level code and the level is the reason: the course argues with
+      Linnaeus rather than introducing him. No Latin is required and no biology
+      degree. What is required is being comfortable with the idea that a name is
+      attached to a specimen because somebody decided it was and wrote the
+      decision down.
+    </p>
+    <p>
+      No prior Chinese is assumed. Every line the course quotes carries an
+      English translation beside it, creature names are given with pinyin on
+      first use, and the course's own prose is English throughout.
+    </p>
+  </section>
+
+  <section class="syl">
     <h2>Three phases, four weeks each</h2>
     <ol class="syl__phases">
       {
@@ -210,13 +239,13 @@ const marked = (text: string) =>
     margin-block: 3rem;
   }
 
+  /* 不设 max-width：版心归主题管。这页原本给 lead 和正文各设了一个，
+     结果一页上出现三种行宽，顶部那段通到 1410 而下面只到 1229。
+     Line length is the theme's call, and `policies` uses it unmodified. Two
+     max-widths here produced three measures on one page — the lead ran to
+     1410 and the sections stopped at 1229, which is what a reader sees first. */
   .syl__lead {
     font-size: 1.15rem;
-    max-width: 58ch;
-  }
-
-  .syl p {
-    max-width: 62ch;
   }
 
   /* 三阶段：编号列表，跟首页同一族，不另起一套装饰。 */
