@@ -20,8 +20,9 @@ spec:
     than a creature
   - your essay names the creature you are reclassifying and the system you are
     reclassifying it into
----
+related:
   - assessments/reclassification-essay
+---
 
 Week 9 left the system broken. Before rebuilding it, this week looks at two
 bestiaries that were never built the way ours was, and asks the uncomfortable

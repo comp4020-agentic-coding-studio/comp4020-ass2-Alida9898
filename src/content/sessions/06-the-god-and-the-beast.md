@@ -20,8 +20,9 @@ spec:
   - your system proposal names what its kind field does when the record supplies
     no kind-word
   - you can cite one record that is called a 神 without being given an office
----
+related:
   - assessments/system-proposal
+---
 
 The system now has a rank above species, and it did not invent it. 神, 獸, 鳥
 and 人 are the 山海经's (Shānhǎijīng) own classifiers, printed in the records
