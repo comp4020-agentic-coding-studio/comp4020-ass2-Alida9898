@@ -404,3 +404,26 @@ and that no bestiary creature is unused. It never checks that a creature a week
 names appears in that week's prose, and it never checks that a week's reference
 to another week points at the right one. Both are cheap to add and both would
 have gone red today.
+
+---
+
+# The course's own blurb, author's words, 2026-09-21
+
+Not yet written into the site. The author's framing, to go on the home page or
+the syllabus, in the course's own deadpan register rather than as a joke:
+
+> Want to learn something with no use whatsoever? You are reading a book that
+> catalogues monsters by geography, and it occurs to you to build something like
+> a modern taxonomy on top of it. Come and classify monsters. Feel the
+> complexity. Watch the system get torn down and rebuilt. It may give you ideas
+> the next time you design a classification of your own.
+
+Why this is worth having rather than cutting: it states the bargain the course is
+actually offering, which is not "you will end with a working taxonomy of the
+山海经". It is the phases named out loud — build, stress, rebuild — in the voice
+of someone who knows the answer is *partly*. The register needs one pass to match
+the rest of the site: the deadpan taxonomist does not wink, so the self-deprecation
+has to be carried by what the sentence admits, not by its tone.
+
+Where it goes: `src/pages/index.astro`, which currently opens on the question and
+the answer. This belongs beside them, not instead of them.
