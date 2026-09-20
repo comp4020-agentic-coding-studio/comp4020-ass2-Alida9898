@@ -155,70 +155,197 @@ still names at least three creatures per week, which CLAUDE.md requires and
 already CLAUDE.md's rule and week 3 was written against it, which is why the
 rule now has a worked example attached to it.
 
-## Per week
+## Per week, with what each section argues
+
+Each block below is the week's opener followed by its sections, and each section
+carries the claim it exists to make. The claims are taken from what the prose
+already argues, not invented for the outline — where a week's prose does not
+support a claim, that is said rather than filled in. Week 10 is the one week
+this cannot be done for, and the reason is under the defects.
 
 **1 · What a classification system is** — exposition, no numbering.
-`What this week does` / `What the 山海经 is` / `How Linnaeus classified` /
-`Borges' fake Chinese encyclopedia` / `What the book already sorts by` /
-`What you leave with`. Headings already plain; only the opener changes.
+
+> You already classify things, mostly without deciding anything. This course
+> does it on purpose. Week 1 is the ground floor: what the material is, what the
+> method is, and how to tell a system that is merely arbitrary from one that is
+> broken.
+
+- `What the 山海经 is` — a geographical survey that describes hundreds of
+  animals in the flat voice of somebody recording what is where. One record
+  printed whole: 狌狌. That flatness is why it is the material.
+- `How Linnaeus classified` — three moves, and any system has to make all
+  three: choose characters, nest them into ranks, give two-part names. Under all
+  three is an assumption the 山海经 breaks — that behind every name is a body
+  somebody could produce.
+- `Borges' fake Chinese encyclopedia` — the counter-example. It is funny because
+  every category answers a different question, not because the animals are
+  strange. That gives the test used all semester.
+- `What the book already sorts by` — the text passes its own test: one
+  character, every entry, never changing question. 猼訑 and 九尾狐 both have nine
+  tails, stand four mountains apart, and the text never puts them together.
+- `What you leave with` — names for the slots in a record, and the citation
+  rule.
 
 **2 · Reading the source text** — method.
-`What this week does` / `Step 1: candidates come from repetition` /
-`Step 2: three tests a candidate has to survive` /
-`Step 3: ruling a record into the columns` / `Count before you trust it` /
-`Missing is not zero` / `What you leave with`. The last two are not steps —
-they are the week checking its own candidate — so they are not numbered.
 
-**3 · Morphological classification** — done, 2026-09-20.
+> Week 1's first move was choose characters, and it skipped the hard part: you
+> cannot choose from nothing. This week is the step underneath step one.
 
-**4 · Geographic classification** — examples. Three kinds of locus claim.
-`Example 1: a mountain you can draw` 夫诸 /
-`Example 2: a sea that locates nothing` 陵鱼 /
-`Example 3: a neighbour rather than a place` 讙头 /
-`What the habitat field is holding` (驺吾 lands here) / `What you leave with`.
+- `Step 1: candidates come from repetition` — the first pass over any material
+  is counting, not close reading. A shape that repeats is a candidate; a shape
+  that appears twice is an anecdote. 其状如X，Y首，见则Z is what this text hands
+  over.
+- `Step 2: three tests a candidate has to survive` — comparable, checkable,
+  about the thing. The third is the one Borges' encyclopedist fails fourteen
+  times running.
+- `Step 3: ruling a record into the columns` — 鹿蜀 ruled into four slots, then
+  蛊雕, where the name arrives first and the consequence is a behaviour rather
+  than an omen. Same slots, different order.
+- `Count before you trust it` — 21 of 45 cited lines carry the comparison, 11
+  the omen, 13 two of the three. The formula is a template the text reaches for,
+  not a law it obeys.
+- `Missing is not zero` — 夫诸 has a comparison, a name and an omen and no use.
+  Three different things put a blank in a cell and only one of them is a value.
+- `What you leave with` — column names, agreed before anything is filed under
+  them.
+
+**3 · Morphological classification** — done, 2026-09-20. The worked example of
+the shape.
+
+**4 · Geographic classification** — examples, one locus claim each.
+
+> Week 3 left you parts you can count. The habitat column looks as solid and is
+> not: one field name is holding three incompatible kinds of claim.
+
+- `Example 1: a mountain you can draw` — 夫诸, filed at a measured position on a
+  山經 route. Position is derivable; the route can be put on paper.
+- `Example 2: a sea that locates nothing` — 陵鱼, 在海中. The field is filled and
+  nothing follows from it.
+- `Example 3: a neighbour rather than a place` — 讙头, positioned relative to the
+  entry before it. Real only inside the text's own sequence, and meaningless out
+  of it.
+- `What the habitat field is holding` — 驺吾 lands here. Storing all three under
+  one name hides the difference instead of recording it, which is the week 12
+  proposal's problem to solve or defend.
+- `What you leave with`.
 
 **5 · Omens and uses** — examples.
-`Example 1: one sentence on two unrelated creatures` 顒 and 肥遗, the pair the
-finding needs / `Example 2: the grid the omens do fill` (scope × event) /
-`Example 3: the omen no other record carries` 毕方 /
-`Why a use is not a character either` / `What you leave with`.
+
+> The consequence slot has been in the entry form since week 2. This week
+> withdraws it as a character of the creature.
+
+- `Example 1: one sentence on two unrelated creatures` — 見則天下大旱 sits word
+  for word on 顒 and on 肥遗, which share no part, no count and no chapter. The
+  pair is the finding, so both records are worked in one section.
+- `Example 2: the grid the omens do fill` — the omens have a closed form, scope
+  (邑 / 國 / 天下) against event (旱 / 水). The form is real and the cell a
+  creature lands in is still unpredictable from anything else on its card.
+- `Example 3: the omen no other record carries` — 毕方 and 譌火. A unique value
+  is not evidence of a character; it is a coincidence nobody has noticed yet.
+- `Why a use is not a character either` — a use states what a person gets, which
+  is a fact about the person.
+- `What you leave with`.
 
 **6 · The god and the beast** — comparison, no numbering.
-`陆吾 and 开明兽: one mountain, two files` /
-`神 is an office, not a rank` 烛阴, 帝江 /
-`The records that name no kind` 窫窳 / `What you leave with`.
+
+> The text has its own classifiers: 神, 獸, 鳥, 人. This week asks whether they
+> sort by body, finds they sort by function, then finds they do not reliably do
+> that either.
+
+- `陆吾 and 开明兽: one mountain, two files` — both nine-fold, both tiger below
+  and human above, one part between them, filed apart. The difference in the
+  record is a job and not a limb.
+- `神 is an office, not a rank` — 烛阴 is a 神 by consequence and 帝江 is a 神
+  with no office at all. The word is not a rank; it is a list of things the text
+  declined to call animals.
+- `The records that name no kind` — 窫窳. Every system proposal has to say what
+  its kind field does with a record that supplies none.
+- `What you leave with`.
 
 **7 · Drift** — one dominant case, no numbering.
-`The record that names no beast` 九尾狐 /
-`What the name picked up after the record closed` /
-`The same drift inside the edition` 狌狌 /
-`Drift that reuses what the record held` 精卫 / `What you leave with`.
 
-**8 · One name, many creatures** — examples, two failure classes.
-`Example 1: one name, three creatures` 肥遗 /
-`Example 2: one creature, two bodies` 窫窳 /
-`Example 3: names that multiply` 并封, 相柳 /
-`Why both obvious fixes beg the question` / `What you leave with`.
+> The 青丘之山 record names no beast. 九尾狐 is a handle attached later, so
+> everything the name carries now was added after the record closed.
+
+- `The record that names no beast` — what the line supplies, and what it cannot.
+- `What the name picked up afterwards` — shape-shifting, seduction, a tail per
+  century. The record is three clauses long and too short to contradict any of
+  it. Absence is what lets a name grow.
+- `The same drift inside the edition` — 狌狌, two graphs and three bodies, so
+  this is not something only later centuries did.
+- `Drift that reuses what the record held` — 精卫, the counter-case, where what
+  the name grew was already in the line.
+- `What you leave with`.
+
+**8 · One name, many creatures** — examples, two directions of failure.
+
+> Two failures of the name field, run in parallel: one name over many creatures,
+> and one creature under many names.
+
+- `Example 1: one name, three creatures` — 肥遗 over two incompatible snakes and
+  a bird, across two chapters.
+- `Example 2: one creature, two bodies` — 窫窳, two records that cannot describe
+  one animal.
+- `Example 3: names that multiply` — 并封 / 屏蓬 and 相柳 / 相繇.
+- `Why both obvious fixes beg the question` — a synonyms field asserts that two
+  names denote one thing, which is the conclusion under dispute. Splitting 肥遗
+  asserts the opposite, which 郭璞 declined to assert when he wrote 疑是同名.
+- `What you leave with`.
 
 **9 · Other systems** — comparison, no numbering.
-`Two systems that never needed a species concept` /
-`珍獸 is a price, not a kind` / `What 其状如 was always doing` /
-`What you leave with`.
 
-**10 · Cross-system comparison** — **not a reframing job. See the defects
-below.**
+> Two traditions that never needed a species concept, read as diagnostic rather
+> than as inferior. Both sort by what a creature is for the reader. Then the
+> same lens turns back on us.
+
+- `Two systems that never needed a species concept` — the Physiologus-descended
+  bestiary and the yōkai catalogue, each with a top division that is a fact
+  about its reader.
+- `珍獸 is a price, not a kind` — 驺吾. Our own material carries the same move.
+- `What 其状如 was always doing` — a comparison is a proposition about the
+  reader's prior acquaintance, so the character this course has leaned on since
+  week 2 is a familiarity claim. 烛阴's record measures the observer's day and
+  year rather than the creature.
+- `What you leave with`.
+
+**10 · Cross-system comparison** — no content skeleton, because there is no
+content to skeletonise. See defect 2.
 
 **11 · Beyond the 山海经** — method.
-`Step 1: three clauses, six undetermined decisions` 夫诸 /
-`Step 2: where comparison runs out` 夔 /
-`Step 3: drawing an absence` 帝江 /
-`When the audit stops working` 九尾狐 / `What you leave with`.
+
+> A reconstruction is an argument nobody can audit: a model has a size, a skin
+> and a gait whether or not the record does. These records are auditable only
+> because they are three clauses long.
+
+- `Step 1: three clauses, six undetermined decisions` — 夫诸's complete record,
+  with every decision a renderer has to make and the line supplies no basis for.
+  The omen-to-agent conversion changes the creature most.
+- `Step 2: where comparison runs out` — 夔.
+- `Step 3: drawing an absence` — 帝江. 渾敦無面目 forces a renderer to draw an
+  absence, and every way of drawing one is a positive choice.
+- `When the audit stops working` — 九尾狐, where the reconstructions are made
+  from reconstructions and there is no record at the bottom.
+- `What you leave with`.
+
+Note: this week's frontmatter names four creatures its prose never mentions. The
+skeleton above follows the prose. Fixing the mismatch means changing `weeks.ts`
+and CLAUDE.md's week list, not the page. See defect 3.
 
 **12 · The taxonomic congress** — examples.
-`Example 1: nine tails on three unrelated creatures` /
-`Example 2: two records that will not resolve` 窫窳 /
-`Example 3: an entry form in the wrong order` 蛊雕 /
-`The rule the congress runs on` / `What you leave with`.
+
+> One admissibility rule: cite a line, then declare which of your own fields
+> that line does not supply. The second clause is what the course has been for —
+> it is the list of places where you decided rather than read.
+
+- `Example 1: nine tails on three unrelated creatures` — a grouping is
+  admissible only if it is declared as one.
+- `Example 2: two records that will not resolve` — 窫窳. You have to pick a body
+  you cannot justify, and say that you picked it.
+- `Example 3: an entry form in the wrong order` — 蛊雕, whose record reverses
+  the order the form assumes.
+- `The rule the congress runs on` — 顒, whose omen belongs to the formula rather
+  than to the bird. Then the course's opening question gets its answer: partly.
+- `What you leave with`.
 
 ## Logistics headings to delete, with their lines
 
