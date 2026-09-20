@@ -1,16 +1,56 @@
-# Where this stands, 2026-09-19 evening
+# Where this stands, 2026-09-21 00:30
 
-Assignment 2 is due **noon Monday 21 September 2026**. The author deploys on
-Sunday with the course's `/ship` skill; the agent does not touch deployment.
+**Due noon today.** Read this section and the two below it first; everything
+after them is older and is kept for the decisions it records, not for its status.
 
 | | |
 |---|---|
 | `pnpm check` | green: 27 pages, 19 tests, 0 type errors, 0 axe violations, 0 broken links |
-| commits | 22, local only, none pushed |
-| repo | **private**, Pages not enabled, no live URL |
+| `pnpm check:evidence` | passes, 5 cited commits resolve |
+| commits | **37, not pushed** |
+| repo | `comp4020-agentic-coding-studio/comp4020-ass2-Alida9898`, **private** |
 | marking | process 45%, deployed artefact 20%, response to brief 35% |
 
-## Done
+## Do these in this order
+
+1. **Push.** `git push origin main`. The repo stays private; this is not `/ship`
+   and does not flip visibility. Thirty-seven commits exist only on one laptop,
+   and process is 45% of the mark — a history nobody can fetch is evidence
+   nobody can mark. The agent's attempt was blocked by the permission
+   classifier, so the author runs it.
+2. **Check `PROCESS.md`'s length against the brief.** It is 691 prose words.
+   The 400-to-600 band recorded further down this file is an earlier note about
+   the brief and appears nowhere the repo can verify — not `README.md`, not
+   `spec/`, not `check-evidence.ts`. If 600 is hard, cut ~90 words; the section
+   `What the checks do not cover` is the newest and should survive, so cut from
+   `How I knew the checks were right`.
+3. **Week 10.** 530 words and the only week quoting no source line at all. It
+   needs writing, not a spine. See defect 2 below.
+4. **The three contradictions**, all small: week 10 claims week 9 covered three
+   systems including a modern database (it covers two, no database); week
+   references run one number low from week 8 onward; week 11's frontmatter names
+   four creatures its prose never mentions, which means `weeks.ts` and
+   CLAUDE.md's week list, not the page.
+5. **The remaining eleven week pages** to the skeleton below. Lowest value of
+   the five — the shape is agreed and written down, so this is execution.
+
+## Settled overnight, do not reopen
+
+- **The course's premise survived being attacked.** The objection was that a
+  system failing on most records is not a system, and that building one in order
+  to break it is circular. It is not: the failures are in the source, not in the
+  course's inventions. 郭璞 wrote 疑是同名 over 肥遗 in the fourth century and
+  袁珂 argued nine passages were misfiled in the twentieth, both without this
+  system. The only invented field is `binomial`, and every page printing one
+  says so.
+- **`form` and `habitat` are not inventions.** They render the record. 陵鱼's
+  habitat reads `在海中 — in the sea, and the record says no more`, which
+  declares its own gap. An earlier claim in this session that they were
+  course-written was wrong and was disproved by reading the values.
+- **The three phases stay** — build, stress, rebuild. The author's own
+  restatement of the course arrived at the same three.
+
+## Done before tonight
 
 **The curriculum pivoted.** The course now teaches building a classification
 system for any material, with the 山海经 as the training set. Twelve weeks
@@ -50,22 +90,20 @@ retired phrase "primary specimen" gone.
 **CLAUDE.md gained a plain-speech rule** with the author's actual complaints
 quoted as the banned examples, pointing at Calling Bullshit as the register.
 
-## Left, in the order it is worth doing
+## Left as of 2026-09-19, superseded by the list at the top
 
-1. **`PROCESS.md`.** 632 words against a 400 to 600 band, and it does not mention
-   the pivot at all. This is the single biggest hole: process is 45%, the brief
-   requires this narrative to have a spine (what you decided a good course looks
-   like, what you encoded in the harness, what you left out), and every claim
-   needs a commit citation. `pnpm check:evidence` fails without citations.
-2. **Weeks 3 to 12.** Frontmatter, rules, creature lists and file names are all
-   correct. The prose is still written for the old curriculum. Weeks 6 to 9 read
-   correctly because their files were moved rather than rewritten; weeks 10 and
-   11 are new and thin; weeks 3, 4, 5 and 12 need the new spine.
-3. **Week 3's deck.** Survives the pivot, still morphology. Never opened at
-   either viewport, and the build only checks its syntax.
+Kept because items 4 and 5 are still open and are recorded nowhere else.
+
+1. ~~`PROCESS.md`.~~ Rewritten `7338335`. Now carries the pivot and the night the
+   premise was attacked. Open question is its length only.
+2. ~~Weeks 3 to 12 prose.~~ Week 3 done (`9aefe5b`). The rest is item 5 at the
+   top, with the shape agreed and written down.
+3. ~~Week 3's deck.~~ Opened at both viewports and corrected (`ca611d1`).
 4. **Assessments.** Still five, summing to 100, but the final has not been
    rewritten as "design a classification system for unseen material". Proposed
-   weights are in the table below and are not yet applied.
+   weights are in the table below and are not yet applied. **Several week pages
+   state assessment weights in their logistics sections; those weights have to be
+   reconciled with `src/content/assessments/` before those sections are deleted.**
 5. **The visual pass.** Deliberately last. Not a marking criterion.
 
 ## Assessment, proposed and not yet applied
@@ -87,7 +125,11 @@ Specimen cards 20, Bestiary entry 30 → 25, Peer review 10, Reclassification es
 
 - Quoted lines come only from `src/lib/citations.ts`, which is generated.
   Translations go in `glosses.ts`. An unfound line claims nothing.
-- No push, no visibility flip, no Pages, until the author does it.
+- **No visibility flip, no Pages, no `/ship`, until the author does it.** This
+  line used to say "no push" as well, which conflated two different acts:
+  pushing to the private origin leaves the repo private and is how the work stops
+  living on one laptop, while flipping visibility is permanent and public. Push
+  freely; ship never.
 
 # Open decisions — curriculum pivot, 2026-09-19
 
