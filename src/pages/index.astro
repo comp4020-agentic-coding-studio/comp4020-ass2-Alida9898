@@ -105,8 +105,31 @@ const facts = [
       </li>
     </ol>
     <p class="outcome__transfer">
-      The final assessment hands you material you have not seen and asks for all
-      three.
+      The midterm asks for all three at once, on a system you design rather than
+      apply, and its last requirement is naming which of your characters would
+      not survive leaving this book.
+    </p>
+  </section>
+
+  <section class="bargain">
+    <h2>What it does not produce</h2>
+    <p>
+      Does the course end with a working taxonomy of the <span lang="zh-Hans"
+        >山海经</span
+      >? No. That is the bargain, and it is worth stating before you enrol rather
+      than after.
+    </p>
+    <p>
+      The book catalogues monsters by where you would meet them. Building
+      something like a modern taxonomy on top of that is a reasonable thing to
+      want, and the twelve weeks are spent finding out how far it gets. The
+      answer the course argues for is <i>partly</i>.
+    </p>
+    <p>
+      What you keep is not the system. It is the list of places it failed, each
+      one specific enough to name and each one written down at the time, and the
+      habit of keeping that list while you are still designing. The next
+      classification you design will be of something else.
     </p>
   </section>
 
@@ -183,7 +206,7 @@ const facts = [
     <ul class="next__list">
       <li>
         <a href={withBase("/sessions/")}>The twelve weeks</a>
-        <p>Each week's rule, the creatures it is tested against, and how the two hours run.</p>
+        <p>Each week's rule, the creatures it is tested against, and what the week leaves you with.</p>
       </li>
       <li>
         <a href={withBase("/assessments/")}>Assessment</a>
@@ -202,11 +225,21 @@ const facts = [
      首屏交给 ContentLayout：它渲染 h1 和 lead（course-config 的 description），
      所以这里不再自己造一个 hero，否则第一屏会出现两个标题。 */
   .outcome,
+  .bargain,
   .phases,
   .set,
   .record,
   .next {
     margin-block: 3.5rem;
+  }
+
+  /* 2. 交易条件。没有新构件，只有段落，所以只约束行长。 */
+  .bargain p {
+    max-width: 58ch;
+  }
+
+  .bargain p + p {
+    margin-block-start: 0.9rem;
   }
 
   /* 1. 能力。编号推进，不是三张等宽卡。 */

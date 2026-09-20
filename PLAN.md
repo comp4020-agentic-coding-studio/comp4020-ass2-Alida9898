@@ -1,25 +1,34 @@
-# Where this stands, 2026-09-21 00:30
+# Where this stands, 2026-09-21 02:00
 
 **Due noon today.** Read this section and the two below it first; everything
 after them is older and is kept for the decisions it records, not for its status.
 
 | | |
 |---|---|
-| `pnpm check` | green: 27 pages, 19 tests, 0 type errors, 0 axe violations, 0 broken links |
-| `pnpm check:evidence` | passes, 5 cited commits resolve |
-| commits | 40, **pushed**; `main` level with `origin/main` |
+| `pnpm check` | green: 27 pages, 24 tests, 0 type errors, 0 axe violations, 0 broken links |
+| `pnpm check:evidence` | passes, 7 cited commits resolve |
+| `PROCESS.md` | 597 prose words, inside the verified 400–600 band |
+| both viewports | 1920x1080 and 390x844, 0 axe violations and no overflow on the home page, an assessment, policies, and weeks 1, 2, 5, 6, 8, 10, 12 |
+| the deck | all 16 slides fit their 720px frame; 5 read at 1920 |
 | repo | `comp4020-agentic-coding-studio/comp4020-ass2-Alida9898`, **private** |
 | marking | process 45%, deployed artefact 20%, response to brief 35% |
+
+**Everything in the list below is done. The one open item is the visual pass,
+which was deliberately last and is not a marking criterion.** Two things want
+the author's eye rather than more work: the assessment judgement call under
+item 4, and 肥𧔥's tofu box, recorded in CLAUDE.md.
 
 ## Do these in this order
 
 1. ~~**Push.**~~ Done. `main` is level with `origin/main`, repo still private.
-2. **Check `PROCESS.md`'s length against the brief.** It is 691 prose words.
-   The 400-to-600 band recorded further down this file is an earlier note about
-   the brief and appears nowhere the repo can verify — not `README.md`, not
-   `spec/`, not `check-evidence.ts`. If 600 is hard, cut ~90 words; the section
-   `What the checks do not cover` is the newest and should survive, so cut from
-   `How I knew the checks were right`.
+2. ~~**Check `PROCESS.md`'s length against the brief.**~~ Done, and the band is
+   no longer unverified. The course site states it:
+   <https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#word-counts>
+   gives **400–600 words for an assignment's `PROCESS.md`**, with no word-limit
+   penalty but scope counted as part of the response to the brief. `curl`
+   reaches it; `WebFetch` fails on a certificate error. Trimmed 685 to 597.
+   It is now recorded in CLAUDE.md so nobody has to find it twice.
+
 3. ~~**Week 10.**~~ Written. Now `.mdx`, four worked examples, four cited lines,
    two `<Caution>` boxes, the two logistics headings gone. Each example is a
    different shape of disagreement rather than a list of what each creature
@@ -33,14 +42,11 @@ after them is older and is kept for the decisions it records, not for its status
    re-derived across all twelve pages. Week 11's creature list in `weeks.ts` is
    now the four its prose works — 夫诸, 夔, 帝江, 九尾狐 — and the four it used
    to name are each still carried by another week, so nothing was orphaned.
-5. ~~**The remaining week pages.**~~ Weeks 4 to 9, 11 and 12 rewritten to the
-   skeleton, all now `.mdx` with specimen cards where their examples are first
-   discussed. Every page opens on `## What this week does`, two to four working
-   sections, `## What you leave with`. Fourteen logistics headings deleted.
-
-   Weeks 1 and 2 carry the new opener heading but their opener *bodies* are
-   still the pre-pivot paragraph rather than the contents list the slot now
-   specifies. That is the one piece of item 5 left.
+5. ~~**The week pages.**~~ All twelve on the spine. Weeks 4 to 9, 11 and 12
+   rewritten and converted to `.mdx`; weeks 1 and 2's opener bodies rewritten to
+   the contents-list contract. Fourteen logistics headings gone. Eleven weeks run
+   three or four working sections; week 2 runs five, which CLAUDE.md now permits
+   for a week whose sections are steps in one method, and the range is pinned.
 
 ## Settled overnight, do not reopen
 
@@ -107,16 +113,24 @@ Kept because items 4 and 5 are still open and are recorded nowhere else.
 2. ~~Weeks 3 to 12 prose.~~ Week 3 done (`9aefe5b`). The rest is item 5 at the
    top, with the shape agreed and written down.
 3. ~~Week 3's deck.~~ Opened at both viewports and corrected (`ca611d1`).
-4. **Assessments.** Still five, summing to 100, and the final has still not been
-   rewritten as "design a classification system for unseen material". Proposed
-   weights in the table below are still not applied.
+4. ~~**Assessments.**~~ Applied. `system-proposal` is renamed
+   `classification-design` — file, URL, JSON endpoint and every ref moved in one
+   commit — and reweighted 25 → 30. `bestiary-entry` 30 → 25. The five still sum
+   to 100 and the check still says so.
 
-   The in-page weights are reconciled: no week page states a weight any more, so
-   no weight exists in two places. Two were attached to the wrong week and were
-   found only by reading the assessment frontmatter — week 6 said the system
-   proposal was due at the end of week 6 (it is week 7) and week 9 said the
-   reclassification essay was due at the end of week 9 (it is week 10). Each week
-   now links the assessment through `related` instead of restating it.
+   **The judgement call, flagged for review.** The rename kept the artefact at
+   week 7 rather than moving it to the end. Weeks 8 to 12 exist to put it under
+   load, and CLAUDE.md says so, so moving it would empty the second half. What
+   made it a *design* rather than a scheme for one book is a new requirement
+   instead: name a body of material outside the 山海经 and say which of your own
+   characters it will not supply. That is week 11's rule used as an assessment
+   criterion, and it is worth 5 of the item's 30.
+
+   Consequence on the home page: it used to promise "the final assessment hands
+   you material you have not seen", which nothing delivered. That line now
+   describes the midterm, accurately. If you would rather the transfer test be
+   the capstone, this is the decision to reopen.
+
 5. **The visual pass.** Deliberately last. Not a marking criterion.
 
 ## Assessment, proposed and not yet applied
@@ -469,23 +483,25 @@ cheap, so those were re-derived by hand this pass.
 
 ---
 
-# The course's own blurb, author's words, 2026-09-21
+# The course's own blurb — written in, 2026-09-21
 
-Not yet written into the site. The author's framing, to go on the home page or
-the syllabus, in the course's own deadpan register rather than as a joke:
+The author's framing is now on the home page as `What it does not produce`,
+between the outcomes and the three phases. It states the bargain: the course
+does not end with a working taxonomy of the 山海经, the answer it argues for is
+*partly*, and what you keep is the list of places the system failed.
+
+The register was changed and the content was not. "Come and classify monsters"
+and "Feel the complexity" are a barker's call and the deadpan taxonomist does
+not wink, so the self-deprecation is carried by what the sentence admits —
+"Does the course end with a working taxonomy? No." — rather than by its tone.
+The rhetorical question is the Calling Bullshit kind: opened, then answered in
+the next three words.
+
+The original, kept because it is the author's own words and the gloss above is
+not:
 
 > Want to learn something with no use whatsoever? You are reading a book that
 > catalogues monsters by geography, and it occurs to you to build something like
 > a modern taxonomy on top of it. Come and classify monsters. Feel the
 > complexity. Watch the system get torn down and rebuilt. It may give you ideas
 > the next time you design a classification of your own.
-
-Why this is worth having rather than cutting: it states the bargain the course is
-actually offering, which is not "you will end with a working taxonomy of the
-山海经". It is the phases named out loud — build, stress, rebuild — in the voice
-of someone who knows the answer is *partly*. The register needs one pass to match
-the rest of the site: the deadpan taxonomist does not wink, so the self-deprecation
-has to be carried by what the sentence admits, not by its tone.
-
-Where it goes: `src/pages/index.astro`, which currently opens on the question and
-the answer. This belongs beside them, not instead of them.

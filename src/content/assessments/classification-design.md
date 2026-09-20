@@ -1,11 +1,12 @@
 ---
-title: System proposal
+title: Classification design
 description:
-  The midterm. Propose the classification system the second half of the
-  semester will try to break, and declare in advance what it refuses to decide.
+  The midterm. Design the classification system the second half of the semester
+  will try to break, declare in advance what it refuses to decide, and name
+  which of its characters material outside the 山海经 will not supply.
 week: 7
 due: 2027-04-19T12:00:00+10:00
-weight: 25
+weight: 30
 marking:
   mode: weighted
   criteria:
@@ -16,12 +17,15 @@ marking:
     - name: Declared refusals, stated as rules rather than as apologies
       weight: 25
     - name: Tested against at least three creatures from weeks 1 to 6
-      weight: 20
+      weight: 15
+    - name: Which characters do not transfer, named for a stated body of other material
+      weight: 5
 spec:
   - names every field, with a one-sentence rule for what goes in it and what does not
   - states the sort order the system imposes, and what that order is a claim about
   - states at least two questions the system refuses to decide, and why refusing is better than guessing
   - works through at least three creatures from weeks 1 to 6, including one the system handles badly
+  - names one body of material outside the 山海经 and says which of its own characters that material will not supply
 related:
   - specimen-cards
   - bestiary-entry
@@ -29,8 +33,9 @@ related:
 
 ## The brief
 
-> Propose the classification system this course will spend its second half
-> trying to break, and say in advance what it will not decide.
+> Design the classification system this course will spend its second half
+> trying to break. Say in advance what it will not decide, and name which of
+> its characters do not survive leaving this book.
 
 Weeks 1 to 6 have supplied the parts. The formula gives three slots. Morphology
 gives a set of body parts that recur. Geography gives a habitat field that
@@ -57,15 +62,22 @@ not ranking them, has made the same decision in public.
 ## What you submit
 
 Two thousand words or the equivalent as a specified schema plus commentary. A
-table of fields alone is not a proposal; a rule has to accompany each field.
+table of fields alone is not a design; a rule has to accompany each field.
 
 Work the system through at least three creatures from weeks 1 to 6. One of them
 must be a creature the system handles badly. Name the field that breaks, and say
 whether the fix is a new field, a looser rule, or a refusal.
 
+The last requirement is the one that makes this a design rather than a scheme
+for one book. Name a body of material outside the
+<span lang="zh-Hans">山海经</span> — a field guide, a fault log, a product
+catalogue, anything with records in it — and say which of your characters it
+will not supply. A system whose characters all happen to be the columns this
+particular text prints has not been designed. It has been transcribed.
+
 Nothing here is provisional in the wrong direction. The second half of the
 semester is spent putting this system under load, and the reclassification essay
-and the bestiary entry both report against it. A proposal that hedges every rule
+and the bestiary entry both report against it. A design that hedges every rule
 gives those later pieces nothing to push on.
 
 ## How it is marked

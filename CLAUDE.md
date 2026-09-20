@@ -199,6 +199,12 @@ A reader picks up any week cold, so the slots do not move:
    `Step N:` only where the sections really are parallel cases or real sequence;
    a week whose sections are exposition takes plain headings, because numbering
    them claims an order that is not there.
+
+   Five is allowed **only** where the sections are numbered steps in one method.
+   Week 2 is the only one, and it earns it: its five are the steps of getting
+   from raw material to columns, and merging any two would hide a step. Eleven
+   weeks run three or four. `spec/course.test.ts` pins the range at two to five
+   and pins the close, so a week cannot quietly grow a sixth slot.
 3. **`## What you leave with`** --- the artefact, and what carries forward.
 
 Warnings, caveats and "do not misread this" go in a `<Caution>` box, never in a
@@ -254,11 +260,43 @@ with the template and keeps dated material inside the teaching period;
 creatures per rule, no orphan creatures, real chapters, the assessment total,
 the harness-to-data agreement, and the stylesheet every page needs.
 
+`spec/course.test.ts` grew five checks on 2026-09-21, each written because
+something had already shipped past every existing one:
+
+- **a creature a week names appears on that week's page** — weeks 5 and 11
+  named six creatures between them that their prose never mentioned.
+- **every week opens on `## What this week does`** — eight of twelve opened on
+  an untitled lead paragraph.
+- **every week names the week before it in that opener** — week references ran
+  one number low from week 8 on.
+- **no Chinese in prose that the edition does not supply** — `bestiary.ts` has
+  no field that can hold a line, but a week page is free prose and weeks 3 and 8
+  quote fragments inline. This applies the same rule where it was not enforced.
+  A run built only from 卷, 次 and locus names is a reference, not a quotation,
+  and passes.
+- **opener, close, and two to five sections between** — the spine, pinned.
+
 **Prove a check fails before believing it passes.** Every check in
 `spec/course.test.ts` was mutation-tested: an invented chapter, a 次 section
 moved to the wrong 卷, a quoted line with the creature's name deleted, a phase
 changed in this file. Each produced the error it should. A check that has only
 ever been green is a check you have not tested.
+
+## Word counts, checked against the course site rather than remembered
+
+**An assignment's `PROCESS.md` runs 400 to 600 words.** Verified 2026-09-21 at
+<https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#word-counts>,
+which also gives 900–1100 for the final project's, 400–600 for its `README.md`,
+150–300 per reflection entry, 600–800 for the COMP8020 research note, and
+150–300 for a crit week's `PROCESS.md`.
+
+There is **no word-limit penalty**, but the page says scope is itself part of
+the response to the brief, so overshooting badly loses marks there rather than
+in a separate deduction. Images do not count toward any of these.
+
+This band lived in `PLAN.md` for days as an unverified note, and the cost of
+that was not knowing whether a trim was worth doing. The site is the authority
+and `curl` reaches it; `WebFetch` failed on a certificate error, so use `curl`.
 
 ## Which language goes where
 
@@ -380,6 +418,30 @@ Things that cost time:
   was the dev server. **Build, then `pnpm preview --port 4331`, and audit that.**
   Per `README.md` the site is judged on `pnpm build` output anyway.
 
+### Screenshotting a deck slide, which took five attempts to work out
+
+The deck is Reveal-shaped: `.slides > section`, one carrying `.present` and the
+rest held at `opacity: 0` by `.past` / `.future`. Three things that do **not**
+work: synthetic `KeyboardEvent`s (nothing listens for them), `scrollIntoView`
+(the page is exactly one viewport tall), and `window.Reveal` (undefined).
+
+Stripping the classes stacks all sixteen slides on top of each other, and
+setting `.present` by hand gives a blank frame, because the entrance animation
+leaves the inner elements at zero opacity and `prefers-reduced-motion` does not
+undo it. What works is injecting a stylesheet:
+
+```js
+.slides > section { display: none !important; opacity: 1 !important;
+                    transform: none !important; position: static !important }
+.slides > section.solo { display: grid !important }
+.slides > section.solo * { opacity: 1 !important; transform: none !important }
+```
+
+then adding `.solo` to one section at a time. A slide's `scrollHeight` is 720 on
+a slide that fits, because that is the design height; anything larger overflows
+its own frame. Measuring all sixteen that way is the cheap check. Looking at
+four or five of them is still the real one.
+
 ## Contrast is a hand-check, and this repo has already failed it twice
 
 `pnpm build` runs axe over every rendered page, but on a build's DOM rather than
@@ -478,6 +540,17 @@ while broken:
   margin into the image so there is only one surface. For line art prefer
   `stroke="currentColor"` and no fill, which inverts correctly with no second
   palette and no filter.
+
+- **A plain YAML scalar cannot contain `: `.** A session's `description:` is an
+  unquoted multi-line scalar, so one `things by it: a mountain` in it fails the
+  whole build with `bad indentation of a mapping entry` pointing at the line
+  after the colon. Use an em dash, or quote the string.
+- **`𧔥` in 肥𧔥 is U+27505, outside the BMP,** and renders as a tofu box in the
+  site's font stack. It is in the generated `citations.ts` and is correct; it is
+  the rendering that fails. Week 8's argument is that the name is spelled with a
+  different second character, so the one place it matters is the one place a
+  reader sees a box. Not fixed: covering CJK Extension B needs a font nobody
+  ships.
 
 Astro and this repo:
 

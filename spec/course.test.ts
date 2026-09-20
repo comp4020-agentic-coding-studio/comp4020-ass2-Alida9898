@@ -13,7 +13,7 @@ import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { bestiary, citationProblems, citedChapters, recordsOf } from "../src/lib/bestiary";
 import { DROUGHT_OMEN, citations } from "../src/lib/citations";
-import { CHAPTERS } from "../src/lib/shanhaijing";
+import { ALL_SECTIONS, CHAPTERS } from "../src/lib/shanhaijing";
 import { orphanCreatures, unknownCreatures, weeks } from "../src/lib/weeks";
 
 interface ApiNode {
@@ -134,6 +134,67 @@ describe("the twelve weeks", () => {
       if (!new RegExp(`[Ww]eek ${week - 1}\\b`).test(opener.replace(/<[^>]*>/g, " "))) {
         wrong.push(`week ${week} does not name week ${week - 1} in its opener`);
       }
+    }
+    expect(wrong, wrong.join("; ")).toEqual([]);
+  });
+
+  // Promise: "never invent the source" holds in the prose too, not only in the
+  // data layer. `bestiary.ts` has no field that accepts source text, so the
+  // rule is enforced by the shape of the code there — but a week page is free
+  // prose and can type anything, and weeks 3 and 8 do quote fragments inline.
+  // This is the same rule applied to the place it was not being enforced: any
+  // run of Chinese long enough to be a line has to be one the edition supplies.
+  // Chapter, section and locus names are how a page says *where* a line sits,
+  // so a run built only out of those is a reference and not a quotation.
+  it("quotes no Chinese the edition does not supply", () => {
+    const supplied = Object.values(citations)
+      .map((record) => record.line)
+      .join("")
+      .replace(/[，。；、：？！]/g, "");
+    // CHAPTERS is a list of 卷 names; ALL_SECTIONS the 次 sections under them.
+    const places = new Set<string>([...CHAPTERS, ...ALL_SECTIONS]);
+    for (const record of Object.values(citations)) {
+      if (record.section) places.add(record.section);
+      if (record.locus) places.add(record.locus);
+    }
+
+    const CJK = /[\u3400-\u9fff\uf900-\ufaff][\u3400-\u9fff\uf900-\ufaff，。；、：？！]*/gu;
+    const invented: string[] = [];
+    for (const file of globSync("src/content/**/*.md*").concat(globSync("src/decks/**/*.mdx"))) {
+      for (const [run] of readFileSync(file, "utf8").matchAll(CJK)) {
+        const core = run.replace(/[，。；、：？！]/g, "");
+        if (core.length < 8) continue;
+        if (supplied.includes(core)) continue;
+        // A locus reference: every comma-separated part names a real place.
+        if (run.split(/[，、]/).every((part) => places.has(part.trim()))) continue;
+        invented.push(`${file}: ${run}`);
+      }
+    }
+    expect(invented, `Chinese in prose that no cited line supplies:\n${invented.join("\n")}`)
+      .toEqual([]);
+  });
+
+  // Promise: the spine does not grow a slot. CLAUDE.md fixes three, and the
+  // middle is where a week turns into a list of animals if nobody counts.
+  it("gives every week an opener, a close, and two to five sections between", () => {
+    const wrong: string[] = [];
+    for (const node of sessions) {
+      const html = readFileSync(resolve("dist", node.id, "index.html"), "utf8");
+      const body = html.slice(html.indexOf("<main"), html.lastIndexOf("</main>"));
+      // The theme brackets the week with its own h2s — a rule box before and a
+      // teaching-team block after — so the week's own spine is the slice from
+      // the opener to the close, and anything outside it belongs to the layout.
+      const all = [...body.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map(([, inner]) =>
+        inner.replace(/<[^>]*>/g, "").replace(/#$/, "").trim(),
+      );
+      const from = all.indexOf("What this week does");
+      const to = all.indexOf("What you leave with");
+      if (from < 0 || to < from) {
+        wrong.push(`${node.id} has no opener-to-close span`);
+        continue;
+      }
+      const working = to - from - 1;
+      if (working < 2 || working > 5) wrong.push(`${node.id} has ${working} working sections`);
     }
     expect(wrong, wrong.join("; ")).toEqual([]);
   });

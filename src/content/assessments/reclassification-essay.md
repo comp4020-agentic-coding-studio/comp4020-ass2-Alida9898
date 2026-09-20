@@ -20,7 +20,7 @@ spec:
   - states what the reading costs — which record is set aside, and what is lost with it
   - says what evidence would change the reading
 related:
-  - system-proposal
+  - classification-design
   - bestiary-entry
 ---
 
@@ -59,7 +59,7 @@ Fifteen hundred to two thousand words. Both records quoted from the edition,
 character for character, in the traditional forms it prints. A translation may
 sit beside a quotation; it may not replace one.
 
-The essay reports against your system proposal. Say which field breaks under
+The essay reports against your classification design. Say which field breaks under
 your reading, and whether that means amending the system or accepting the loss.
 Amending it is permitted and does not count against the proposal.
 

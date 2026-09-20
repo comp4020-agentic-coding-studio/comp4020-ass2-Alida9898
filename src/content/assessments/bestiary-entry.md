@@ -5,7 +5,7 @@ description:
   twenty-five, admissible under the week 12 rule, with its gaps declared.
 week: 12
 due: 2027-05-24T12:00:00+10:00
-weight: 30
+weight: 25
 marking:
   mode: weighted
   criteria:
@@ -24,7 +24,7 @@ spec:
   - the entry names which of its own fields the cited line does not supply
 related:
   - sessions/12-the-taxonomic-congress
-  - system-proposal
+  - classification-design
   - peer-review
 ---
 
