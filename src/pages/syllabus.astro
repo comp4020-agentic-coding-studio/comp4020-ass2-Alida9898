@@ -1,0 +1,287 @@
+---
+import "../styles/site.css";
+import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import { getCollection } from "astro:content";
+import { courseMeta } from "../course-config";
+import { bestiary } from "../lib/bestiary";
+import { citations } from "../lib/citations";
+import { CHAPTERS, EDITION } from "../lib/shanhaijing";
+import { PHASE_LABELS, weeks, type Phase } from "../lib/weeks";
+import { siteConfig } from "../site-config";
+
+// 这一页不写死任何东西。十二周从 weeks.ts 来，考核从集合来，数字从数据里数。
+// 大纲和周页面各说各话是这门课最容易犯的错，所以唯一的防法是它们读同一个源。
+//
+// Nothing on this page is typed in. The twelve weeks come from `weeks.ts`,
+// which `spec/course.test.ts` already checks against every session page, so the
+// syllabus cannot drift from the weeks it summarises. The assessment rows come
+// from the collection, so a weight cannot exist here and differently there.
+
+const withBase = (path: string): string =>
+  `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
+
+// 周次链接要指向那一周自己的页面，不是索引。slug 从集合来，不从周号拼——
+// 集合 key 是文件名、URL、JSON 端点和引用四件事，拼出来的会悄悄断。
+const sessionBySlug = new Map(
+  (await getCollection("sessions")).map((entry) => [entry.data.week, entry.id]),
+);
+
+const assessments = (await getCollection("assessments")).sort(
+  (a, b) => a.data.due.getTime() - b.data.due.getTime(),
+);
+const total = assessments.reduce((sum, item) => sum + item.data.weight, 0);
+
+const PHASE_NOTE: Record<Phase, string> = {
+  build: "The system is assembled from the cleanest records and it fits them, which is the part that should worry you.",
+  stress: "Each candidate character is put under a case it was not chosen for. Four of them do not survive.",
+  rebuild: "Other traditions, then a system of your own for material nobody has sorted.",
+};
+
+const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
+  const span = weeks.filter((week) => week.phase === phase);
+  return {
+    phase,
+    label: PHASE_LABELS[phase],
+    from: span[0].week,
+    to: span[span.length - 1].week,
+    note: PHASE_NOTE[phase],
+  };
+});
+
+// 中英混排：汉字串要自己的 lang，否则读屏软件用英文音素念它。
+// Screen readers pronounce an unmarked CJK run with English phonemes, so every
+// run gets its own lang. The rules are authored in simplified; quoted lines
+// never appear on this page, which is why one script is enough here.
+const CJK = /[㐀-鿿豈-﫿][㐀-鿿豈-﫿，。；、：？！]*/gu;
+const marked = (text: string) =>
+  text.replace(CJK, (run) => `<span lang="zh-Hans">${run}</span>`);
+---
+
+<ContentLayout
+  title="Syllabus"
+  description={`${courseMeta.code} in one page: the question, the twelve rules, the creatures each is tested against, and what you hand in.`}
+  {...siteConfig}
+>
+  <section class="syl">
+    <h2>The question</h2>
+    <p class="syl__lead">
+      Can a rigorous classification system be built for the creatures of the
+      <span lang="zh-Hans">山海经</span>? The course holds that one question for
+      twelve weeks. The answer it argues for is <i>partly</i>, and the failures
+      are more interesting than the successes.
+    </p>
+    <p>
+      The <span lang="zh-Hans">山海经</span> files hundreds of creatures by where
+      you would meet them and never says what any of them is a kind of. That
+      makes it a training set rather than a subject: you build a classification
+      system on it, watch which of its fields survive contact with the records,
+      and leave with the method rather than with the taxonomy.
+    </p>
+  </section>
+
+  <section class="syl">
+    <h2>Three phases, four weeks each</h2>
+    <ol class="syl__phases">
+      {
+        phases.map((phase) => (
+          <li>
+            <p class="syl__span">Weeks {phase.from}–{phase.to}</p>
+            <h3>{phase.label}</h3>
+            <p>{phase.note}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="syl">
+    <h2>The twelve weeks</h2>
+    <p>
+      Every week states exactly one rule and tests it against at least three
+      creatures. Creatures recur on purpose: the same record read under a
+      different rule is supposed to look different, and a recurring creature that
+      reads the same twice means the second week has no rule of its own.
+    </p>
+
+    <div class="syl__weeks">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Week</th>
+            <th scope="col">Topic</th>
+            <th scope="col">The rule it states</th>
+            <th scope="col">Tested against</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            weeks.map((week) => (
+              <tr>
+                <th scope="row">
+                  {
+                    sessionBySlug.has(week.week) ? (
+                      <a href={withBase(`/sessions/${sessionBySlug.get(week.week)}/`)}>
+                        {week.week}
+                      </a>
+                    ) : (
+                      week.week
+                    )
+                  }
+                </th>
+                <td>{week.title}</td>
+                <td set:html={marked(week.rule)} />
+                <td class="syl__creatures" set:html={marked(week.creatures.join("、"))} />
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="syl">
+    <h2>What you hand in</h2>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Piece</th>
+          <th scope="col">Due</th>
+          <th scope="col">Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          assessments.map((item) => (
+            <tr>
+              <th scope="row">
+                <a href={withBase(`/assessments/${item.id}/`)}>{item.data.title}</a>
+              </th>
+              <td>
+                {item.data.due.toLocaleDateString("en-AU", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                  timeZone: "Australia/Sydney",
+                })}
+              </td>
+              <td>{item.data.weight} per cent</td>
+            </tr>
+          ))
+        }
+        <tr class="syl__total">
+          <th scope="row">Total</th>
+          <td></td>
+          <td>{total} per cent</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="syl">
+    <h2>What the course quotes, and how</h2>
+    <p>
+      Every quoted line comes from one edition,
+      <span lang="zh-Hant">{EDITION.title}</span>,
+      <span lang="zh-Hant">{EDITION.edition}</span>. The received text has
+      {CHAPTERS.length} <span lang="zh-Hant">卷</span>, and the course reads all
+      of them: the working bestiary is {bestiary.length} creatures carrying
+      {Object.keys(citations).length} cited lines, with at least one record in
+      every chapter.
+    </p>
+    <p>
+      No page writes a line of its own. Where a line cannot be found the entry
+      says so and claims nothing after that, which is the rule the
+      <a href={withBase("/policies/")}>policies page</a> states in full and the
+      rule the final congress admits entries under. The binomials are this
+      course's inventions and every page that prints one says so.
+    </p>
+  </section>
+</ContentLayout>
+
+<style>
+  .syl {
+    margin-block: 3rem;
+  }
+
+  .syl__lead {
+    font-size: 1.15rem;
+    max-width: 58ch;
+  }
+
+  .syl p {
+    max-width: 62ch;
+  }
+
+  /* 三阶段：编号列表，跟首页同一族，不另起一套装饰。 */
+  .syl__phases {
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  .syl__phases li {
+    padding: 1.1rem 1.1rem 1.3rem;
+  }
+
+  .syl__phases li + li {
+    border-inline-start: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  /* 14px 的琥珀小标签实测不过 4.5:1，所以用正文次级色（8.92:1）。 */
+  .syl__span {
+    margin: 0 0 0.3rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .syl__phases h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    color: var(--at-text);
+  }
+
+  .syl__phases p {
+    margin: 0;
+    color: var(--at-text-secondary);
+  }
+
+  .syl table {
+    margin-block-start: 1.25rem;
+  }
+
+  .syl__creatures {
+    white-space: normal;
+  }
+
+  .syl__total th,
+  .syl__total td {
+    font-weight: 600;
+    border-block-start: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+  }
+
+  /* 十二行四列在 390 上要缩，跟第三周零件表同样的处理：让它装得下，
+     而不是塞进一个没有 tabindex 的滚动容器里跟 axe 吵。 */
+  @media (max-width: 40rem) {
+    .syl__phases {
+      grid-template-columns: 1fr;
+    }
+
+    .syl__phases li + li {
+      border-inline-start: 0;
+      border-block-start: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+    }
+
+    .syl__weeks table {
+      font-size: 0.74rem;
+    }
+
+    .syl__weeks :is(th, td) {
+      padding-inline: 0.3rem;
+    }
+  }
+</style>
