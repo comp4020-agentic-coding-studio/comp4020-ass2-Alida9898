@@ -1,7 +1,7 @@
 ---
 title: Bestiary entry
 description:
-  The final piece. One new entry for a creature outside the course's
+  What the congress tables. One new entry for a creature outside the course's
   twenty-five, admissible under the week 12 rule, with its gaps declared.
 week: 12
 due: 2027-05-24T12:00:00+10:00

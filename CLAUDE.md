@@ -115,6 +115,23 @@ hardest. It applies to the agent exactly as it applies to a student.
   so quoted lines are traditional. The course's own prose uses simplified.
   Transliterating a quotation is still altering it, which is why every creature
   carries both `name` and `nameTrad`.
+- **Every quoted line carries an English gloss, and so does every fragment you
+  reason from.** Translations live in `src/lib/glosses.ts`, keyed by citation
+  key, hand written and never in `citations.ts`. Thirty of forty-six citations
+  had none until 2026-09-21, so thirty specimen cards printed Chinese and
+  nothing else. Three checks pin it now: every citation has a gloss, every gloss
+  has a citation, and no gloss is the Chinese over again.
+
+  The same applies to fragments quoted inline in a week's prose. Chapter,
+  section and place names are objects of study and stay bare — 海內南經 is a
+  name, not a sentence. Anything you argue *from* gets its English beside it:
+  見則天下大旱 ran through weeks 5 and 12 as the load-bearing
+  evidence of both, untranslated, in a course whose prose is English.
+- **吹 and 呼 are both outward breath.** 燭陰's 吹為冬，呼為夏 is a sharp blow
+  against a warm one, not an out-breath against an in-breath. Weeks 6 and 9 and
+  `bestiary.ts` all rendered it "breath out is winter and in is summer" until a
+  translation pass caught it. A gloss written next to the line is what found it,
+  which is an argument for writing them.
 - `verified: true` is a claim, not a mood: a verified entry's cited line has to
   contain the creature's own name. The one exception is 九尾狐, which the text
   describes and never names, declared as `unnamedInSource` rather than smoothed

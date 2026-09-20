@@ -13,6 +13,7 @@ import { dirname, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { bestiary, citationProblems, citedChapters, recordsOf } from "../src/lib/bestiary";
 import { DROUGHT_OMEN, citations } from "../src/lib/citations";
+import { glosses } from "../src/lib/glosses";
 import { ALL_SECTIONS, CHAPTERS } from "../src/lib/shanhaijing";
 import { orphanCreatures, unknownCreatures, weeks } from "../src/lib/weeks";
 
@@ -311,6 +312,36 @@ describe("the bestiary", () => {
   it("knows the received text has eighteen chapters", () => {
     expect(CHAPTERS).toHaveLength(18);
     expect(new Set(CHAPTERS).size).toBe(18);
+  });
+});
+
+describe("translations", () => {
+  // Promise: a reader who does not read Chinese can still follow the evidence.
+  // Every specimen card prints its cited line; a card with no gloss prints that
+  // line and nothing else, which asks the reader to take the argument on trust.
+  // 30 of 46 citations were in that state until 2026-09-21.
+  it("gives every cited line an English gloss", () => {
+    const missing = Object.keys(citations).filter((key) => !glosses[key]);
+    expect(missing, `cited lines with no translation: ${missing.join(", ")}`).toEqual([]);
+  });
+
+  // Promise: a gloss is a translation of something, not free-standing prose.
+  // `glosses.ts` has always claimed this check exists in its header comment and
+  // it did not, so a gloss could outlive the citation it was written for and
+  // nothing would say so.
+  it("has no gloss for a line the edition does not carry", () => {
+    const orphans = Object.keys(glosses).filter((key) => !(key in citations));
+    expect(orphans, `glosses with no citation: ${orphans.join(", ")}`).toEqual([]);
+  });
+
+  // Promise: the translation is the course speaking and the line is the text
+  // speaking, and the two never merge. A gloss that is only the Chinese back
+  // again has translated nothing.
+  it("writes every gloss in English", () => {
+    const untranslated = Object.entries(glosses)
+      .filter(([, gloss]) => !/[a-z]{4}/i.test(gloss))
+      .map(([key]) => key);
+    expect(untranslated, `glosses with no English in them: ${untranslated.join(", ")}`).toEqual([]);
   });
 });
 

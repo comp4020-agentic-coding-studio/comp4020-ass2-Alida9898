@@ -5,18 +5,22 @@ after them is older and is kept for the decisions it records, not for its status
 
 | | |
 |---|---|
-| `pnpm check` | green: 27 pages, 24 tests, 0 type errors, 0 axe violations, 0 broken links |
+| `pnpm check` | green: 27 pages, 27 tests, 0 type errors, 0 axe violations, 0 broken links |
 | `pnpm check:evidence` | passes, 7 cited commits resolve |
 | `PROCESS.md` | 597 prose words, inside the verified 400–600 band |
 | both viewports | 1920x1080 and 390x844, 0 axe violations and no overflow on the home page, an assessment, policies, and weeks 1, 2, 5, 6, 8, 10, 12 |
 | the deck | all 16 slides fit their 720px frame; 5 read at 1920 |
+| translations | all 46 cited lines glossed, was 16; 14 inline fragments glossed in prose |
 | repo | `comp4020-agentic-coding-studio/comp4020-ass2-Alida9898`, **private** |
 | marking | process 45%, deployed artefact 20%, response to brief 35% |
 
 **Everything in the list below is done. The one open item is the visual pass,
-which was deliberately last and is not a marking criterion.** Two things want
-the author's eye rather than more work: the assessment judgement call under
-item 4, and 肥𧔥's tofu box, recorded in CLAUDE.md.
+which was deliberately last and is not a marking criterion.** Three things want
+the author's eye rather than more work, all recorded where they belong: 肥𧔥's
+tofu box (CLAUDE.md), the 讙 gloss's 奪百聲, and two readings in the new glosses
+that rest on emendation rather than on the character — 薄魚's 歐 read as 嘔, and
+貙 identified as a lynx-like beast. Each is the kind of thing this course asks a
+student to declare, so each is declared.
 
 ## Do these in this order
 
@@ -91,8 +95,9 @@ the omen, 13 two of three. The rule now says the formula is a template the text
 often leaves incomplete. Four counts pinned by a check, mutation-tested.
 
 **Translations** live in `src/lib/glosses.ts`, keyed by citation key, hand
-written and separate from the generated `citations.ts`. A key with no gloss
-renders none.
+written and separate from the generated `citations.ts`. All forty-six citations
+now carry one; thirty did not until 2026-09-21, and those thirty cards printed a
+Chinese line with nothing beside it.
 
 **A contents rail** on week pages: fixed in the left margin from 1024px, a row of
 links at the top below that. Week pages run a 34rem column. Verified for overlap
@@ -113,23 +118,25 @@ Kept because items 4 and 5 are still open and are recorded nowhere else.
 2. ~~Weeks 3 to 12 prose.~~ Week 3 done (`9aefe5b`). The rest is item 5 at the
    top, with the shape agreed and written down.
 3. ~~Week 3's deck.~~ Opened at both viewports and corrected (`ca611d1`).
-4. ~~**Assessments.**~~ Applied. `system-proposal` is renamed
-   `classification-design` — file, URL, JSON endpoint and every ref moved in one
-   commit — and reweighted 25 → 30. `bestiary-entry` 30 → 25. The five still sum
-   to 100 and the check still says so.
+4. ~~**Assessments.**~~ Applied, and the transfer test is the capstone.
 
-   **The judgement call, flagged for review.** The rename kept the artefact at
-   week 7 rather than moving it to the end. Weeks 8 to 12 exist to put it under
-   load, and CLAUDE.md says so, so moving it would empty the second half. What
-   made it a *design* rather than a scheme for one book is a new requirement
-   instead: name a body of material outside the 山海经 and say which of your own
-   characters it will not supply. That is week 11's rule used as an assessment
-   criterion, and it is worth 5 of the item's 30.
+   `system-proposal` is renamed `classification-design` — file, URL, JSON
+   endpoint and every ref moved together — and reweighted 25 → 30.
+   `bestiary-entry` 30 → 25. The five still sum to 100.
 
-   Consequence on the home page: it used to promise "the final assessment hands
-   you material you have not seen", which nothing delivered. That line now
-   describes the midterm, accurately. If you would rather the transfer test be
-   the capstone, this is the decision to reopen.
+   **It is now one assessment in two parts**, which is how the transfer test got
+   to the end without emptying the middle. Part 1 at week 7 is the system, and
+   weeks 8 to 12 still have it to break. Part 2 is due 28 May, the last day of
+   teaching and after the congress, and it is the transfer test in full: run
+   your own system on material this course never supplied and declare which of
+   its characters the new material does not supply. Part 2 carries 35 of the
+   item's 100 and is marked on the declarations rather than on how well the
+   system did.
+
+   An earlier pass made the transfer test a 5-mark criterion on the week 7
+   midterm. The author overruled that, which was right: the home page had been
+   promising a final assessment on unseen material since before any of this, and
+   the promise is now true rather than reworded away.
 
 5. **The visual pass.** Deliberately last. Not a marking criterion.
 
