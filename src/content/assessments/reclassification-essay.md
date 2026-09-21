@@ -29,7 +29,7 @@ related:
 > Take one creature whose records disagree, argue for one reading of it, and
 > say what your reading costs.
 
-Some creatures in the 山海經 (Shānhǎijīng) appear twice and cannot be
+Some creatures in the 山海经 (Shānhǎijīng, the *Classic of Mountains and Seas*) appear twice and cannot be
 reconciled. 窫窳 (yàyǔ) is dragon-headed and 貙-like in one record and
 snake-bodied with a human face in the other: 窫窳者，蛇身人面，貳負臣所殺也。
 Two bodies, one name, and nothing in either passage that prefers one over the

@@ -74,7 +74,7 @@ each other, so changing one tells you about the other.
    Rule: Other bestiaries sort by what a creature is for the reader, so their top division is a fact about the reader rather than about the creatures.
 10. **Cross-system comparison** · rebuild
    Rule: Putting one creature through two systems shows which of its features each system had to ignore, and the ignored features are where the two systems actually disagree.
-11. **Beyond the 山海经** · rebuild
+11. **Beyond the Classic of Mountains and Seas** · rebuild
    Rule: A system transfers only as far as its characters do, so the test of one is naming which of its characters the next material will not supply.
 12. **The taxonomic congress** · rebuild
    Rule: A new entry is admissible only if it cites a line and declares which of its own fields that line does not supply.
@@ -115,6 +115,18 @@ hardest. It applies to the agent exactly as it applies to a student.
   so quoted lines are traditional. The course's own prose uses simplified.
   Transliterating a quotation is still altering it, which is why every creature
   carries both `name` and `nameTrad`.
+- **山海经 gets its English every time.** First use on a page is
+  `山海经 (Shānhǎijīng, the *Classic of Mountains and Seas*)`; every later use on
+  that page is *Classic of Mountains and Seas* in English. The same applies to
+  the edition: `四庫全書本，郭璞注` is glossed as the *Siku Quanshu* text with
+  郭璞's (Guō Pú) commentary. It appeared 27 times across the site with English
+  beside it about four of those, and the specimen card's footer printed the
+  edition line untranslated on nearly every page. `spec/course.test.ts` fails any
+  built page that prints the characters with no English within 78 characters.
+
+  Frontmatter is metadata and carries no markup, so it uses the English title
+  outright. A heading does too, when the page's own first paragraph introduces
+  the characters immediately below it — week 1 does this.
 - **Every quoted line carries an English gloss, and so does every fragment you
   reason from.** Translations live in `src/lib/glosses.ts`, keyed by citation
   key, hand written and never in `citations.ts`. Thirty of forty-six citations

@@ -40,7 +40,7 @@ binomial, the kind word the text itself uses, form, habitat, omen, use and at
 least one citation. Most records will not fill most of those fields. That is
 the expected result, not a failed submission.
 
-The 山海經 (Shānhǎijīng) has more creatures than the twenty-five in this
+The 山海经 (Shānhǎijīng, the *Classic of Mountains and Seas*) has more creatures than the twenty-five in this
 bestiary, and the short records are the better choice. 双双 (shuāngshuāng) is
 recorded as 有三青獸相並，名曰雙雙。 Ten characters. There is a name, a
 colour, a count and a posture, and the entry form's remaining six fields have

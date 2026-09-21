@@ -37,7 +37,7 @@ half a page. The card is not the point. The point is that by week 12 there are
 twelve of them, written under twelve different rules, and the differences
 between them carry the argument the rest of your work stands on.
 
-The 山海經 (Shānhǎijīng) does not reward one careful reading of one passage. It
+The 山海经 (Shānhǎijīng, the *Classic of Mountains and Seas*) does not reward one careful reading of one passage. It
 rewards the same passage read again under a rule that did not apply the first
 time. 狌狌 (xīngxīng) appears in week 1 as the first beast on the first
 mountain, and again in week 8 as a name with three bodies behind it. A card

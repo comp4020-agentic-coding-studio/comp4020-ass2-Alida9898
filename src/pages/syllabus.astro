@@ -80,7 +80,8 @@ const marked = (text: string) =>
     <p>
       The formal version of the same question, for anybody who has to write it
       on a form. Can a rigorous classification system be built for the creatures
-      of the <span lang="zh-Hans">山海经</span>? The course holds that question
+      of the <span lang="zh-Hans">山海经</span>{" "}(Shānhǎijīng, the{" "}
+      <i>Classic of Mountains and Seas</i>)? The course holds that question
       for twelve weeks and argues for <i>partly</i>. Nobody is pretending
       otherwise, and the failures are what you are assessed on.
     </p>
@@ -91,7 +92,7 @@ const marked = (text: string) =>
     <p>Two things, and neither of them is a reading list.</p>
     <p>
       <strong
-        >A basic acquaintance with the <span lang="zh-Hans">山海经</span></strong
+        >A basic acquaintance with the <i>Classic of Mountains and Seas</i></strong
       >. Nobody expects you to have read all {CHAPTERS.length}{" "}
       <span lang="zh-Hant">卷</span>, and nobody in the room will have. You
       should arrive knowing what kind of book it is: a geographical survey that
@@ -217,9 +218,12 @@ const marked = (text: string) =>
     <h2>What the course quotes, and how</h2>
     <p>
       Every quoted line comes from one edition,{" "}
-      <span lang="zh-Hant">{EDITION.title}</span>,{" "}
-      <span lang="zh-Hant">{EDITION.edition}</span>. The received text has
-      {CHAPTERS.length} <span lang="zh-Hant">卷</span>, and the course reads all
+      <span lang="zh-Hant">{EDITION.title}</span> (the{" "}
+      <i>Classic of Mountains and Seas</i>),{" "}
+      <span lang="zh-Hant">{EDITION.edition}</span> — the <i>Siku Quanshu</i>{" "}
+      text with <span lang="zh-Hant">郭璞</span>'s commentary. The received text
+      has {CHAPTERS.length} <span lang="zh-Hant">卷</span> (juàn, scrolls), and
+      the course reads all
       of them: the working bestiary is {bestiary.length} creatures carrying
       {Object.keys(citations).length} cited lines, with at least one record in
       every chapter.

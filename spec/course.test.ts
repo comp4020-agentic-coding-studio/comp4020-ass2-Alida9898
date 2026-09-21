@@ -345,6 +345,30 @@ describe("translations", () => {
   });
 });
 
+describe("the book's own name", () => {
+  // Promise: a reader who does not read Chinese is never shown a Chinese word
+  // with nothing beside it. 山海经 appeared 27 times across the site; a handful
+  // carried pinyin, most carried nothing, and the specimen footer printed
+  // 山海經, 四庫全書本，郭璞注 on nearly every page untranslated. The rule the
+  // author set: first use gives the characters and the English, every later use
+  // is English. So any Chinese occurrence at all has to have English beside it.
+  it("never prints 山海经 without English beside it", () => {
+    const naked: string[] = [];
+    for (const file of globSync("dist/**/index.html").filter((f) => !f.includes("/decks/"))) {
+      const html = readFileSync(file, "utf8");
+      const body = html.slice(html.indexOf("<main"), html.lastIndexOf("</main>"));
+      const text = body.replace(/<[^>]*>/g, "");
+      for (const match of text.matchAll(/山海[经經]/g)) {
+        const after = text.slice(match.index + 3, match.index + 78);
+        if (!/Sh[āa]nh[ǎa]ij[īi]ng|Classic of Mountains/.test(after)) {
+          naked.push(`${file}: …${text.slice(Math.max(0, match.index - 25), match.index + 40).replace(/\s+/g, " ")}…`);
+        }
+      }
+    }
+    expect(naked, `山海经 with no English beside it:\n${naked.join("\n")}`).toEqual([]);
+  });
+});
+
 describe("assessment", () => {
   // Promise: a student can add the semester up. The schema already forces each
   // assessment's own criteria to total 100; nothing but this stops the

@@ -56,9 +56,9 @@ export const courseMeta = slopCourseMetaSchema.parse({
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "Build a classification system for any material, and learn it on a book " +
-    "that resists. The 山海经 files hundreds of creatures by where you would " +
-    "meet them and never says what any of them is a kind of. Twelve weeks: " +
-    "build a system, push it until it strains, then design your own.",
+    "Build a classification system for any material, on a book that resists. " +
+    "The 山海经 (Shanhaijing, the Classic of Mountains and Seas) files hundreds " +
+    "of creatures by where you would meet them and never says what any of them " +
+    "is a kind of. Twelve weeks: build it, strain it, rebuild it.",
   tags: ["taxonomy", "shanhaijing", "classification"],
 }) satisfies CourseMetaInput;

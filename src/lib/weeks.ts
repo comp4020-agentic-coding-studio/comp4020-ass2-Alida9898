@@ -115,7 +115,7 @@ export const weeks: Week[] = [
   {
     week: 11,
     phase: "rebuild",
-    title: "Beyond the 山海经",
+    title: "Beyond the Classic of Mountains and Seas",
     topic: "Classification as a general skill: new material, no system supplied.",
     rule: "A system transfers only as far as its characters do, so the test of one is naming which of its characters the next material will not supply.",
     creatures: ["夫诸", "夔", "帝江", "九尾狐"],

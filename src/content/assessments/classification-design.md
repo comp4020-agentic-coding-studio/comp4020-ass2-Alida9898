@@ -27,7 +27,7 @@ spec:
   - states the sort order the system imposes, and what that order is a claim about
   - states at least two questions the system refuses to decide, and why refusing is better than guessing
   - works through at least three creatures from weeks 1 to 6, including one the system handles badly
-  - Part 2 applies the same system to a body of material this course did not supply, with its records cited the way the 山海经 ones are
+  - Part 2 applies the same system to a body of material this course did not supply, with its records cited the way the Classic of Mountains and Seas ones are
   - Part 2 names every character of your own system that the new material does not supply, and says what you did about each
 related:
   - specimen-cards
@@ -94,7 +94,7 @@ supplied.
 Choose the material yourself. A field guide, a fault log, a parts catalogue, a
 tasting note, a set of case reports — anything with repeated records in it and
 enough of them to count. Cite it the way you cite the
-<span lang="zh-Hans">山海经</span>: a locatable reference per record, and
+<span lang="zh-Hans">山海经</span> (Shānhǎijīng, the *Classic of Mountains and Seas*): a locatable reference per record, and
 nothing quoted that you cannot point at.
 
 Then write the list this whole course has been for. Which of your characters
@@ -105,7 +105,7 @@ objections come from, so it is last for a reason: it is the only piece you
 cannot write before the system has been broken.
 
 A Part 2 reporting that everything transferred has chosen material too close to
-the <span lang="zh-Hans">山海经</span>, or has not looked.
+the *Classic of Mountains and Seas*, or has not looked.
 
 ## How it is marked
 
