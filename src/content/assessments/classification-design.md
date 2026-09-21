@@ -45,7 +45,8 @@ related:
 
 Weeks 1 to 6 have supplied the parts. The formula gives three slots. Morphology
 gives a set of body parts that recur. Geography gives a habitat field that
-behaves differently in the 山經 chapters than in the 海經 ones. Omens and uses
+behaves differently in the 山經 (Shānjīng, the Mountains chapters) than in the
+海經 (Hǎijīng, the Seas chapters). Omens and uses
 give two more fields, and both turn out to belong to the formula rather than to
 the animal. A system is what you get when those parts are fixed in an order and
 a rule is written for each.

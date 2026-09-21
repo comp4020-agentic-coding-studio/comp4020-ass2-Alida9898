@@ -17,7 +17,7 @@
 // cannot be chosen independently.
 import { bestiary, recordsOf, type Creature } from "../lib/bestiary";
 import { glossFor } from "../lib/glosses";
-import { EDITION } from "../lib/shanhaijing";
+import { CHAPTER_NAMES, EDITION } from "../lib/shanhaijing";
 import { weekOf } from "../lib/weeks";
 import CreatureCut from "./CreatureCut.astro";
 
@@ -98,9 +98,16 @@ if (name) {
             {recordsOf(specimen).map((record) => (
               <li>
                 <p class="specimen__where" lang="zh-Hant">
-                  {record.chapter}
-                  {record.section && ` · ${record.section}`}
-                  {record.locus && ` · ${record.locus}`}
+                  <span lang="zh-Hant">{record.chapter}</span>
+                  {CHAPTER_NAMES[record.chapter] && (
+                    <span class="specimen__chapter-en">
+                      {" "}({CHAPTER_NAMES[record.chapter]})
+                    </span>
+                  )}
+                  {record.section && (
+                    <> · <span lang="zh-Hant">{record.section}</span></>
+                  )}
+                  {record.locus && <> · <span lang="zh-Hant">{record.locus}</span></>}
                 </p>
                 <blockquote class="specimen__line" lang="zh-Hant">
                   {record.line}
@@ -150,6 +157,12 @@ if (name) {
   .specimen__cut {
     flex: 0 0 auto;
     line-height: 0;
+  }
+
+  /* 卷的英文名跟在中文后面，用次级色，让中文仍是主。 */
+  .specimen__chapter-en {
+    color: var(--at-text-secondary);
+    letter-spacing: normal;
   }
 
   .specimen__label {

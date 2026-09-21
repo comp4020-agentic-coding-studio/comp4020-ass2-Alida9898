@@ -69,6 +69,35 @@ export const MOUNTAIN_CHAPTERS = Object.keys(SECTIONS) as (keyof typeof SECTIONS
 
 export const ALL_SECTIONS: readonly string[] = Object.values(SECTIONS).flat();
 
+
+// 十八卷的英文名。卷名是全站出现最多的中文——每张标本卡的出处行都有它——
+// 而它一直是纯中文。译名是课程自己给的，所以放在这里而不是 citations.ts。
+//
+// English names for the eighteen 卷. The chapter line is the most repeated
+// Chinese on the site, once per specimen card, and it carried no English at
+// all. These renderings are the course's own, which is why they live here and
+// not in the generated citations module.
+export const CHAPTER_NAMES: Record<string, string> = {
+  南山經: "Southern Mountains",
+  西山經: "Western Mountains",
+  北山經: "Northern Mountains",
+  東山經: "Eastern Mountains",
+  中山經: "Central Mountains",
+  海外南經: "Beyond the Seas, South",
+  海外西經: "Beyond the Seas, West",
+  海外北經: "Beyond the Seas, North",
+  海外東經: "Beyond the Seas, East",
+  海內南經: "Within the Seas, South",
+  海內西經: "Within the Seas, West",
+  海內北經: "Within the Seas, North",
+  海內東經: "Within the Seas, East",
+  大荒東經: "Great Wilds, East",
+  大荒南經: "Great Wilds, South",
+  大荒西經: "Great Wilds, West",
+  大荒北經: "Great Wilds, North",
+  海內經: "Within the Seas",
+};
+
 export function isChapter(value: string): value is Chapter {
   return (CHAPTERS as readonly string[]).includes(value);
 }

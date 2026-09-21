@@ -19,7 +19,7 @@ marking:
       weight: 15
 spec:
   - twelve cards, one per teaching week, each naming a creature from that week's list
-  - every card cites a 卷, and for the five 山經 chapters a 次 section and a locus
+  - every card cites a 卷, and for the five 山經 (Shānjīng, the Mountains chapters) chapters a 次 section and a locus
   - every card names at least one field the cited line does not supply
   - a card that could not find its line is marked unverified rather than filled in
 related:

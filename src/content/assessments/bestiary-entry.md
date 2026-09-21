@@ -19,7 +19,7 @@ marking:
       weight: 30
 spec:
   - the creature is not one of the twenty-five the course already carries
-  - at least one citation, giving the 卷 and, for the five 山經 chapters, the 次 section and locus
+  - at least one citation, giving the 卷 and, for the five 山經 (Shānjīng, the Mountains chapters) chapters, the 次 section and locus
   - every quoted line matches the edition character for character, in traditional forms
   - the entry names which of its own fields the cited line does not supply
 related:
