@@ -11,3 +11,8 @@
  * slide class you reach for (`_class: quote`), a code-heavy layout, a
  * background. */
 @import url("astro-theme-university/styles/deck.css");
+
+/* 重构图单独一页：图占上面大部分，说明压在下面，整页不超过 720 的画框。 */
+.recon { margin: 0; display: grid; gap: 0.6rem; justify-items: center; }
+.recon img { max-height: 300px; width: auto; object-fit: contain; }
+.recon figcaption { font-size: 0.55em; line-height: 1.4; max-width: 52ch; opacity: 1; }
