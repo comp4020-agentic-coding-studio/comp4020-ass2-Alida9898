@@ -49,6 +49,15 @@ export const collections = {
         teachers: teacherRefs.optional(),
         rule: z.string().trim().min(20),
         creatures: z.array(z.string().trim().min(1)).min(3),
+        // 只有第三周有 deck。它是一周的产物之一，所以是字段而不是正文里的一个词
+        // ——写在正文里，读者要读到第 191 行才看得见。
+        // Only week 3 has one. A deck is one of a week's artefacts, so it is a
+        // field rather than a word in the prose: buried in the body it sat on
+        // line 191 of 222 and nobody scanning the page found it.
+        slides: z
+          .string()
+          .regex(/^\/decks\/[a-z0-9-]+\/$/)
+          .optional(),
       })
       .loose(),
   }),

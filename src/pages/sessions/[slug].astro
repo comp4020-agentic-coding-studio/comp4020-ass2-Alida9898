@@ -11,6 +11,10 @@ import { formatCourseDate } from "../../lib/dates";
 import { PHASE_LABELS, weeks } from "../../lib/weeks";
 import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
 
+// 手写的根绝对链接不会被 Astro 补 base，部署后 404。
+const withBase = (path: string): string =>
+  `${import.meta.env.BASE_URL.replace(/\/$/, "")}${path}`;
+
 export async function getStaticPaths() {
   const sessions = await getPublishedCollection("sessions");
   return sessions.map((session) => ({ params: { slug: session.id }, props: { session } }));
@@ -43,6 +47,16 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
     <h2 id="rule-heading">The rule this week states</h2>
     <p class="rule__text">{session.data.rule}</p>
   </section>
+
+  {
+    session.data.slides && (
+      <p class="slides">
+        <a href={withBase(session.data.slides)}>Slides for this week</a> — the
+        one week whose argument is four bodies side by side, which prose cannot
+        hold on a screen.
+      </p>
+    )
+  }
 
   <Toc headings={headings} />
 
@@ -165,6 +179,12 @@ const phaseNumber = phase === "build" ? 1 : phase === "stress" ? 2 : 3;
     :global(.parts-table :is(th, td)) {
       padding-inline: 0.4rem;
     }
+  }
+
+  .slides {
+    margin: -1rem 0 2rem;
+    font-size: 0.95rem;
+    color: var(--at-text-secondary);
   }
 
   /* 规则块是每周页面的骨架，所以它不能靠颜色区分，得靠位置和边框。 */
