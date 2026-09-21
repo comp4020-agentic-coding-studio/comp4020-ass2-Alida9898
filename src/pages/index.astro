@@ -52,6 +52,7 @@ const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
 
 // 有线图的六只。首页只用画过的，没画过的不出现。
 const DRAWN = ["帝江", "陆吾", "毕方", "夫诸", "九尾狐", "并封"];
+const pinyinOf = new Map(bestiary.map((creature) => [creature.name, creature.pinyin]));
 
 // 手写的 <a href="/..."> 不会被 Astro 补 base，部署后就是 404。主题的 Card 组件
 // 自己处理，这里不用组件，所以自己补。
@@ -67,9 +68,9 @@ const withBase = (path: string): string =>
 const facts = [
   { value: String(weeks.length), label: "weeks" },
   { value: String(bestiary.length), label: "creature records" },
-  { value: String(CHAPTERS.length), label: "chapters, all of them read" },
+  { value: String(CHAPTERS.length), label: "chapters, all read" },
   { value: String(ALL_SECTIONS.length), label: "mountain routes" },
-  { value: "1", label: "edition, cited line by line" },
+  { value: "1", label: "edition, cited in full" },
 ];
 ---
 
@@ -167,7 +168,10 @@ const facts = [
         DRAWN.map((name) => (
           <li>
             <CreatureCut name={name} size={104} />
-            <p lang="zh-Hans">{name}</p>
+            <p>
+              <span lang="zh-Hans">{name}</span>{" "}
+              <span class="cuts__pinyin">{pinyinOf.get(name)}</span>
+            </p>
           </li>
         ))
       }
@@ -368,6 +372,13 @@ const facts = [
     font-feature-settings: normal;
   }
 
+  .cuts__pinyin {
+    font-style: italic;
+    color: var(--at-text-secondary);
+    /* 拉丁字距是给拉丁文的，中文名紧挨着它，别让两边用同一套。 */
+    letter-spacing: normal;
+  }
+
   .facts {
     display: grid;
     grid-template-columns: repeat(5, auto);
@@ -387,7 +398,11 @@ const facts = [
 
   .facts dd {
     margin: 0.3rem 0 0;
-    max-width: 14ch;
+    /* 每条标签一行。之前 14ch 让两条长的折成两行、其余一行，那一排就参差了。
+       One line each: at 14ch the two longest labels wrapped and the rest did
+       not, so the row came out ragged. */
+    max-width: none;
+    white-space: nowrap;
     font-size: 0.85rem;
     color: var(--at-text-secondary);
   }
