@@ -17,7 +17,7 @@
 // cannot be chosen independently.
 import { bestiary, recordsOf, type Creature } from "../lib/bestiary";
 import { glossFor } from "../lib/glosses";
-import { CHAPTER_NAMES, EDITION } from "../lib/shanhaijing";
+import { EDITION, referenceInEnglish } from "../lib/shanhaijing";
 import { weekOf } from "../lib/weeks";
 import CreatureCut from "./CreatureCut.astro";
 
@@ -99,15 +99,13 @@ if (name) {
               <li>
                 <p class="specimen__where" lang="zh-Hant">
                   <span lang="zh-Hant">{record.chapter}</span>
-                  {CHAPTER_NAMES[record.chapter] && (
-                    <span class="specimen__chapter-en">
-                      {" "}({CHAPTER_NAMES[record.chapter]})
-                    </span>
-                  )}
                   {record.section && (
                     <> · <span lang="zh-Hant">{record.section}</span></>
                   )}
                   {record.locus && <> · <span lang="zh-Hant">{record.locus}</span></>}
+                  <span class="specimen__where-en" lang="en">
+                    {referenceInEnglish(record.chapter, record.section, record.locus)}
+                  </span>
                 </p>
                 <blockquote class="specimen__line" lang="zh-Hant">
                   {record.line}
@@ -159,10 +157,16 @@ if (name) {
     line-height: 0;
   }
 
-  /* 卷的英文名跟在中文后面，用次级色，让中文仍是主。 */
-  .specimen__chapter-en {
+  /* 出处的英文另起一行放在中文下面，而不是挤在中间——挤进去那一行会变得
+     没法读。中文是引用，英文是给读不懂的人看的同一条引用。
+     The English reference sits on its own line under the Chinese rather than
+     interleaved with it: inline, the record line becomes unreadable. */
+  .specimen__where-en {
+    display: block;
+    margin-block-start: 0.15rem;
     color: var(--at-text-secondary);
     letter-spacing: normal;
+    font-feature-settings: normal;
   }
 
   .specimen__label {

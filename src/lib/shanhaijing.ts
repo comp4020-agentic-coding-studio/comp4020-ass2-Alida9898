@@ -98,6 +98,76 @@ export const CHAPTER_NAMES: Record<string, string> = {
   海內經: "Within the Seas",
 };
 
+
+// 次 分节和山川名的英文。分节名是可推的（之首＝第一节，次N＝第N节），
+// 山川名不是，所以一条条给。译名是课程自己的，跟卷名一样放这里。
+//
+// English for the 次 sections and for the mountains and waters a record is
+// filed under. A reader who cannot read the characters otherwise gets a
+// reference they cannot use. Section names derive; place names do not, so they
+// are listed. Both are the course's own renderings, like the chapter names.
+const DIRECTION: Record<string, string> = {
+  南: "southern",
+  西: "western",
+  北: "northern",
+  東: "eastern",
+  中: "central",
+};
+
+const ORDINAL = ["", "first", "second", "third", "fourth", "fifth", "sixth",
+  "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
+
+const NUMERAL: Record<string, number> = {
+  一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10, 十一: 11, 十二: 12,
+};
+
+/** `西次三經` → "third western section"; `南山經之首` → "first southern section". */
+export function sectionName(section: string): string | undefined {
+  const where = DIRECTION[section[0]];
+  if (!where) return undefined;
+  if (section.endsWith("之首")) return `first ${where} section`;
+  const digits = section.replace(/^.次/, "").replace(/經$/, "");
+  const n = NUMERAL[digits];
+  return n ? `${ORDINAL[n]} ${where} section` : undefined;
+}
+
+export const PLACE_NAMES: Record<string, string> = {
+  令丘之山: "Mount Lingqiu",
+  基山: "Mount Ji",
+  天山: "the Heaven Mountain",
+  太華之山: "Mount Taihua",
+  女烝之山: "Mount Nüzheng",
+  姑逢之山: "Mount Gufeng",
+  子桐之山: "Mount Zitong",
+  密山: "Mount Mi",
+  招搖之山: "Mount Zhaoyao",
+  敖岸之山: "Mount Aoan",
+  昆侖之丘: "the Hill of Kunlun",
+  杻陽之山: "Mount Niuyang",
+  渾夕之山: "Mount Hunxi",
+  發鳩之山: "Mount Fajiu",
+  空桑之山: "Mount Kongsang",
+  章莪之山: "Mount Zhang'e",
+  翼望之山: "Mount Yiwang",
+  英山: "Mount Ying",
+  雞山: "Mount Ji (雞)",
+  青丘之山: "the Green Hill",
+  鮮山: "Mount Xian",
+  鹿吳之山: "Mount Luwu",
+};
+
+/** The whole reference in English: chapter, section and place. */
+export function referenceInEnglish(
+  chapter: string,
+  section?: string,
+  locus?: string,
+): string {
+  const parts = [CHAPTER_NAMES[chapter] ?? chapter];
+  if (section) parts.push(sectionName(section) ?? section);
+  if (locus) parts.push(PLACE_NAMES[locus] ?? locus);
+  return parts.join(" · ");
+}
+
 export function isChapter(value: string): value is Chapter {
   return (CHAPTERS as readonly string[]).includes(value);
 }
