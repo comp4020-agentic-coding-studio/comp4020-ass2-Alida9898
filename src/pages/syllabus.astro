@@ -48,13 +48,66 @@ const phases = (Object.keys(PHASE_LABELS) as Phase[]).map((phase) => {
   };
 });
 
-// 中英混排：汉字串要自己的 lang，否则读屏软件用英文音素念它。
-// Screen readers pronounce an unmarked CJK run with English phonemes, so every
-// run gets its own lang. The rules are authored in simplified; quoted lines
-// never appear on this page, which is why one script is enough here.
-const CJK = /[㐀-鿿豈-﫿][㐀-鿿豈-﫿，。；、：？！]*/gu;
-const marked = (text: string) =>
-  text.replace(CJK, (run) => `<span lang="zh-Hans">${run}</span>`);
+// 这一页上每个中文词第一次出现给「中文（拼音，英文）」，之后只用英文或罗马化
+// 形式。生物名的拼音直接取自 bestiary.ts，不另抄一份。
+//
+// Every Chinese term gets `characters (pinyin, English)` the first time it
+// appears on this page, and its English or romanised form after that. Creature
+// pinyin comes from `bestiary.ts` rather than being retyped, so a reading can
+// only be wrong in one place. An unmarked CJK run is read out with English
+// phonemes, so each one also carries its own `lang`.
+const CREATURE_PINYIN = new Map(bestiary.map((creature) => [creature.name, creature.pinyin]));
+
+const TERMS: Array<[string, string, string]> = [
+  // 整条定式当一个词处理。逐字拆开注释会把它拆得读不出来。
+  // The formula is glossed whole: term-by-term it becomes unreadable.
+  [
+    "其状如X，Y首，见则Z",
+    "qí zhuàng rú X, Y shǒu, jiàn zé Z",
+    "shaped like X, with Y heads, and where it appears, Z",
+  ],
+  ["见则天下大旱", "jiàn zé tiānxià dà hàn", "where it appears, the world goes dry"],
+  ["其状如", "qí zhuàng rú", "shaped like"],
+  ["见则", "jiàn zé", "where it appears"],
+  ["山经", "Shānjīng", "the Mountains chapters"],
+  ["海经", "Hǎijīng", "the Seas chapters"],
+  ["首", "shǒu", "head"],
+  ["神", "shén", "god"],
+  ["獸", "shòu", "beast"],
+  ["鳥", "niǎo", "bird"],
+  ["人", "rén", "human"],
+];
+
+const introduced = new Set<string>();
+
+/** `characters (pinyin, English)` on first use on this page, English after. */
+function gloss(term: string): string {
+  const entry = TERMS.find(([zh]) => zh === term);
+  const pinyin = entry?.[1] ?? CREATURE_PINYIN.get(term);
+  const english = entry?.[2];
+  const tagged = `<span lang="zh-Hans">${term}</span>`;
+  if (introduced.has(term)) return english ? english : (pinyin ?? tagged);
+  introduced.add(term);
+  if (!pinyin) return tagged;
+  return english ? `${tagged} (${pinyin}, ${english})` : `${tagged} (${pinyin})`;
+}
+
+/**
+ * Glosses every known term in one pass, longest match first. Successive splits
+ * do not work here: a later, shorter term cuts into a longer one that has
+ * already been matched, and 其状如X，Y首，见则Z comes apart into three glosses
+ * that nobody can read.
+ */
+const TERM_RE = new RegExp(
+  [...TERMS.map(([zh]) => zh), ...CREATURE_PINYIN.keys()]
+    .sort((a, b) => b.length - a.length)
+    .map((zh) => zh.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|"),
+  "g",
+);
+
+const marked = (text: string) => text.replace(TERM_RE, (term) => gloss(term));
+
 ---
 
 <ContentLayout
@@ -94,7 +147,8 @@ const marked = (text: string) =>
       <strong
         >A basic acquaintance with the <i>Classic of Mountains and Seas</i></strong
       >. Nobody expects you to have read all {CHAPTERS.length}{" "}
-      <span lang="zh-Hant">卷</span>, and nobody in the room will have. You
+      <span lang="zh-Hant">卷</span> (juàn, scrolls), and nobody in the room will
+      have. You
       should arrive knowing what kind of book it is: a geographical survey that
       files creatures by where you would meet them, in records that are
       routinely three clauses long. Week 1 introduces it properly. If you are
@@ -167,7 +221,7 @@ const marked = (text: string) =>
                 </th>
                 <td>{week.title}</td>
                 <td set:html={marked(week.rule)} />
-                <td class="syl__creatures" set:html={marked(week.creatures.join("、"))} />
+                <td class="syl__creatures" set:html={week.creatures.map((name) => gloss(name)).join("、")} />
               </tr>
             ))
           }
@@ -221,9 +275,9 @@ const marked = (text: string) =>
       <span lang="zh-Hant">{EDITION.title}</span> (the{" "}
       <i>Classic of Mountains and Seas</i>),{" "}
       <span lang="zh-Hant">{EDITION.edition}</span> — the <i>Siku Quanshu</i>{" "}
-      text with <span lang="zh-Hant">郭璞</span>'s commentary. The received text
-      has {CHAPTERS.length} <span lang="zh-Hant">卷</span> (juàn, scrolls), and
-      the course reads all
+      text with <span lang="zh-Hant">郭璞</span>'s (Guō Pú) commentary. The received
+      text
+      has {CHAPTERS.length} juàn, and the course reads all
       of them: the working bestiary is {bestiary.length} creatures carrying
       {Object.keys(citations).length} cited lines, with at least one record in
       every chapter.
